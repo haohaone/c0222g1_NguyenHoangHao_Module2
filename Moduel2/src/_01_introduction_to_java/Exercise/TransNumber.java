@@ -1,4 +1,4 @@
-package _01_Introduction_To_Java.Exercise;
+package _01_introduction_to_java.Exercise;
 
 import java.util.Scanner;
 
@@ -33,9 +33,6 @@ public class TransNumber {
         String chuCaiHangDonVi = "";
 
         switch (soHangTram) {
-            case 0:
-                chuCaiHangTram += "";
-                break;
             case 1:
                 chuCaiHangTram += "One Hundred";
                 break;
@@ -65,9 +62,6 @@ public class TransNumber {
         }
 
         switch (soHangDonVi) {
-            case 0:
-                chuCaiHangDonVi += "";
-                break;
             case 1:
                 chuCaiHangDonVi += "One";
                 break;
@@ -95,12 +89,8 @@ public class TransNumber {
             case 9:
                 chuCaiHangDonVi += "Nine";
         }
-
         if (hangChuc >= 20) {
             switch (soHangChuc) {
-                case 0:
-                    chuCaiHangChuc += "";
-                    break;
                 case 2:
                     chuCaiHangChuc += "Twenty";
                     break;
