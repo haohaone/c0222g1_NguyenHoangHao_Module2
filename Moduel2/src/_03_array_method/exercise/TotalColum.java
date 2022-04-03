@@ -1,9 +1,9 @@
-package _03_array_method.Exercise;
+package _03_array_method.exercise;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class TongCot {
+public class TotalColum {
     public static int array (int [] array){
         int total = 0;
         for (int value : array) {

@@ -1,8 +1,8 @@
-package _02_loop_statement.Pratice;
+package _02_loop_statement.pratice;
 
 import java.util.Scanner;
 
-public class VeSao {
+public class PrintsStar {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("1. Draw the triangle");

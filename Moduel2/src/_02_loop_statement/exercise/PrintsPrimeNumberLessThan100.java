@@ -1,6 +1,6 @@
-package _02_loop_statement.Exercise;
+package _02_loop_statement.exercise;
 
-public class SoNtDuoi100 {
+public class PrintsPrimeNumberLessThan100 {
     public static void main(String[] args) {
         int num=1;
         while (true){

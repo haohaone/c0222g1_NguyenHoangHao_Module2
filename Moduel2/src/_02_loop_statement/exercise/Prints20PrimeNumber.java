@@ -1,6 +1,6 @@
-package _02_loop_statement.Exercise;
+package _02_loop_statement.exercise;
 
-public class In20SoNguyenTo {
+class Prints20PrimeNumber {
     public static void main(String[] args) {
         int num=1;
         int soLuongSoNt=0;

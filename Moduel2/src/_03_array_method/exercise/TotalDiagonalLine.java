@@ -1,8 +1,8 @@
-package _03_array_method.Exercise;
+package _03_array_method.exercise;
 
 import java.util.Scanner;
 
-public class TongDuongCheo {
+public class TotalDiagonalLine {
     public static int tongCheo (int [][] array){
         int totalLeft = 0;
         int totalRight = 0;

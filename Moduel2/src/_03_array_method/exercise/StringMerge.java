@@ -1,8 +1,8 @@
-package _03_array_method.Exercise;
+package _03_array_method.exercise;
 
 import java.util.Arrays;
 
-public class GopChuoi {
+public class StringMerge {
     public static int[] noiChuoi(int [] arr1 , int [] arr2){
         int newArray [] = new int[arr1.length + arr2.length];
         for (int i = 0; i < arr1.length; i++) {

@@ -1,8 +1,8 @@
-package _02_loop_statement.Pratice;
+package _02_loop_statement.pratice;
 
 import java.util.Scanner;
 
-public class TinhTienChoVay {
+public class LoanCalculation {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         double money;

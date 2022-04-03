@@ -1,6 +1,6 @@
-package _03_array_method.Pratice;
+package _03_array_method.pratice;
 
-public class PhanTuLonNhat {
+public class ElementMax {
     public static int timSoLonNhat (int[] array){
         int max = array[0];
         for (int i = 1; i < array.length ; i++) {

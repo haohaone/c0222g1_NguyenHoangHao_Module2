@@ -1,8 +1,8 @@
-package _03_array_method.Pratice;
+package _03_array_method.pratice;
 
 import java.util.Scanner;
 
-public class ChuyenDoiNhietDo {
+public class ChangeTemperature {
     public static String doiCquaF (double doC){
         return "Do F: " + ((9 / 5) * doC + 32);
     }

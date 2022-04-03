@@ -1,10 +1,10 @@
-package _03_array_method.Pratice;
+package _03_array_method.pratice;
 
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
 
 import java.lang.reflect.Array;
 
-public class DaoNguocPhanTu {
+public class ReverseElement {
 //    int [] array = new int [10];
     public static int[] ReverseArray (int[] array){
         for (int i = 0; i < array.length / 2; i++) {

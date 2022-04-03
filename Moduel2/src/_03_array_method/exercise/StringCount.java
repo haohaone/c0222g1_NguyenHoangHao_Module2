@@ -1,8 +1,8 @@
-package _03_array_method.Exercise;
+package _03_array_method.exercise;
 
 import java.util.Scanner;
 
-public class Demkytuchuoi {
+public class StringCount {
     public static void kiemTraKiTu(String str){
         char [] arr = new char[str.length()];
         for (int i = 0; i < str.length(); i++) {

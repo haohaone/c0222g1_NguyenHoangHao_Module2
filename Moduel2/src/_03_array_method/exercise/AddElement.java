@@ -1,9 +1,9 @@
-package _03_array_method.Exercise;
+package _03_array_method.exercise;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ThemPhanTu {
+public class AddElement {
     public static void themPhanTuVaoMang (int[] array,int num,int changeNum) {
         if (num <= array.length-1){
             for (int i = array.length - 1; i >= num ; i--) {

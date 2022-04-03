@@ -1,11 +1,11 @@
-package _03_array_method.Exercise;
+package _03_array_method.exercise;
 
 import com.sun.org.apache.xpath.internal.objects.XNumber;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class XoaPhanTuTrongMang {
+class DeleteElementInArray {
     public static void XoaPhanTu (int[] array,int num){
         boolean flag = false;
         for (int i = 0; i < array.length; i++) {

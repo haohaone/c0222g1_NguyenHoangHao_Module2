@@ -1,8 +1,8 @@
-package _02_loop_statement.Exercise;
+package _02_loop_statement.exercise;
 
 import java.util.Scanner;
 
-public class VeSao2 {
+public class PrintsStar {
 //    public void Hcn(){
 //
 //    }

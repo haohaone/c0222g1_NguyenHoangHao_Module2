@@ -1,8 +1,8 @@
-package _03_array_method.Pratice;
+package _03_array_method.pratice;
 
 import java.util.Scanner;
 
-public class TimGiaTriTrongMang {
+public class FindValueInArray {
     public static String DanhSachHs (String [] array,String name){
         boolean flag = false;
         int viTri = 0;
