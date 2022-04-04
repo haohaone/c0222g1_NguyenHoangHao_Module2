@@ -1,12 +1,10 @@
 package _03_array_method.exercise;
 
-import com.sun.org.apache.xpath.internal.objects.XNumber;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
 class DeleteElementInArray {
-    public static void XoaPhanTu (int[] Array,int num){
+    public static void deleteElement(int[] Array, int num){
         boolean flag = false;
         for (int i = 0; i < Array.length; i++) {
             if (Array[i]==num){
@@ -34,6 +32,6 @@ class DeleteElementInArray {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhap phan tu can xoa");
         int num = Integer.parseInt(scanner.nextLine());
-        XoaPhanTu(Array,num);
+        deleteElement(Array,num);
     }
 }
