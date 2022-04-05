@@ -26,15 +26,15 @@ public class ClassFan {
             if (this.status){
                 return  "Fan is on \n"+" speed is: "+this.speed+"\n color is: "+this.color+"\n radius is: "+this.radius;
             }else {
-                return "Fan is off";
+                return "Fan is off \n"+"color is: "+this.color+"\n radius í: "+this.radius;
             }
         }
     }
 
     public static void main(String[] args) {
-        Fan vinaFan = new Fan(3,true,10,"yellow");
+        Fan vinaFan = new Fan(Fan.fast,true,10,"yellow");
         System.out.println(vinaFan.toString());
-        Fan appleFan = new Fan(2,false,5,"blue");
+        Fan appleFan = new Fan(Fan.medium,false,5,"blue");
         System.out.println(appleFan.toString());
     }
 }

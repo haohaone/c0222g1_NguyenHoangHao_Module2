@@ -18,12 +18,12 @@ public class StopWatch {
             return this.endTime;
         }
 
-        public double start(){
-            return this.starTime = System.currentTimeMillis();
+        public void start(){
+            this.starTime = System.currentTimeMillis();
         }
 
-        public double stop(){
-            return this.endTime = System.currentTimeMillis();
+        public void stop(){
+            this.endTime = System.currentTimeMillis();
         }
 
     }
@@ -31,6 +31,10 @@ public class StopWatch {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         StopCountTime stopWatch = new StopCountTime();
+        int [] Array = new int[100000];
+        for (int i = 0; i < 100000; i++) {
+            Array[i] = (int)Math.floor(Math.random()*100000);
+        }
         System.out.println("Bắt đầu đếm giờ bấm Start:");
         while (true){
             String enter = scanner.nextLine();
@@ -40,14 +44,18 @@ public class StopWatch {
         }
         stopWatch.start();
         System.out.println("Thời gian bắt đầu: "+stopWatch.getStarTime());
-        System.out.println("Kết thúc đếm giờ bấm Stop:");
-        while (true){
-            String stop = scanner.nextLine();
-            if (stop.equals("Stop")){
-                break;
+        int [] newArr = new int[100000];
+        int a = 0;
+        for (int i = 1; i <= 100000; i++) {
+            for (int j = 0; j < Array.length; j++) {
+                if (i == Array[j] ){
+                    newArr[a] = Array[j];
+                    a++;
+                }
             }
         }
         stopWatch.stop();
         System.out.println("Thời gian vừa bấm giờ là: "+stopWatch.getEndTime());
+        System.out.println(stopWatch.getEndTime() - stopWatch.getStarTime());
     }
 }
