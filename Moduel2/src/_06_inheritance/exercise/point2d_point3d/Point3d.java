@@ -21,8 +21,8 @@ public class Point3d extends Point2d{
         this.z = z;
     }
 
-    public String getXYZ(){
-        return "("+x+", "+y+", "+z+")";
+    public double[] getXYZ(){
+        return new double[]{x, y, z};
     }
 
     @Override

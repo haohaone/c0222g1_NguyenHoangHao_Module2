@@ -30,8 +30,8 @@ public class Point2d {
         this.y = y;
     }
 
-    public String getXY(double [] arrayXy){
-        return "("+x+", "+y+")";
+    public double[] getXY(){
+        return new double[]{x, y};
     }
 
 
