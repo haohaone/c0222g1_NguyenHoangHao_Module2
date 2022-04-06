@@ -8,24 +8,24 @@ public class Students {
 
     }
 
-    public Students(String name, String classes) {
+    protected Students(String name, String classes) {
         this.name = name;
         this.classes = classes;
     }
 
-    public String getName() {
+    protected String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
 
-    public String getClasses() {
+    protected String getClasses() {
         return classes;
     }
 
-    public void setClasses(String classes) {
+    protected void setClasses(String classes) {
         this.classes = classes;
     }
 }
