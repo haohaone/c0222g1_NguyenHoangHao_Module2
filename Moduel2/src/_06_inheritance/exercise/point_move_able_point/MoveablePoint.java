@@ -1,13 +1,13 @@
 package _06_inheritance.exercise.point_move_able_point;
 
-public class MoveAblePoint extends Point {
+public class MoveablePoint extends Point {
     private float xSpeed, ySpeed;
 
-    MoveAblePoint(){
+    MoveablePoint(){
 
     }
 
-    public MoveAblePoint(float x, float y, float xSpeed, float ySpeed) {
+    public MoveablePoint(float x, float y, float xSpeed, float ySpeed) {
         super(x, y);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
@@ -38,7 +38,7 @@ public class MoveAblePoint extends Point {
         return new float[]{this.xSpeed, this.ySpeed};
     }
 
-    public MoveAblePoint move(){
+    public MoveablePoint move(){
         this.setX(getX() + xSpeed);
         this.setY(getY() + ySpeed);
         return this;
