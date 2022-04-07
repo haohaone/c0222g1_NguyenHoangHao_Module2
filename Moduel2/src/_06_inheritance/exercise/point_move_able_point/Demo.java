@@ -9,5 +9,7 @@ public class Demo {
         moveAblePoint.setSpeed(50,150);
         System.out.println("moveAblePoint is fixed");
         System.out.println(moveAblePoint.toString());
+        moveAblePoint.move();
+        System.out.println(moveAblePoint.toString());
     }
 }

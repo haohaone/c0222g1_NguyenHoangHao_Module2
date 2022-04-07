@@ -1,7 +1,7 @@
 package _06_inheritance.exercise.triangle;
 
 public class Shape {
-    protected double size1 = 1, size2 = 1, size3 = 1;
+    private double size1 = 1, size2 = 1, size3 = 1;
 
     Shape(){
 

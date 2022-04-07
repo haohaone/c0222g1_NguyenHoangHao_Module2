@@ -1,7 +1,7 @@
 package _06_inheritance.pratice.geometric;
 
 public class Square extends Shape {
-    protected double size;
+    private double size;
 
     public Square() {
         this.size = 1;

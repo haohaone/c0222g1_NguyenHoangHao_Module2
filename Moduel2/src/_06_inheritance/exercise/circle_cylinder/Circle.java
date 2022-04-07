@@ -1,8 +1,8 @@
 package _06_inheritance.exercise.circle_cylinder;
 
 public class Circle {
-     double radius;
-     String color;
+     private double radius;
+     private String color;
 
     public Circle(double radius, String color) {
         this.radius = radius;
@@ -35,11 +35,9 @@ public class Circle {
 
     @Override
     public String toString() {
-        return "Circle{" +
-                "radius=" + radius +
+        return  "radius=" + radius +
                 ", color=" + color +
                 ", area="+this.getArea()+
-                ", perimeter="+this.getPerimeter() +
-                '}';
+                ", perimeter="+this.getPerimeter();
     }
 }

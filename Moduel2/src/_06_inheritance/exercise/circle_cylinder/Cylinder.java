@@ -1,7 +1,7 @@
 package _06_inheritance.exercise.circle_cylinder;
 
 public class Cylinder extends Circle{
-    protected double height;
+    private double height;
 
     public Cylinder(double radius, String color, double height) {
         super(radius, color);
@@ -27,12 +27,6 @@ public class Cylinder extends Circle{
 
     @Override
     public String toString() {
-        return "Circle{" +
-                "radius=" + radius +
-                ", color=" + color +
-                ", area="+this.getArea()+
-                ", perimeter="+this.getPerimeter() +
-                ", capacity="+this.getCapacity() +
-                '}';
+        return super.toString() + " capacity =" +getCapacity();
     }
 }

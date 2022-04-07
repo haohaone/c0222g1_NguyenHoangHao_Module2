@@ -1,8 +1,8 @@
 package _06_inheritance.exercise.point2d_point3d;
 
 public class Point2d {
-    protected double x;
-    protected double y;
+    private double x;
+    private double y;
 
     public Point2d(double x, double y) {
         this.x = x;

@@ -1,8 +1,8 @@
 package _06_inheritance.pratice.geometric;
 
 public class Shape {
-    protected String color;
-    protected boolean filled;
+    private String color;
+    private boolean filled;
 
     Shape(){
         this.color = "green";

@@ -38,6 +38,12 @@ public class MoveAblePoint extends Point {
         return new float[]{this.xSpeed, this.ySpeed};
     }
 
+    public MoveAblePoint move(){
+        this.setX(getX() + xSpeed);
+        this.setY(getY() + ySpeed);
+        return this;
+    }
+
     @Override
     public String toString() {
         return super.toString()+

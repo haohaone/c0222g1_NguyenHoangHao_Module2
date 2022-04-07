@@ -1,7 +1,7 @@
 package _06_inheritance.pratice.geometric;
 
 public class Circle extends Shape {
-    protected double radius;
+    private double radius;
 
     Circle(){
         this.radius = 1;

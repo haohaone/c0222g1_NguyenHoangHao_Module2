@@ -1,8 +1,8 @@
 package _04_object_array.exercise.fan;
 
-public class ClassFan {
-    public static class Fan{
-        private static final int SLOW = 1, MEDIUM = 2, FAST = 3;
+
+    public class Fan{
+        public static final int SLOW = 1, MEDIUM = 2, FAST = 3;
         int speed;
         private boolean status;
         private double radius;
@@ -30,4 +30,3 @@ public class ClassFan {
             }
         }
     }
-}

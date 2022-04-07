@@ -22,7 +22,7 @@ public class Point3d extends Point2d{
     }
 
     public double[] getXYZ(){
-        return new double[]{x, y, z};
+        return new double[]{getX(), getY(), getZ()};
     }
 
     @Override

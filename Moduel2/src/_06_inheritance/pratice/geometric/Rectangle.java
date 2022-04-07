@@ -1,8 +1,8 @@
 package _06_inheritance.pratice.geometric;
 
 public class Rectangle extends Shape {
-    protected double width;
-    protected double height;
+    private double width;
+    private double height;
 
     public Rectangle() {
         this.width = 1;
