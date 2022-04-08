@@ -37,6 +37,6 @@ public class Square extends Geometric implements  Colorable {
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString() + " area = "+getArea();
     }
 }

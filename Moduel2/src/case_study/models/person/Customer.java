@@ -1,20 +1,22 @@
-package case_study.person;
+package case_study.models.person;
 
-public class Customer extends Person {
+import case_study.models.service.CustomerService;
+
+public class Customer extends Person implements CustomerService {
     private int idCustomerNumber;
     private String address, customerType;
-    private final static String diamond, platinum, gold, sliver, member;
+    private static final String GOLD, SILVER, MEMBER, PLATINUM, DIAMOND;
 
     static {
-        diamond = "Diamond";
-        platinum = "Platinum";
-        gold = "Gold";
-        sliver = "Sliver";
-        member = "member";
+        GOLD = "Gold";
+        SILVER = "Silver";
+        MEMBER = "Member";
+        PLATINUM = "Platinum";
+        DIAMOND = "Diamond";
     }
 
-    public Customer(String name, String dateOfBirth, String email, boolean gender, int idCardNumber, int phone, int idCustomerNumber, String address, String customerType) {
-        super(name, dateOfBirth, email, gender, idCardNumber, phone);
+    public Customer(String name, String dateOfBirth, String gender, String email, int idCardNumber, int phoneNumber, int idCustomerNumber, String address, String customerType) {
+        super(name, dateOfBirth, gender, email, idCardNumber, phoneNumber);
         this.idCustomerNumber = idCustomerNumber;
         this.address = address;
         this.customerType = customerType;
@@ -65,6 +67,16 @@ public class Customer extends Person {
     }
 
     @Override
+    public String getGender() {
+        return super.getGender();
+    }
+
+    @Override
+    public void setGender(String gender) {
+        super.setGender(gender);
+    }
+
+    @Override
     public String getEmail() {
         return super.getEmail();
     }
@@ -72,16 +84,6 @@ public class Customer extends Person {
     @Override
     public void setEmail(String email) {
         super.setEmail(email);
-    }
-
-    @Override
-    public boolean isGender() {
-        return super.isGender();
-    }
-
-    @Override
-    public void setGender(boolean gender) {
-        super.setGender(gender);
     }
 
     @Override
@@ -95,12 +97,32 @@ public class Customer extends Person {
     }
 
     @Override
-    public int getPhone() {
-        return super.getPhone();
+    public int getPhoneNumber() {
+        return super.getPhoneNumber();
     }
 
     @Override
-    public void setPhone(int phone) {
-        super.setPhone(phone);
+    public void setPhoneNumber(int phoneNumber) {
+        super.setPhoneNumber(phoneNumber);
+    }
+
+    @Override
+    public void display() {
+
+    }
+
+    @Override
+    public void addNew() {
+
+    }
+
+    @Override
+    public void edit() {
+
+    }
+
+    @Override
+    public void delete() {
+
     }
 }
