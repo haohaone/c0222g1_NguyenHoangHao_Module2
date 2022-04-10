@@ -99,7 +99,6 @@ public class DisplayPersonList {
     }
 
 
-
     public static void main(String[] args) {
         int choice;
         while (true){

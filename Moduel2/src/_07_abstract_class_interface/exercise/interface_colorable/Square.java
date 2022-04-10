@@ -1,8 +1,19 @@
 package _07_abstract_class_interface.exercise.interface_colorable;
 
 public class Square extends Geometric implements  Colorable {
-    public Square(double size1, double size2) {
+    private boolean filled;
+
+    public Square(double size1, double size2, boolean filled) {
         super(size1, size2);
+        this.filled = filled;
+    }
+
+    public boolean isFilled() {
+        return filled;
+    }
+
+    public void setFilled(boolean filled) {
+        this.filled = filled;
     }
 
     @Override
