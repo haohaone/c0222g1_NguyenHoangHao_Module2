@@ -1,6 +1,6 @@
 package case_study.models.person;
 
-import case_study.models.service.CustomerService;
+import case_study.service.CustomerService;
 
 public class Customer extends Person implements CustomerService {
     private int idCustomerNumber;

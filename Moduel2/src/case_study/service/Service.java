@@ -1,4 +1,4 @@
-package case_study.models.service;
+package case_study.service;
 
 public interface Service {
     void display();

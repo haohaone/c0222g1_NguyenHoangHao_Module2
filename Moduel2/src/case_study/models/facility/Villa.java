@@ -1,6 +1,6 @@
 package case_study.models.facility;
 
-import case_study.models.service.FacilityService;
+import case_study.service.FacilityService;
 
 public class Villa extends Facility implements FacilityService {
     private int sizePool;

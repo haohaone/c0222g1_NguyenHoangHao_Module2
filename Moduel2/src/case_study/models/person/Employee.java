@@ -1,6 +1,6 @@
 package case_study.models.person;
 
-import case_study.models.service.EmployeeService;
+import case_study.service.EmployeeService;
 
 public class Employee extends Person implements EmployeeService {
     private String level, position;

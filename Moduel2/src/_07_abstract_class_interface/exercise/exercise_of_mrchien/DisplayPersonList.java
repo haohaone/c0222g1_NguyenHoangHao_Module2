@@ -96,6 +96,7 @@ public class DisplayPersonList {
         if (!flag){
             System.out.println("Name is not in person list");
         }
+        Person.setAmount(Person.getAmount() - 1);
     }
 
 

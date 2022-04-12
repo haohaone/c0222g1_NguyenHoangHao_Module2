@@ -1,6 +1,6 @@
-package case_study.models.service;
+package case_study.service;
 
-public interface CustomerService extends Service {
+public interface FacilityService extends Service {
     @Override
     void display();
 

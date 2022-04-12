@@ -1,5 +1,6 @@
 package case_study.controllers;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DisplayMainMenu {
