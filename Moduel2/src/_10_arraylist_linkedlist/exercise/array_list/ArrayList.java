@@ -1,30 +1,30 @@
-package _10_arraylist_linkedlist.exercise;
+package _10_arraylist_linkedlist.exercise.array_list;
 
 import java.util.Arrays;
 
-public class Arraylist<E> {
+public class ArrayList<E> {
     private int size = 0;
-    private static final int DEFAULT_CAPACITY = 1;
+    private static final int DEFAULT_CAPACITY = 10;
     private Object[] elements;
 
-    public Arraylist() {
+    public ArrayList() {
         elements = new Object[DEFAULT_CAPACITY];
     }
 
-    public Arraylist(int capacity) {
+    public ArrayList(int capacity) {
         elements = new Object[capacity];
     }
 
     private void ensureCapa(){
-        int newSize = elements.length + 1;
+        int newSize = elements.length * 2 ;
         elements = Arrays.copyOf(elements, newSize);
     }
 
-    public boolean push(E e){
+    public boolean add(E e){
         if (size == elements.length){
             ensureCapa();
         }
-        elements[elements.length-1] = e;
+        elements[size] = e;
         size++;
         return true;
     }
@@ -33,7 +33,7 @@ public class Arraylist<E> {
         if (size == elements.length){
             ensureCapa();
         }
-        for (int i = elements.length - 1; i >= index; i--) {
+        for (int i = size - 1; i >= index; i--) {
             elements[i] = elements[i - 1];
             if (i == index){
                 elements[i] = e;
@@ -43,21 +43,18 @@ public class Arraylist<E> {
     }
 
     public E remove(int index){
+        E deleted = (E) elements[index];
         for (int i = index; i < elements.length - 1; i++) {
             elements[i] = elements[i + 1];
         }
+        elements[size-1] = null;
         size--;
-        elements = Arrays.copyOf(elements, size);
-        return (E) elements[index];
+        return deleted;
     }
 
     public int size(){
         return size;
     }
-
-//    public E clone(){
-//        return (E) Arrays.copyOf(elements,size);
-//    }
 
     public boolean contains (E o){
         boolean flag = false;
@@ -83,15 +80,38 @@ public class Arraylist<E> {
     }
 
     public E get(int i){
-        return (E)elements[i];
+        if (elements[i]==null){
+            throw new IndexOutOfBoundsException("Index: "+i+","+" Size: "+size);
+        }else {
+            return (E) elements[i];
+        }
+    }
+
+    public ArrayList<E> clone(){
+        ArrayList<E> newArray = new ArrayList<>();
+        newArray.elements =  Arrays.copyOf(elements,size);
+        newArray.size = size;
+        return newArray;
     }
 
     public void clear(){
         elements = Arrays.copyOf(elements,0);
+        size = 0;
     }
 
-    @Override
     public String toString() {
-        return Arrays.toString(elements);
+        StringBuilder string = new StringBuilder("[");
+        if (size != 0){
+            for (int i = 0; i < size; i++) {
+                string.append((E) elements[i]);
+                if (i==size-1){
+                    break;
+                }
+                string.append(",");
+            }
+        }
+        string.append(']');
+        return string.toString();
     }
+
 }
