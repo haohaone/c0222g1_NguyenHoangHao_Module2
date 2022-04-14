@@ -1,39 +1,48 @@
 package _07_abstract_class_interface.exercise.interface_colorable;
 
-public class Square extends Geometric implements  Colorable {
-    private boolean filled;
+public class Square extends Shape implements  Colorable {
+    private double size1 , size2;
 
-    public Square(double size1, double size2, boolean filled) {
-        super(size1, size2);
-        this.filled = filled;
+    public Square(String color, boolean filled, double size1, double size2) {
+        super(color, filled);
+        this.size1 = size1;
+        this.size2 = size2;
     }
 
-    public boolean isFilled() {
-        return filled;
-    }
-
-    public void setFilled(boolean filled) {
-        this.filled = filled;
-    }
-
-    @Override
     public double getSize1() {
-        return super.getSize1();
+        return size1;
     }
 
-    @Override
     public void setSize1(double size1) {
-        super.setSize1(size1);
+        this.size1 = size1;
     }
 
-    @Override
     public double getSize2() {
-        return super.getSize2();
+        return size2;
+    }
+
+    public void setSize2(double size2) {
+        this.size2 = size2;
     }
 
     @Override
-    public void setSize2(double size2) {
-        super.setSize2(size2);
+    public String getColor() {
+        return super.getColor();
+    }
+
+    @Override
+    public void setColor(String color) {
+        super.setColor(color);
+    }
+
+    @Override
+    public boolean isFilled() {
+        return super.isFilled();
+    }
+
+    @Override
+    public void setFilled(boolean filled) {
+        super.setFilled(filled);
     }
 
     @Override
@@ -42,12 +51,16 @@ public class Square extends Geometric implements  Colorable {
     }
 
     @Override
-    public void howToColor() {
-        System.out.println("Color all four sides");
+    public String howToColor() {
+        if (isFilled()){
+            return  "Color all four sides";
+        }else {
+            return  "Can't fill";
+        }
     }
 
     @Override
     public String toString() {
-        return super.toString() + " area = "+getArea();
+        return "Square "+super.toString() + " area = "+getArea() + "\n" +howToColor();
     }
 }

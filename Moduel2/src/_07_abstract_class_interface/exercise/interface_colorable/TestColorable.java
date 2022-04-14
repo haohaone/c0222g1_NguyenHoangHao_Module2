@@ -2,17 +2,13 @@ package _07_abstract_class_interface.exercise.interface_colorable;
 
 public class TestColorable {
     public static void main(String[] args) {
-        Square [] squaresList = new Square[2];
-         squaresList[0] = new Square(9,8, true);
-         squaresList[1] = new Square(15,6, false);
-        for (Square square : squaresList) {
-            if (square.isFilled()){
-                System.out.println(square.toString());
-                square.howToColor();
-            }else {
-                System.out.println(square.toString());
-                System.out.println("Can't fill");
-            }
+        Shape [] shapes = new Shape[3];
+        shapes[0] = new Square("BLue",true,4,5);
+        shapes[1] = new Circle("Red",true,4.5);
+        shapes[2] = new Square("BLue",false,4,3);
+        for (Shape shape : shapes) {
+            System.out.println(shape.toString());
+            System.out.println();
         }
     }
 }
