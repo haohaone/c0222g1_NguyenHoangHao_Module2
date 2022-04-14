@@ -7,17 +7,16 @@ public class MyLinkedListTest {
     public static void main(String[] args) {
         MyLinkedList<Integer> ll = new MyLinkedList<>();
         ll.addFirst(2);
-        ll.addLast(1);
-        ll.addLast(4);
-        ll.addLast(4);
-        ll.addLast(2);
-        ll.addLast(9);
-        ll.addLast(9);
+        ll.addFirst(1);
+        ll.addFirst(4);
+        ll.addFirst(4);
+        ll.addFirst(2);
+        ll.addFirst(9);
+        ll.addFirst(9);
         System.out.println(ll.toString());
 
-        MyLinkedList<Integer> clone = new MyLinkedList<>();
-        clone = ll.clone();
-        System.out.println(clone);
+        ll.remove(2);
+        System.out.println(ll.toString());
 
 //        List<Integer> ll = new LinkedList<>();
 //        ll.add(1);

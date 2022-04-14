@@ -59,9 +59,7 @@ public class MyLinkedList<E> {
 
     public E removeFirst() {
         Node holder = head;
-        Node temp = head;
-        temp = temp.next;
-        head = temp;
+        head = head.next;
         numNode--;
         return (E) holder;
     }
@@ -72,8 +70,7 @@ public class MyLinkedList<E> {
             temp = temp.next;
         }
         Node deleted = temp;
-        Node holder = temp;
-        holder.next = null;
+        temp.next = null;
         numNode--;
         return (E) deleted;
     }
