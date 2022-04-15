@@ -2,20 +2,20 @@ package case_study.models.person;
 
 import case_study.service.CustomerService;
 
-public class Customer extends Person implements CustomerService {
+public class Customer extends Person{
     private int idCustomerNumber;
     private String address, customerType;
-    private static final String GOLD, SILVER, MEMBER, PLATINUM, DIAMOND;
 
-    static {
-        GOLD = "Gold";
-        SILVER = "Silver";
-        MEMBER = "Member";
-        PLATINUM = "Platinum";
-        DIAMOND = "Diamond";
-    }
+    public Customer(String name,
+                    String dateOfBirth,
+                    String gender,
+                    String email,
+                    int idCardNumber,
+                    String phoneNumber,
+                    int idCustomerNumber,
+                    String address,
+                    String customerType) {
 
-    public Customer(String name, String dateOfBirth, String gender, String email, int idCardNumber, int phoneNumber, int idCustomerNumber, String address, String customerType) {
         super(name, dateOfBirth, gender, email, idCardNumber, phoneNumber);
         this.idCustomerNumber = idCustomerNumber;
         this.address = address;
@@ -97,32 +97,20 @@ public class Customer extends Person implements CustomerService {
     }
 
     @Override
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return super.getPhoneNumber();
     }
 
     @Override
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         super.setPhoneNumber(phoneNumber);
     }
 
     @Override
-    public void display() {
-
-    }
-
-    @Override
-    public void addNew() {
-
-    }
-
-    @Override
-    public void edit() {
-
-    }
-
-    @Override
-    public void delete() {
-
+    public String toString() {
+        return super.toString() +
+                ", customer id = " + idCustomerNumber +
+                ", address = " + address +
+                ", customer type = " + customerType;
     }
 }

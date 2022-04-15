@@ -2,14 +2,16 @@ package case_study.models.facility;
 
 import case_study.service.FacilityService;
 
-public class Room extends Facility implements FacilityService {
+public class Room extends Facility {
     private String freeService;
 
-    Room(){
+    public Room(String nameService,
+                String rentType,
+                int areaUse,
+                int feeRent,
+                int maximumCustomer,
+                String freeService) {
 
-    }
-
-    public Room(String nameService, String rentType, int areaUse, int feeRent, int maximumCustomer, String freeService) {
         super(nameService, rentType, areaUse, feeRent, maximumCustomer);
         this.freeService = freeService;
     }
@@ -64,27 +66,8 @@ public class Room extends Facility implements FacilityService {
         super.setMaximumCustomer(maximumCustomer);
     }
 
-    public Room(String nameService, String rentType, int areaUse, int feeRent, int maximumCustomer) {
-        super(nameService, rentType, areaUse, feeRent, maximumCustomer);
-    }
-
     @Override
-    public void display() {
-
-    }
-
-    @Override
-    public void addNew() {
-
-    }
-
-    @Override
-    public void edit() {
-
-    }
-
-    @Override
-    public void delete() {
-
+    public String toString() {
+        return super.toString() + ", free service = " + freeService +"]";
     }
 }

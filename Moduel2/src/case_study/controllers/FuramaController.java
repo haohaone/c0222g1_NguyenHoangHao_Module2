@@ -1,44 +1,70 @@
 package case_study.controllers;
 
 import java.util.Scanner;
+import case_study.controllers.DisplayMainMenu;
+import case_study.service.implement.CustomerServiceImp;
+import case_study.service.implement.EmployeeServiceImp;
 
 public class FuramaController {
     public static Scanner scanner = new Scanner(System.in);
+    public DisplayMainMenu displayMainMenu = new DisplayMainMenu();
 
     public static void employeeManagement() {
+        EmployeeServiceImp employeeServiceImp = new EmployeeServiceImp();
         int choice;
         while (true) {
             System.out.println("-----Employee Menu-----");
             System.out.println("1. Display list employee");
             System.out.println("2. Add new employee");
             System.out.println("3. Edit employee");
-            System.out.println("4. Return main menu");
+            System.out.println("4. Delete employee");
+            System.out.println("5. Return main menu");
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
+                    employeeServiceImp.display();
+                    break;
                 case 2:
+                    employeeServiceImp.addNew();
+                    break;
                 case 3:
+                    employeeServiceImp.edit();
+                    break;
                 case 4:
-                    System.exit(4);
+                    employeeServiceImp.delete();
+                    break;
+                case 5:
+                    DisplayMainMenu.displayMainMenu();
             }
         }
     }
 
     public static void customerManagement() {
+        CustomerServiceImp customerServiceImp = new CustomerServiceImp();
         int choice;
         while (true) {
             System.out.println("-----Customer Menu-----");
-            System.out.println("1. Display list customers");
-            System.out.println("2. Add new customers");
-            System.out.println("3. Edit customers");
-            System.out.println("4. Return main menu");
+            System.out.println("1. Display list customer");
+            System.out.println("2. Add new customer");
+            System.out.println("3. Edit customer");
+            System.out.println("4. Delete customer");
+            System.out.println("5. Return main menu");
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
+                    customerServiceImp.display();
+                    break;
                 case 2:
+                    customerServiceImp.addNew();
+                    break;
                 case 3:
+                    customerServiceImp.edit();
+                    break;
                 case 4:
-                    System.exit(4);
+                    customerServiceImp.delete();
+                    break;
+                case 5:
+                    DisplayMainMenu.displayMainMenu();
             }
         }
     }
@@ -57,7 +83,7 @@ public class FuramaController {
                 case 2:
                 case 3:
                 case 4:
-                    System.exit(4);
+                    DisplayMainMenu.displayMainMenu();
             }
         }
     }
@@ -80,7 +106,7 @@ public class FuramaController {
                 case 4:
                 case 5:
                 case 6:
-                    System.exit(4);
+                    DisplayMainMenu.displayMainMenu();
             }
         }
     }
@@ -97,7 +123,7 @@ public class FuramaController {
                 case 1:
                 case 2:
                 case 3:
-                    System.exit(4);
+                    DisplayMainMenu.displayMainMenu();
             }
         }
     }

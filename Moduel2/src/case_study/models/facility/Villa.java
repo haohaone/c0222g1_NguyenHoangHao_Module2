@@ -2,14 +2,18 @@ package case_study.models.facility;
 
 import case_study.service.FacilityService;
 
-public class Villa extends Facility implements FacilityService {
+public class Villa extends Facility {
     private int sizePool;
 
-    Villa (){
+    public Villa(String nameService,
+                 String rentType,
+                 String standardService,
+                 int floor,
+                 int areaUse,
+                 int feeRent,
+                 int maximumCustomer,
+                 int sizePool) {
 
-    }
-
-    public Villa(String nameService, String rentType, String standardService, String floor, int areaUse, int feeRent, int maximumCustomer, int sizePool) {
         super(nameService, rentType, standardService, floor, areaUse, feeRent, maximumCustomer);
         this.sizePool = sizePool;
     }
@@ -53,12 +57,12 @@ public class Villa extends Facility implements FacilityService {
     }
 
     @Override
-    public String getFloor() {
+    public int getFloor() {
         return super.getFloor();
     }
 
     @Override
-    public void setFloor(String floor) {
+    public void setFloor(int floor) {
         super.setFloor(floor);
     }
 
@@ -93,22 +97,7 @@ public class Villa extends Facility implements FacilityService {
     }
 
     @Override
-    public void display() {
-
-    }
-
-    @Override
-    public void addNew() {
-
-    }
-
-    @Override
-    public void edit() {
-
-    }
-
-    @Override
-    public void delete() {
-
+    public String toString() {
+        return super.toString() +", size pool = " + sizePool+ ", floor = " + getFloor() +"]";
     }
 }

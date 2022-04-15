@@ -10,7 +10,9 @@ public class Test {
         personArrayList.add(new Nam("trung",2003));
         personArrayList.add(new Nam("hoang",1995));
         personArrayList.add(new Nu("nhung",1991));
+
         Collections.sort(personArrayList);
+
         Queue<Person> nam = new LinkedList<>();
         Queue<Person> nu = new LinkedList<>();
 

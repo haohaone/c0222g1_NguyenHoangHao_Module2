@@ -2,18 +2,19 @@ package case_study.models.facility;
 
 public abstract class Facility {
     private String nameService,
-                    rentType,
-                    standardService,
-                    floor;
+            rentType,
+            standardService;
     private int areaUse,
-                feeRent,
-                maximumCustomer;
+            feeRent,
+            maximumCustomer,
+            floor;
 
-    Facility(){
+    public Facility(String nameService,
+                    String rentType,
+                    int areaUse,
+                    int feeRent,
+                    int maximumCustomer) {
 
-    }
-
-    public Facility(String nameService, String rentType, int areaUse, int feeRent, int maximumCustomer) {
         this.nameService = nameService;
         this.rentType = rentType;
         this.areaUse = areaUse;
@@ -21,7 +22,7 @@ public abstract class Facility {
         this.maximumCustomer = maximumCustomer;
     }
 
-    public Facility(String nameService, String rentType, String standardService, String floor, int areaUse, int feeRent, int maximumCustomer) {
+    public Facility(String nameService, String rentType, String standardService, int floor, int areaUse, int feeRent, int maximumCustomer) {
         this.nameService = nameService;
         this.rentType = rentType;
         this.standardService = standardService;
@@ -55,11 +56,11 @@ public abstract class Facility {
         this.standardService = standardService;
     }
 
-    public String getFloor() {
+    public int getFloor() {
         return floor;
     }
 
-    public void setFloor(String floor) {
+    public void setFloor(int floor) {
         this.floor = floor;
     }
 
@@ -85,5 +86,16 @@ public abstract class Facility {
 
     public void setMaximumCustomer(int maximumCustomer) {
         this.maximumCustomer = maximumCustomer;
+    }
+
+    @Override
+    public String toString() {
+        return "[" +
+                "nameService = " + nameService + '\'' +
+                ", rentType = " + rentType + '\'' +
+                ", standardService = " + standardService + '\'' +
+                ", areaUse = " + areaUse +
+                ", feeRent = " + feeRent +
+                ", maximumCustomer = " + maximumCustomer;
     }
 }

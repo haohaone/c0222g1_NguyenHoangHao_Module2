@@ -1,10 +1,16 @@
 package case_study.models.person;
 
 public abstract class Person{
-    private String name, dateOfBirth, gender, email;
-    private int idCardNumber, phoneNumber;
+    private String name, dateOfBirth, gender, email, phoneNumber;
+    private int idCardNumber;
 
-    public Person(String name, String dateOfBirth, String gender, String email, int idCardNumber, int phoneNumber) {
+    public Person(String name,
+                  String dateOfBirth,
+                  String gender,
+                  String email,
+                  int idCardNumber,
+                  String phoneNumber) {
+
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
@@ -53,11 +59,22 @@ public abstract class Person{
         this.idCardNumber = idCardNumber;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "[" +
+                "name = " + name + '\'' +
+                ", date of birth = '" + dateOfBirth + '\'' +
+                ", gender = '" + gender + '\'' +
+                ", email = '" + email + '\'' +
+                ", id card Number = " + idCardNumber +
+                ", phone number = " + phoneNumber;
     }
 }

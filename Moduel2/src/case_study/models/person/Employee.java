@@ -2,26 +2,22 @@ package case_study.models.person;
 
 import case_study.service.EmployeeService;
 
-public class Employee extends Person implements EmployeeService {
+public class Employee extends Person {
     private String level, position;
     private int idEmployeeNumber, salary;
-    private static final String SECONDARY_GRADUATION, COLLEGE_GRADUATION, GRADUATE, POST_GRADUATE;
-    private static final String RECEPTIONIST, SERVANTS, SUPERVISOR, MANAGER, DIRECTOR;
 
-    static {
-        SECONDARY_GRADUATION = "Secondary Graduation";
-        COLLEGE_GRADUATION = "College Graduation";
-        GRADUATE = "Graduate";
-        POST_GRADUATE = "Post-Graduate";
 
-        RECEPTIONIST = "Receptionist";
-        SERVANTS = "Servants";
-        SUPERVISOR = "Supervisor";
-        MANAGER = "Manager";
-        DIRECTOR = "Director";
-    }
+    public Employee(String name,
+                    String dateOfBirth,
+                    String gender,
+                    String email,
+                    int idCardNumber,
+                    String phoneNumber,
+                    String level,
+                    String position,
+                    int idEmployeeNumber,
+                    int salary) {
 
-    public Employee(String name, String dateOfBirth, String gender, String email, int idCardNumber, int phoneNumber, String level, String position, int idEmployeeNumber, int salary) {
         super(name, dateOfBirth, gender, email, idCardNumber, phoneNumber);
         this.level = level;
         this.position = position;
@@ -112,32 +108,22 @@ public class Employee extends Person implements EmployeeService {
     }
 
     @Override
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return super.getPhoneNumber();
     }
 
     @Override
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         super.setPhoneNumber(phoneNumber);
     }
 
     @Override
-    public void display() {
-
-    }
-
-    @Override
-    public void addNew() {
-
-    }
-
-    @Override
-    public void edit() {
-
-    }
-
-    @Override
-    public void delete() {
-
+    public String toString() {
+        return super.toString() +
+                ", level =" + level +
+                ", position = " + position +
+                ", employee id = " + idEmployeeNumber +
+                ", salary = " + salary +
+                "]";
     }
 }

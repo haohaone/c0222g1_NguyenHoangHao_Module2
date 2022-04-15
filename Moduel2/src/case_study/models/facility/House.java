@@ -2,13 +2,15 @@ package case_study.models.facility;
 
 import case_study.service.FacilityService;
 
-public class House extends Facility implements FacilityService {
+public class House extends Facility {
 
-    House(){
+    public House(String nameService,
+                 String rentType,
+                 String standardService,
+                 int floor, int areaUse,
+                 int feeRent,
+                 int maximumCustomer) {
 
-    }
-
-    public House(String nameService, String rentType, String standardService, String floor, int areaUse, int feeRent, int maximumCustomer) {
         super(nameService, rentType, standardService, floor, areaUse, feeRent, maximumCustomer);
     }
 
@@ -43,12 +45,12 @@ public class House extends Facility implements FacilityService {
     }
 
     @Override
-    public String getFloor() {
+    public int getFloor() {
         return super.getFloor();
     }
 
     @Override
-    public void setFloor(String floor) {
+    public void setFloor(int floor) {
         super.setFloor(floor);
     }
 
@@ -83,22 +85,7 @@ public class House extends Facility implements FacilityService {
     }
 
     @Override
-    public void display() {
-
-    }
-
-    @Override
-    public void addNew() {
-
-    }
-
-    @Override
-    public void edit() {
-
-    }
-
-    @Override
-    public void delete() {
-
+    public String toString() {
+        return super.toString() + ", floor = " + getFloor() + "]";
     }
 }
