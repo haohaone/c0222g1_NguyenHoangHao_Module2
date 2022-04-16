@@ -17,6 +17,7 @@ public class ProductManagerLinkedList {
             if (productsList.get(i).getIdProduct() == id){
                 index = i;
                 count++;
+                break;
             }
         }
         if (count == 0){
@@ -40,6 +41,7 @@ public class ProductManagerLinkedList {
             if (productsList.get(i).getIdProduct() == id){
                 index = i;
                 count++;
+                break;
             }
         }
         if (count == 0){
@@ -50,13 +52,14 @@ public class ProductManagerLinkedList {
         }
     }
 
-    public void searchProduct(int id){
+    public void searchProduct(String name){
         int count = 0;
         int index = 0;
         for (int i = 0; i < productsList.size(); i++) {
-            if (productsList.get(i).getIdProduct() == id){
+            if (productsList.get(i).getNameProduct().contains(name)){
                 index = i;
                 count++;
+                break;
             }
         }
         if (count == 0){

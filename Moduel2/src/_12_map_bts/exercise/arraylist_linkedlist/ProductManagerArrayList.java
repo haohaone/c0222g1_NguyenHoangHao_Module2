@@ -1,7 +1,5 @@
 package _12_map_bts.exercise.arraylist_linkedlist;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -21,6 +19,7 @@ public class ProductManagerArrayList {
             if (productsList.get(i).getIdProduct() == id){
                 index = i;
                 count++;
+                break;
             }
         }
         if (count == 0){
@@ -44,6 +43,7 @@ public class ProductManagerArrayList {
             if (productsList.get(i).getIdProduct() == id){
                 index = i;
                 count++;
+                break;
             }
         }
         if (count == 0){
@@ -54,13 +54,14 @@ public class ProductManagerArrayList {
         }
     }
 
-    public void searchProduct(int id){
+    public void searchProduct(String name){
         int count = 0;
         int index = 0;
         for (int i = 0; i < productsList.size(); i++) {
-            if (productsList.get(i).getIdProduct() == id){
+            if (productsList.get(i).getNameProduct().contains(name)){
                 index = i;
                 count++;
+                break;
             }
         }
         if (count == 0){

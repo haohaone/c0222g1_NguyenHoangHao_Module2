@@ -1,7 +1,5 @@
 package _12_map_bts.exercise.arraylist_linkedlist;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-
 import java.util.Scanner;
 
 public class TestProductList {
