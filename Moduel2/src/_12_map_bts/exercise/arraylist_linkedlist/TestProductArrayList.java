@@ -9,6 +9,7 @@ public class TestProductArrayList {
     int choice;
     while (true){
         int id, price;
+        String name;
         System.out.println("1. Add new product");
         System.out.println("2. Delete product");
         System.out.println("3. Set product");
@@ -21,7 +22,7 @@ public class TestProductArrayList {
         switch (choice){
             case 1:
                 System.out.println("Input name product");
-                String name = scanner.nextLine();
+                name = scanner.nextLine();
                 System.out.println("Input idProduct");
                 id = Integer.parseInt(scanner.nextLine());
                 System.out.println("Input Product Price");
@@ -41,8 +42,8 @@ public class TestProductArrayList {
                 break;
             case 4:
                 System.out.println("Input id of Product you want to search");
-                id = Integer.parseInt(scanner.nextLine());
-                productManagerLinkedList.searchProduct(id);
+                name = scanner.nextLine();
+                productManagerLinkedList.searchProduct(name);
                 break;
             case 5:
                 System.out.println("Compare products list in order price");

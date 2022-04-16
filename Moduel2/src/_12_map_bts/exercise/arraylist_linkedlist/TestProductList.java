@@ -41,8 +41,8 @@ public class TestProductList {
                     break;
                 case 4:
                     System.out.println("Input id of Product you want to search");
-                    id = Integer.parseInt(scanner.nextLine());
-                    productManagerArrayList.searchProduct(id);
+                    name = scanner.nextLine();
+                    productManagerArrayList.searchProduct(name);
                     break;
                 case 5:
                     System.out.println("Compare products list in order price");
