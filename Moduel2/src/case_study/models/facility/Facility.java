@@ -7,22 +7,33 @@ public abstract class Facility {
     private int areaUse,
             feeRent,
             maximumCustomer,
-            floor;
+            floor,
+            id;
+    private int maintain = 0;
 
     public Facility(String nameService,
                     String rentType,
                     int areaUse,
                     int feeRent,
-                    int maximumCustomer) {
+                    int maximumCustomer
+                    ,int id) {
 
         this.nameService = nameService;
         this.rentType = rentType;
         this.areaUse = areaUse;
         this.feeRent = feeRent;
         this.maximumCustomer = maximumCustomer;
+        this.id = id;
     }
 
-    public Facility(String nameService, String rentType, String standardService, int floor, int areaUse, int feeRent, int maximumCustomer) {
+    public Facility(String nameService,
+                    String rentType,
+                    String standardService,
+                    int floor,
+                    int areaUse,
+                    int feeRent,
+                    int maximumCustomer,
+                    int id) {
         this.nameService = nameService;
         this.rentType = rentType;
         this.standardService = standardService;
@@ -30,6 +41,15 @@ public abstract class Facility {
         this.areaUse = areaUse;
         this.feeRent = feeRent;
         this.maximumCustomer = maximumCustomer;
+        this.id = id;
+    }
+
+    public int getMaintain() {
+        return maintain;
+    }
+
+    public void setMaintain(int maintain) {
+        this.maintain = maintain;
     }
 
     public String getNameService() {
@@ -88,6 +108,14 @@ public abstract class Facility {
         this.maximumCustomer = maximumCustomer;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "[" +
@@ -96,6 +124,7 @@ public abstract class Facility {
                 ", standardService = " + standardService + '\'' +
                 ", areaUse = " + areaUse +
                 ", feeRent = " + feeRent +
-                ", maximumCustomer = " + maximumCustomer;
+                ", maximumCustomer = " + maximumCustomer +
+                ", id = " + id;
     }
 }

@@ -8,14 +8,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeServiceImp implements EmployeeService {
-    static List<Employee> employeeList = new ArrayList<>();
-    static Scanner scanner = new Scanner(System.in);
+    private static List<Employee> employeeList = new ArrayList<>();
+    public static Scanner scanner = new Scanner(System.in);
 
     @Override
     public void display() {
         for (Employee employee : employeeList) {
             System.out.println(employee.toString());
         }
+    }
+
+    public static List<Employee> getEmployeeList() {
+        return employeeList;
     }
 
     @Override

@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class DecimalBinaryTest {
-    public static int DecimalToBinary(int decimal){
+    public static int decimalToBinary(int decimal){
         Stack<Integer> binary = new Stack<>();
         int divide = 0;
         while (true){
@@ -23,7 +23,7 @@ public class DecimalBinaryTest {
         return Integer.parseInt(string);
     }
 
-    public static int BinaryToDecimal(int binary){
+    public static int binaryToDecimal(int binary){
         String [] string = String.valueOf(binary).split("");
         Stack<Integer> binaryStack = new Stack<>();
         for (int i = 0; i < string.length; i++) {
@@ -53,14 +53,14 @@ public class DecimalBinaryTest {
                     binary = 0;
                     System.out.println("Input Decimal convert to Binary");
                     decimal = Integer.parseInt(scanner.nextLine());
-                    binary = DecimalToBinary(decimal);
+                    binary = decimalToBinary(decimal);
                     System.out.println(binary);
                     break;
                 case 2:
                     decimal = 0;
                     System.out.println("Input Binary covert to Decimal");
                     binary = Integer.parseInt(scanner.nextLine());
-                    decimal = BinaryToDecimal(binary);
+                    decimal = binaryToDecimal(binary);
                     System.out.println(decimal);
                     break;
                 case 0:

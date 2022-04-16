@@ -10,8 +10,44 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CustomerServiceImp implements CustomerService {
-    static List<Customer> customerList = new LinkedList<>();
+    private static List<Customer> customerList = new LinkedList<>();
     static Scanner scanner = new Scanner(System.in);
+
+    static {
+        customerList.add(new Customer("hao",
+                "8-7-1999",
+                "Nam",
+                "hoanghao9x87@gmail.com",
+                201787802,
+                "0762709502",
+                1,
+                "hoa an 14",
+                "VIP"));
+
+        customerList.add(new Customer("hoang",
+                "2-7-2005",
+                "Nam",
+                "hoang2005@gmail.com",
+                2005878888,
+                "0762709888",
+                2,
+                "165 nguyen tat thanh",
+                "VIP"));
+
+        customerList.add(new Customer("trung",
+                "25-1-2005",
+                "Nam",
+                "trungtrung@gmail.com",
+                200511111,
+                "0905000002",
+                3,
+                "99 dien bien phu",
+                "VIP"));
+    }
+
+    public static List<Customer> getCustomerList() {
+        return customerList;
+    }
 
     @Override
     public void display() {
@@ -48,7 +84,7 @@ public class CustomerServiceImp implements CustomerService {
 
         String customerType = "";
         boolean check = true;
-        while (check){
+        while (check) {
             System.out.println("--------Menu--------");
             System.out.println("1. Gold");
             System.out.println("2. Silver");
@@ -57,7 +93,7 @@ public class CustomerServiceImp implements CustomerService {
             System.out.println("5. Diamond");
             System.out.println("Input your choice");
             int choice = Integer.parseInt(scanner.nextLine());
-            switch (choice){
+            switch (choice) {
                 case 1:
                     customerType = "Gold";
                     check = false;
@@ -84,14 +120,14 @@ public class CustomerServiceImp implements CustomerService {
         }
 
         customerList.add(new Customer(name,
-                                    dateOfBirth,
-                                    gender,
-                                    email,
-                                    idCardNumber,
-                                    phoneNumber,
-                                    customerID,
-                                    address,
-                                    customerType));
+                dateOfBirth,
+                gender,
+                email,
+                idCardNumber,
+                phoneNumber,
+                customerID,
+                address,
+                customerType));
 
         System.out.println("Add new successful");
     }
@@ -104,13 +140,13 @@ public class CustomerServiceImp implements CustomerService {
         int index = 0;
 
         for (int i = 0; i < customerList.size(); i++) {
-            if (customerList.get(i).getIdCustomerNumber() == id){
+            if (customerList.get(i).getIdCustomerNumber() == id) {
                 index = i;
                 flag = true;
                 break;
             }
         }
-        if (flag){
+        if (flag) {
             System.out.println("Input customer name");
             String name = scanner.nextLine();
             customerList.get(index).setName(name);
@@ -145,7 +181,7 @@ public class CustomerServiceImp implements CustomerService {
 
             String customerType = "";
             boolean check = true;
-            while (check){
+            while (check) {
                 System.out.println("--------Menu--------");
                 System.out.println("1. Gold");
                 System.out.println("2. Silver");
@@ -154,7 +190,7 @@ public class CustomerServiceImp implements CustomerService {
                 System.out.println("5. Diamond");
                 System.out.println("Input your choice");
                 int choice = Integer.parseInt(scanner.nextLine());
-                switch (choice){
+                switch (choice) {
                     case 1:
                         customerType = "Gold";
                         check = false;
@@ -182,7 +218,7 @@ public class CustomerServiceImp implements CustomerService {
             customerList.get(index).setCustomerType(customerType);
 
             System.out.println("Edit successful");
-        }else {
+        } else {
             System.out.println("Id is not in employee list");
         }
     }
@@ -194,16 +230,16 @@ public class CustomerServiceImp implements CustomerService {
         boolean flag = false;
 
         for (int i = 0; i < customerList.size(); i++) {
-            if (customerList.get(i).getIdCustomerNumber() == id){
+            if (customerList.get(i).getIdCustomerNumber() == id) {
                 customerList.remove(i);
                 flag = true;
                 break;
             }
         }
 
-        if (flag){
+        if (flag) {
             System.out.println("Delete successful");
-        }else {
+        } else {
             System.out.println("Id is not in employee list");
         }
     }

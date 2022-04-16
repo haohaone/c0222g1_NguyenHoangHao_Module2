@@ -1,13 +1,14 @@
 package case_study.booking_contracts;
 
 public class Contract {
-    private int idBooking, idCustomer, preFee, totalFeeRent;
+    private int idBooking, idCustomer, preFee, totalFeeRent, idContract;
 
-    public Contract(int idBooking, int idCustomer, int preFee, int totalFeeRent) {
+    public Contract(int idBooking, int idCustomer, int idContract, int preFee, int totalFeeRent) {
         this.idBooking = idBooking;
         this.idCustomer = idCustomer;
         this.preFee = preFee;
         this.totalFeeRent = totalFeeRent;
+        this.idContract = idContract;
     }
 
     public int getIdBooking() {
@@ -40,5 +41,24 @@ public class Contract {
 
     public void setTotalFeeRent(int totalFeeRent) {
         this.totalFeeRent = totalFeeRent;
+    }
+
+    public int getIdContract() {
+        return idContract;
+    }
+
+    public void setIdContract(int idContract) {
+        this.idContract = idContract;
+    }
+
+    @Override
+    public String toString() {
+        return "[" +
+                "idBooking=" + idBooking +
+                ", idCustomer=" + idCustomer +
+                ", preFee=" + preFee +
+                ", totalFeeRent=" + totalFeeRent +
+                ", idContract=" + idContract +
+                ']';
     }
 }

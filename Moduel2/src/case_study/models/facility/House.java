@@ -9,9 +9,20 @@ public class House extends Facility {
                  String standardService,
                  int floor, int areaUse,
                  int feeRent,
-                 int maximumCustomer) {
+                 int maximumCustomer,
+                 int id) {
 
-        super(nameService, rentType, standardService, floor, areaUse, feeRent, maximumCustomer);
+        super(nameService, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id);
+    }
+
+    @Override
+    public int getMaintain() {
+        return super.getMaintain();
+    }
+
+    @Override
+    public void setMaintain(int maintain) {
+        super.setMaintain(maintain);
     }
 
     @Override
@@ -85,7 +96,17 @@ public class House extends Facility {
     }
 
     @Override
+    public int getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
     public String toString() {
-        return super.toString() + ", floor = " + getFloor() + "]";
+        return super.toString() + ", floor = " + getFloor();
     }
 }

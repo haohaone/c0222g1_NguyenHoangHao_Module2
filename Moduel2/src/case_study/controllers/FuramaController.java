@@ -2,8 +2,7 @@ package case_study.controllers;
 
 import java.util.Scanner;
 import case_study.controllers.DisplayMainMenu;
-import case_study.service.implement.CustomerServiceImp;
-import case_study.service.implement.EmployeeServiceImp;
+import case_study.service.implement.*;
 
 public class FuramaController {
     public static Scanner scanner = new Scanner(System.in);
@@ -70,25 +69,63 @@ public class FuramaController {
     }
 
     public static void facilityManagement() {
+        FacilityServiceImp facilityServiceImp = new FacilityServiceImp();
         int choice;
         while (true) {
             System.out.println("-----Facility Menu-----");
             System.out.println("1. Display list facility");
             System.out.println("2. Add new facility");
-            System.out.println("3. Edit facility");
+            System.out.println("3. Display list facility maintenance");
             System.out.println("4. Return main menu");
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
+                    facilityServiceImp.display();
+                    break;
                 case 2:
+                    addNewFacilityMenu();
+                    break;
                 case 3:
+                    facilityServiceImp.displayMaintain();
+                    break;
                 case 4:
                     DisplayMainMenu.displayMainMenu();
             }
         }
     }
 
+    public static void addNewFacilityMenu(){
+        FacilityServiceImp facilityServiceImp = new FacilityServiceImp();
+        int choice;
+        while (true) {
+            System.out.println("---Add new facility menu--");
+            System.out.println("1. Add new Villa");
+            System.out.println("2. Add new House");
+            System.out.println("3. Add new Room");
+            System.out.println("4. Back to menu");
+            choice = Integer.parseInt(scanner.nextLine());
+            switch (choice) {
+                case 1:
+                    facilityServiceImp.addNewVilla();
+                    facilityManagement();
+                    break;
+                case 2:
+                    facilityServiceImp.addNewHouse();
+                    facilityManagement();
+                    break;
+                case 3:
+                    facilityServiceImp.addNewRoom();
+                    facilityManagement();
+                    break;
+                case 4:
+                    facilityManagement();
+            }
+        }
+    }
+
     public static void bookingManagement() {
+        BookingServiceImp bookingServiceImp = new BookingServiceImp();
+        ContractServiceImp contractServiceImp = new ContractServiceImp();
         int choice;
         while (true){
             System.out.println("-----Booking Menu-----");
@@ -101,10 +138,20 @@ public class FuramaController {
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
+                    bookingServiceImp.addBooking();
+                    break;
                 case 2:
+                    bookingServiceImp.displayListBooking();
+                    break;
                 case 3:
+                    contractServiceImp.createNewContract();
+                    break;
                 case 4:
+                    contractServiceImp.displayContract();
+                    break;
                 case 5:
+                    contractServiceImp.editNewContract();
+                    break;
                 case 6:
                     DisplayMainMenu.displayMainMenu();
             }

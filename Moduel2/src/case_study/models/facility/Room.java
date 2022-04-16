@@ -10,10 +10,21 @@ public class Room extends Facility {
                 int areaUse,
                 int feeRent,
                 int maximumCustomer,
+                int id,
                 String freeService) {
 
-        super(nameService, rentType, areaUse, feeRent, maximumCustomer);
+        super(nameService, rentType, areaUse, feeRent, maximumCustomer, id);
         this.freeService = freeService;
+    }
+
+    @Override
+    public int getMaintain() {
+        return super.getMaintain();
+    }
+
+    @Override
+    public void setMaintain(int maintain) {
+        super.setMaintain(maintain);
     }
 
     @Override
@@ -57,6 +68,36 @@ public class Room extends Facility {
     }
 
     @Override
+    public String getStandardService() {
+        return super.getStandardService();
+    }
+
+    @Override
+    public void setStandardService(String standardService) {
+        super.setStandardService(standardService);
+    }
+
+    @Override
+    public int getFloor() {
+        return super.getFloor();
+    }
+
+    @Override
+    public void setFloor(int floor) {
+        super.setFloor(floor);
+    }
+
+    @Override
+    public int getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
     public int getMaximumCustomer() {
         return super.getMaximumCustomer();
     }
@@ -68,6 +109,6 @@ public class Room extends Facility {
 
     @Override
     public String toString() {
-        return super.toString() + ", free service = " + freeService +"]";
+        return super.toString() + ", free service = " + freeService;
     }
 }

@@ -5,7 +5,7 @@ import _10_arraylist_linkedlist.exercise.array_list.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
-public class TreeMap {
+public class CountString {
     public static void main(String[] args) {
         String string = "Hello GOOD Morning everybody good morning";
         String [] arrString = string.split(" ");

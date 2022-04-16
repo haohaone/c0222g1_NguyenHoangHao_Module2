@@ -12,10 +12,21 @@ public class Villa extends Facility {
                  int areaUse,
                  int feeRent,
                  int maximumCustomer,
+                 int id,
                  int sizePool) {
 
-        super(nameService, rentType, standardService, floor, areaUse, feeRent, maximumCustomer);
+        super(nameService, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id);
         this.sizePool = sizePool;
+    }
+
+    @Override
+    public int getMaintain() {
+        return super.getMaintain();
+    }
+
+    @Override
+    public void setMaintain(int maintain) {
+        super.setMaintain(maintain);
     }
 
     public int getSizePool() {
@@ -87,6 +98,16 @@ public class Villa extends Facility {
     }
 
     @Override
+    public int getId() {
+        return super.getId();
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
+
+    @Override
     public int getMaximumCustomer() {
         return super.getMaximumCustomer();
     }
@@ -98,6 +119,6 @@ public class Villa extends Facility {
 
     @Override
     public String toString() {
-        return super.toString() +", size pool = " + sizePool+ ", floor = " + getFloor() +"]";
+        return super.toString() +", size pool = " + sizePool+ ", floor = " + getFloor();
     }
 }
