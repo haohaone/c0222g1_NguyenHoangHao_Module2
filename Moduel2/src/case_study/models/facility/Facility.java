@@ -121,7 +121,6 @@ public abstract class Facility {
         return "[" +
                 "nameService = " + nameService + '\'' +
                 ", rentType = " + rentType + '\'' +
-                ", standardService = " + standardService + '\'' +
                 ", areaUse = " + areaUse +
                 ", feeRent = " + feeRent +
                 ", maximumCustomer = " + maximumCustomer +

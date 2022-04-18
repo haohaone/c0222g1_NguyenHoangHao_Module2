@@ -60,10 +60,15 @@ public class FacilityServiceImp implements FacilityService {
     @Override
     public void displayMaintain() {
         System.out.println("--------------Maintain facility ---------------");
+        int count = 0;
         for (Map.Entry<Facility, Integer> element : facilityList.entrySet()) {
             if (element.getValue() >= 5) {
                 System.out.println(element.getKey() + ", amount rented = " + element.getValue() + "]");
+                count++;
             }
+        }
+        if (count == 0){
+            System.out.println("Not facility need to maintain");
         }
     }
 

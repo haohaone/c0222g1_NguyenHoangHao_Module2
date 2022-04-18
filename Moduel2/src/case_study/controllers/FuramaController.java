@@ -159,6 +159,7 @@ public class FuramaController {
     }
 
     public static void promotionManagement() {
+        PromotionServiceImp promotionServiceImp = new PromotionServiceImp();
         int choice;
         while (true){
             System.out.println("-----------Promotion Menu-----------");
@@ -168,7 +169,11 @@ public class FuramaController {
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
+                    promotionServiceImp.displayCustomerUseService();
+                    break;
                 case 2:
+                    promotionServiceImp.displayDiscount();
+                    break;
                 case 3:
                     DisplayMainMenu.displayMainMenu();
             }

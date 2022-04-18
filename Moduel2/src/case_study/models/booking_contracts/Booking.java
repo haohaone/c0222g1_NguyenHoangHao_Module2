@@ -1,30 +1,26 @@
-package case_study.booking_contracts;
+package case_study.models.booking_contracts;
 
 import case_study.models.facility.Facility;
 import case_study.models.person.Customer;
 
 public class Booking {
-    private int idBooking, idCustomerNumber;
-    private String starTime, endTime, nameService, standardService;
+    private int idBooking;
+    private String starTime, endTime;
     private Customer customer;
     private Facility facility;
+    private boolean statusContract;
 
     public Booking(int idBooking,
-                   int idCustomerNumber,
                    String starTime,
                    String endTime,
-                   String nameService,
-                   String standardService,
                    Customer customer,
                    Facility facility) {
         this.idBooking = idBooking;
-        this.idCustomerNumber = idCustomerNumber;
         this.starTime = starTime;
         this.endTime = endTime;
-        this.nameService = nameService;
-        this.standardService = standardService;
         this.customer = customer;
         this.facility = facility;
+        this.statusContract = false;
     }
 
     public int getIdBooking() {
@@ -33,14 +29,6 @@ public class Booking {
 
     public void setIdBooking(int idBooking) {
         this.idBooking = idBooking;
-    }
-
-    public int getIdCustomerNumber() {
-        return idCustomerNumber;
-    }
-
-    public void setIdCustomerNumber(int idCustomerNumber) {
-        this.idCustomerNumber = idCustomerNumber;
     }
 
     public String getStarTime() {
@@ -59,22 +47,6 @@ public class Booking {
         this.endTime = endTime;
     }
 
-    public String getNameService() {
-        return nameService;
-    }
-
-    public void setNameService(String nameService) {
-        this.nameService = nameService;
-    }
-
-    public String getStandardService() {
-        return standardService;
-    }
-
-    public void setStandardService(String standardService) {
-        this.standardService = standardService;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
@@ -83,13 +55,30 @@ public class Booking {
         return facility;
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setFacility(Facility facility) {
+        this.facility = facility;
+    }
+
+    public boolean isStatusContract() {
+        return statusContract;
+    }
+
+    public void setStatusContract(boolean statusContract) {
+        this.statusContract = statusContract;
+    }
+
     @Override
     public String toString() {
         return  "[" +
                 "idBooking = " + idBooking +
-                ", idCustomerNumber = " + idCustomerNumber +
+                ", idCustomerNumber = " + customer.getIdCustomerNumber() +
                 ", starTime = " + starTime + '\'' +
                 ", endTime = " + endTime + '\'' +
-                ", nameService = " + nameService;
+                ", nameService = " + facility.getNameService() +
+                ", status Contract = " + isStatusContract();
     }
 }

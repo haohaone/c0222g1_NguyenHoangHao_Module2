@@ -33,7 +33,8 @@ public class DisplayMainMenu {
                     FuramaController.promotionManagement();
                     break;
                 case 6:
-                    System.exit(0);
+                    System.exit(6);
+
             }
         }
     }

@@ -1,6 +1,6 @@
 package case_study.utils;
 
-import case_study.booking_contracts.Booking;
+import case_study.models.booking_contracts.Booking;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +14,6 @@ public class BookingComparator implements Comparator<Booking> {
         LocalDate startDate2 = LocalDate.parse(o2.getStarTime(), formatter);
         LocalDate endDate1 = LocalDate.parse(o1.getEndTime(), formatter);
         LocalDate endDate2 = LocalDate.parse(o2.getEndTime(), formatter);
-
         if (startDate1.compareTo(startDate2) < 0){
             return  -1;
         }else  if (startDate1.compareTo(startDate2) > 0){
