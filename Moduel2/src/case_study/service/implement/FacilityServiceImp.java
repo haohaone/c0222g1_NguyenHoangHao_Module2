@@ -102,7 +102,7 @@ public class FacilityServiceImp implements FacilityService {
         int sizePool = Integer.parseInt(scanner.nextLine());
 
         Villa villa = new Villa(name, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id, sizePool);
-        facilityList.put(villa, 1);
+        facilityList.put(villa, 0);
         System.out.println("Add successful");
     }
 
@@ -133,7 +133,7 @@ public class FacilityServiceImp implements FacilityService {
         int id = Integer.parseInt(scanner.nextLine());
 
         House house = new House(name, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id);
-        facilityList.put(house, 1);
+        facilityList.put(house, 0);
         System.out.println("Add successful");
     }
 
@@ -167,7 +167,7 @@ public class FacilityServiceImp implements FacilityService {
         String freeService = scanner.nextLine();
 
         Room room = new Room(name, rentType, areaUse, feeRent, maximumCustomer, id, freeService);
-        facilityList.put(room, 1);
+        facilityList.put(room, 0);
         System.out.println("Add successful");
     }
 }

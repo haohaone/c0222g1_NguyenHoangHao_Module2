@@ -4,11 +4,12 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class DecimalBinaryTest {
-    public static int decimalToBinary(int decimal){
+
+    public static String decimalToBinary(int decimal){
         Stack<Integer> binary = new Stack<>();
         int divide = 0;
         while (true){
-            divide = decimal % 2;
+            divide = (decimal) % 2;
             binary.push(divide);
             decimal = decimal / 2;
             if (decimal  < 1){
@@ -20,11 +21,11 @@ public class DecimalBinaryTest {
         for (int i = 0; i < size; i++) {
             string += binary.pop();
         }
-        return Integer.parseInt(string);
+        return string;
     }
 
-    public static int binaryToDecimal(int binary){
-        String [] string = String.valueOf(binary).split("");
+    public static int binaryToDecimal(String binary){
+        String [] string = binary.split("");
         Stack<Integer> binaryStack = new Stack<>();
         for (int i = 0; i < string.length; i++) {
             binaryStack.push(Integer.parseInt(string[i]));
@@ -37,6 +38,7 @@ public class DecimalBinaryTest {
     }
 
     public static void main(String[] args) {
+
         int choice;
         Scanner scanner = new Scanner(System.in);
 
@@ -46,11 +48,11 @@ public class DecimalBinaryTest {
             System.out.println("2. Binary to Decimal");
             System.out.println("0. Exit");
             choice = Integer.parseInt(scanner.nextLine());
-            int binary;
+            String binary;
             int decimal;
             switch (choice){
                 case 1:
-                    binary = 0;
+                    binary = "";
                     System.out.println("Input Decimal convert to Binary");
                     decimal = Integer.parseInt(scanner.nextLine());
                     binary = decimalToBinary(decimal);
@@ -59,7 +61,7 @@ public class DecimalBinaryTest {
                 case 2:
                     decimal = 0;
                     System.out.println("Input Binary covert to Decimal");
-                    binary = Integer.parseInt(scanner.nextLine());
+                    binary = scanner.nextLine();
                     decimal = binaryToDecimal(binary);
                     System.out.println(decimal);
                     break;
