@@ -59,7 +59,6 @@ public class ProductManagerLinkedList {
             if (productsList.get(i).getNameProduct().contains(name)){
                 index = i;
                 count++;
-                break;
             }
         }
         if (count == 0){
