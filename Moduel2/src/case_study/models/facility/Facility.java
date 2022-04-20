@@ -3,12 +3,12 @@ package case_study.models.facility;
 public abstract class Facility {
     private String nameService,
             rentType,
-            standardService;
+            standardService,
+            id;
     private int areaUse,
             feeRent,
             maximumCustomer,
-            floor,
-            id;
+            floor;
     private int maintain = 0;
 
     public Facility(String nameService,
@@ -16,7 +16,7 @@ public abstract class Facility {
                     int areaUse,
                     int feeRent,
                     int maximumCustomer
-                    ,int id) {
+                    ,String id) {
 
         this.nameService = nameService;
         this.rentType = rentType;
@@ -33,7 +33,7 @@ public abstract class Facility {
                     int areaUse,
                     int feeRent,
                     int maximumCustomer,
-                    int id) {
+                    String id) {
         this.nameService = nameService;
         this.rentType = rentType;
         this.standardService = standardService;
@@ -108,11 +108,11 @@ public abstract class Facility {
         this.maximumCustomer = maximumCustomer;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

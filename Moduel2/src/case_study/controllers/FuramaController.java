@@ -10,7 +10,7 @@ public class FuramaController {
 
     public static void employeeManagement() {
         EmployeeServiceImp employeeServiceImp = new EmployeeServiceImp();
-        int choice;
+        int choice = 0;
         while (true) {
             System.out.println("-----Employee Menu-----");
             System.out.println("1. Display list employee");
@@ -18,7 +18,11 @@ public class FuramaController {
             System.out.println("3. Edit employee");
             System.out.println("4. Delete employee");
             System.out.println("5. Return main menu");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice) {
                 case 1:
                     employeeServiceImp.display();
@@ -40,7 +44,7 @@ public class FuramaController {
 
     public static void customerManagement() {
         CustomerServiceImp customerServiceImp = new CustomerServiceImp();
-        int choice;
+        int choice = 0;
         while (true) {
             System.out.println("-----Customer Menu-----");
             System.out.println("1. Display list customer");
@@ -48,7 +52,11 @@ public class FuramaController {
             System.out.println("3. Edit customer");
             System.out.println("4. Delete customer");
             System.out.println("5. Return main menu");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice) {
                 case 1:
                     customerServiceImp.display();
@@ -70,14 +78,18 @@ public class FuramaController {
 
     public static void facilityManagement() {
         FacilityServiceImp facilityServiceImp = new FacilityServiceImp();
-        int choice;
+        int choice = 0;
         while (true) {
             System.out.println("-----Facility Menu-----");
             System.out.println("1. Display list facility");
             System.out.println("2. Add new facility");
             System.out.println("3. Display list facility maintenance");
             System.out.println("4. Return main menu");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice) {
                 case 1:
                     facilityServiceImp.display();
@@ -96,14 +108,18 @@ public class FuramaController {
 
     public static void addNewFacilityMenu(){
         FacilityServiceImp facilityServiceImp = new FacilityServiceImp();
-        int choice;
+        int choice = 0;
         while (true) {
             System.out.println("---Add new facility menu--");
             System.out.println("1. Add new Villa");
             System.out.println("2. Add new House");
             System.out.println("3. Add new Room");
             System.out.println("4. Back to menu");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice) {
                 case 1:
                     facilityServiceImp.addNewVilla();
@@ -126,7 +142,7 @@ public class FuramaController {
     public static void bookingManagement() {
         BookingServiceImp bookingServiceImp = new BookingServiceImp();
         ContractServiceImp contractServiceImp = new ContractServiceImp();
-        int choice;
+        int choice = 0;
         while (true){
             System.out.println("-----Booking Menu-----");
             System.out.println("1. Add new booking");
@@ -135,7 +151,11 @@ public class FuramaController {
             System.out.println("4. Display list contracts");
             System.out.println("5. Edit Contracts");
             System.out.println("6. Return main menu");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice) {
                 case 1:
                     bookingServiceImp.addBooking();
@@ -160,13 +180,17 @@ public class FuramaController {
 
     public static void promotionManagement() {
         PromotionServiceImp promotionServiceImp = new PromotionServiceImp();
-        int choice;
+        int choice = 0;
         while (true){
             System.out.println("-----------Promotion Menu-----------");
             System.out.println("1. Display list customers use service");
             System.out.println("2. Display list customers get voucher");
             System.out.println("3. Return main menu");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice) {
                 case 1:
                     promotionServiceImp.displayCustomerUseService();

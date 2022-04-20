@@ -37,7 +37,7 @@ public class EmployeeServiceImp implements EmployeeService {
         String email = scanner.nextLine();
 
         System.out.println("Input employee ID card number");
-        int idCardNumber = Integer.parseInt(scanner.nextLine());
+        String idCardNumber = scanner.nextLine();
 
         System.out.println("Input phone number");
         String phoneNumber = scanner.nextLine();
@@ -45,13 +45,18 @@ public class EmployeeServiceImp implements EmployeeService {
         String level = "";
         boolean checkLevel = true;
         while (checkLevel){
+            int choice = 0;
             System.out.println("--------Menu--------");
             System.out.println("1. Secondary Graduation");
             System.out.println("2. College Graduation");
             System.out.println("3. Graduate");
             System.out.println("4. Post-Graduate");
             System.out.println("Input your choice");
-            int choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice){
                 case 1:
                     level = "Secondary Graduation";
@@ -76,6 +81,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
         String position = "";
         boolean checkPosition = true;
+        int choice = 0;
         while (checkPosition){
             System.out.println("--------Menu--------");
             System.out.println("1. Receptionist");
@@ -84,7 +90,11 @@ public class EmployeeServiceImp implements EmployeeService {
             System.out.println("4. Manager");
             System.out.println("5. Director");
             System.out.println("Input your choice");
-            int choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice){
                 case 1:
                     position = "Receptionist";
@@ -112,10 +122,18 @@ public class EmployeeServiceImp implements EmployeeService {
         }
 
         System.out.println("Input employee ID ");
-        int employeeID = Integer.parseInt(scanner.nextLine());
+        String employeeID = scanner.nextLine();
 
         System.out.println("Input employee salary");
-        int salary = Integer.parseInt(scanner.nextLine());
+        int salary;
+        while (true){
+            try {
+                salary = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
+        }
 
         employeeList.add(new Employee(name,
                             dateOfBirth,
@@ -134,12 +152,13 @@ public class EmployeeServiceImp implements EmployeeService {
     @Override
     public void edit() {
         System.out.println("Input ID of employee to edit");
-        int id = Integer.parseInt(scanner.nextLine());
+        String id = scanner.nextLine();
+
         boolean flag = false;
         int index = 0;
 
         for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getIdEmployeeNumber() == id){
+            if (employeeList.get(i).getIdEmployeeNumber().equals(id)){
                 index = i;
                 flag = true;
                 break;
@@ -163,12 +182,13 @@ public class EmployeeServiceImp implements EmployeeService {
             employeeList.get(index).setEmail(email);
 
             System.out.println("Input employee ID card number");
-            int idCardNumber = Integer.parseInt(scanner.nextLine());
+            String idCardNumber = scanner.nextLine();
+
             employeeList.get(index).setIdCardNumber(idCardNumber);
 
             System.out.println("Input phone number");
-            int phoneNumber = Integer.parseInt(scanner.nextLine());
-            employeeList.get(index).setIdCardNumber(phoneNumber);
+            String phoneNumber = scanner.nextLine();
+            employeeList.get(index).setPhoneNumber(phoneNumber);
 
             String level = "";
             boolean checkLevel = true;
@@ -179,7 +199,12 @@ public class EmployeeServiceImp implements EmployeeService {
                 System.out.println("3. Graduate");
                 System.out.println("4. Post-Graduate");
                 System.out.println("Input your choice");
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice = 0;
+                try {
+                    choice = Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");;
+                }
                 switch (choice){
                     case 1:
                         level = "Secondary Graduation";
@@ -213,7 +238,12 @@ public class EmployeeServiceImp implements EmployeeService {
                 System.out.println("4. Manager");
                 System.out.println("5. Director");
                 System.out.println("Input your choice");
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice = 0;
+                try {
+                    choice = Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");;
+                }
                 switch (choice){
                     case 1:
                         position = "Receptionist";
@@ -253,11 +283,11 @@ public class EmployeeServiceImp implements EmployeeService {
     @Override
     public void delete() {
         System.out.println("Input ID of employee to edit");
-        int id = Integer.parseInt(scanner.nextLine());
+        String id = scanner.nextLine();
         boolean flag = false;
 
         for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getIdEmployeeNumber() == id){
+            if (employeeList.get(i).getIdEmployeeNumber().equals(id)){
                 employeeList.remove(i);
                 flag = true;
                 break;

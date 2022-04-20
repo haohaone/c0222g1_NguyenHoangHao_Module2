@@ -1,14 +1,13 @@
 package case_study.models.person;
 
 public abstract class Person{
-    private String name, dateOfBirth, gender, email, phoneNumber;
-    private int idCardNumber;
+    private String name, dateOfBirth, gender, email, phoneNumber, idCardNumber;
 
     public Person(String name,
                   String dateOfBirth,
                   String gender,
                   String email,
-                  int idCardNumber,
+                  String idCardNumber,
                   String phoneNumber) {
 
         this.name = name;
@@ -51,11 +50,11 @@ public abstract class Person{
         this.email = email;
     }
 
-    public int getIdCardNumber() {
+    public String getIdCardNumber() {
         return idCardNumber;
     }
 
-    public void setIdCardNumber(int idCardNumber) {
+    public void setIdCardNumber(String idCardNumber) {
         this.idCardNumber = idCardNumber;
     }
 

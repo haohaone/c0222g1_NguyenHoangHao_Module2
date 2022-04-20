@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class DisplayMainMenu {
     public static void displayMainMenu() {
         Scanner scanner = new Scanner(System.in);
-        int choice;
+        int choice = 0;
         while (true){
             System.out.println("----Menu Management----");
             System.out.println("1. Employee Management");
@@ -15,7 +15,11 @@ public class DisplayMainMenu {
             System.out.println("4. Booking Management");
             System.out.println("5. Promotion Management");
             System.out.println("6. Exit");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice){
                 case 1:
                     FuramaController.employeeManagement();

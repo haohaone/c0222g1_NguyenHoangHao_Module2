@@ -1,18 +1,15 @@
 package case_study.models.person;
 
-import case_study.service.CustomerService;
-
 public class Customer extends Person{
-    private int idCustomerNumber;
-    private String address, customerType;
+    private String address, customerType, idCustomerNumber;
 
     public Customer(String name,
                     String dateOfBirth,
                     String gender,
                     String email,
-                    int idCardNumber,
+                    String idCardNumber,
                     String phoneNumber,
-                    int idCustomerNumber,
+                    String idCustomerNumber,
                     String address,
                     String customerType) {
 
@@ -22,11 +19,21 @@ public class Customer extends Person{
         this.customerType = customerType;
     }
 
-    public int getIdCustomerNumber() {
+    @Override
+    public String getIdCardNumber() {
+        return super.getIdCardNumber();
+    }
+
+    @Override
+    public void setIdCardNumber(String idCardNumber) {
+        super.setIdCardNumber(idCardNumber);
+    }
+
+    public String getIdCustomerNumber() {
         return idCustomerNumber;
     }
 
-    public void setIdCustomerNumber(int idCustomerNumber) {
+    public void setIdCustomerNumber(String idCustomerNumber) {
         this.idCustomerNumber = idCustomerNumber;
     }
 
@@ -84,16 +91,6 @@ public class Customer extends Person{
     @Override
     public void setEmail(String email) {
         super.setEmail(email);
-    }
-
-    @Override
-    public int getIdCardNumber() {
-        return super.getIdCardNumber();
-    }
-
-    @Override
-    public void setIdCardNumber(int idCardNumber) {
-        super.setIdCardNumber(idCardNumber);
     }
 
     @Override

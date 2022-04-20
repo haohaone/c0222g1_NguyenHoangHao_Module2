@@ -1,10 +1,8 @@
 package case_study.service.implement;
 
 import case_study.models.person.Customer;
-import case_study.models.person.Employee;
 import case_study.service.CustomerService;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,9 +16,9 @@ public class CustomerServiceImp implements CustomerService {
                 "8-7-1999",
                 "Nam",
                 "hoanghao9x87@gmail.com",
-                201787802,
+                "201787802",
                 "0762709502",
-                1,
+                "1",
                 "hoa an 14",
                 "VIP"));
 
@@ -28,9 +26,9 @@ public class CustomerServiceImp implements CustomerService {
                 "2-7-2005",
                 "Nam",
                 "hoang2005@gmail.com",
-                2005878888,
+                "2005878888",
                 "0762709888",
-                2,
+                "2",
                 "165 nguyen tat thanh",
                 "VIP"));
 
@@ -38,9 +36,9 @@ public class CustomerServiceImp implements CustomerService {
                 "25-1-2005",
                 "Nam",
                 "trungtrung@gmail.com",
-                200511111,
+                "200511111",
                 "0905000002",
-                3,
+                "3",
                 "99 dien bien phu",
                 "VIP"));
     }
@@ -71,13 +69,13 @@ public class CustomerServiceImp implements CustomerService {
         String email = scanner.nextLine();
 
         System.out.println("Input customer ID card number");
-        int idCardNumber = Integer.parseInt(scanner.nextLine());
+        String idCardNumber = scanner.nextLine();
 
         System.out.println("Input phone number");
         String phoneNumber = scanner.nextLine();
 
         System.out.println("Input customer ID ");
-        int customerID = Integer.parseInt(scanner.nextLine());
+        String customerID = scanner.nextLine();
 
         System.out.println("Input customer address");
         String address = scanner.nextLine();
@@ -92,7 +90,12 @@ public class CustomerServiceImp implements CustomerService {
             System.out.println("4. Platinum");
             System.out.println("5. Diamond");
             System.out.println("Input your choice");
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = 0;
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");;
+            }
             switch (choice) {
                 case 1:
                     customerType = "Gold";
@@ -135,12 +138,12 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     public void edit() {
         System.out.println("Input ID of customer to edit");
-        int id = Integer.parseInt(scanner.nextLine());
+        String id = scanner.nextLine();
         boolean flag = false;
         int index = 0;
 
         for (int i = 0; i < customerList.size(); i++) {
-            if (customerList.get(i).getIdCustomerNumber() == id) {
+            if (customerList.get(i).getIdCustomerNumber().equals(id)) {
                 index = i;
                 flag = true;
                 break;
@@ -164,7 +167,7 @@ public class CustomerServiceImp implements CustomerService {
             customerList.get(index).setEmail(email);
 
             System.out.println("Input customer ID card number");
-            int idCardNumber = Integer.parseInt(scanner.nextLine());
+            String idCardNumber = scanner.nextLine();
             customerList.get(index).setIdCardNumber(idCardNumber);
 
             System.out.println("Input phone number");
@@ -172,7 +175,7 @@ public class CustomerServiceImp implements CustomerService {
             customerList.get(index).setPhoneNumber(phoneNumber);
 
             System.out.println("Input customer ID");
-            int customerId = Integer.parseInt(scanner.nextLine());
+            String customerId = scanner.nextLine();
             customerList.get(index).setIdCustomerNumber(customerId);
 
             System.out.println("Input customer address");
@@ -189,7 +192,12 @@ public class CustomerServiceImp implements CustomerService {
                 System.out.println("4. Platinum");
                 System.out.println("5. Diamond");
                 System.out.println("Input your choice");
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice = 0;
+                try {
+                    choice = Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");;
+                }
                 switch (choice) {
                     case 1:
                         customerType = "Gold";
@@ -226,11 +234,11 @@ public class CustomerServiceImp implements CustomerService {
     @Override
     public void delete() {
         System.out.println("Input ID of employee to edit");
-        int id = Integer.parseInt(scanner.nextLine());
+        String id = scanner.nextLine();
         boolean flag = false;
 
         for (int i = 0; i < customerList.size(); i++) {
-            if (customerList.get(i).getIdCustomerNumber() == id) {
+            if (customerList.get(i).getIdCustomerNumber().equals(id)) {
                 customerList.remove(i);
                 flag = true;
                 break;

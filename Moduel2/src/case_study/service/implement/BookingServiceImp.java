@@ -1,7 +1,6 @@
 package case_study.service.implement;
 
 import case_study.models.booking_contracts.Booking;
-import case_study.models.booking_contracts.Contract;
 import case_study.models.facility.Facility;
 import case_study.models.facility.Room;
 import case_study.models.person.Customer;
@@ -31,6 +30,14 @@ public class BookingServiceImp implements BookingService {
         Facility facility = chooseFacility();
         System.out.println("Input start rent time");
         String startTime = scanner.nextLine();
+//        while (true){
+//            try {
+//                startTime = scanner.nextLine();
+//                break;
+//            }catch (Exception e){
+//                System.err.println("Input wrong format");
+//            }
+//        }
         System.out.println("Input end rent time");
         String endTime = scanner.nextLine();
         Booking booking = new Booking(
@@ -63,20 +70,22 @@ public class BookingServiceImp implements BookingService {
         customerServiceImp.display();
 
         boolean check = true;
-        int id;
+        String id;
         while (check) {
+            if (CustomerServiceImp.getCustomerList().isEmpty()){
+                System.out.println("Customer list is not customer in list");
+                break;
+            }
             System.out.println("Input id of customer booking");
-            id = Integer.parseInt(scanner.nextLine());
+            id = scanner.nextLine();
             for (Customer customer : CustomerServiceImp.getCustomerList()) {
-                if (id == customer.getIdCustomerNumber()) {
+                if (customer.getIdCustomerNumber().equals(id)) {
                     check = false;
                     return customer;
                 }
             }
-            if (check) {
-                System.out.println("Id is not in list");
-                System.out.println();
-            }
+            System.out.println("Id is not in list");
+            System.out.println();
         }
         return null;
     }
@@ -85,6 +94,15 @@ public class BookingServiceImp implements BookingService {
         int id;
         boolean flag = true;
         while (flag) {
+            if (bookingSet.isEmpty()){
+                System.out.println("Booking list is not booking in list");
+                break;
+            }
+            try {
+                id = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Input wrong format");
+            }
             System.out.println("Input id booking need to edit");
             displayListBooking();
             id = Integer.parseInt(scanner.nextLine());
@@ -104,7 +122,7 @@ public class BookingServiceImp implements BookingService {
                     return booking;
                 }
             }
-            if (flag){
+            if (flag) {
                 System.out.println("Your id input is not in list");
             }
         }
@@ -117,12 +135,12 @@ public class BookingServiceImp implements BookingService {
         facilityServiceImp.display();
 
         boolean check = true;
-        int id;
+        String id;
         while (check) {
             System.out.println("Input id of facility");
-            id = Integer.parseInt(scanner.nextLine());
+            id = scanner.nextLine();
             for (Map.Entry<Facility, Integer> entry : FacilityServiceImp.getFacilityList().entrySet()) {
-                if (id == entry.getKey().getId()) {
+                if (entry.getKey().getId().equals(id)) {
                     if (entry.getValue() <= 5) {
                         check = false;
                         entry.setValue(entry.getValue() + 1);

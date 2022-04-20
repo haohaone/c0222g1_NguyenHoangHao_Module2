@@ -10,7 +10,7 @@ public class House extends Facility {
                  int floor, int areaUse,
                  int feeRent,
                  int maximumCustomer,
-                 int id) {
+                 String id) {
 
         super(nameService, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id);
     }
@@ -96,12 +96,12 @@ public class House extends Facility {
     }
 
     @Override
-    public int getId() {
+    public String getId() {
         return super.getId();
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(String id) {
         super.setId(id);
     }
 

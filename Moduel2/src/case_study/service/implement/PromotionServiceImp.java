@@ -1,15 +1,12 @@
 package case_study.service.implement;
 
-import case_study.models.booking_contracts.Booking;
 import case_study.models.booking_contracts.Contract;
-import case_study.models.person.Customer;
 import case_study.service.PromotionService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.Stack;
 
 public class PromotionServiceImp implements PromotionService {
@@ -56,12 +53,40 @@ public class PromotionServiceImp implements PromotionService {
         if (count > 0 ){
             System.out.println("This month have " + count + " customers");
             System.out.println("please input your amount give away discount");
+
             System.out.println("Input amount discount 10%");
-            int discount10 =Integer.parseInt(scanner.nextLine());
+            int discount10;
+            while (true){
+                try {
+                    discount10 = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");
+                }
+            }
+
             System.out.println("Input amount discount 20%");
-            int discount20 =Integer.parseInt(scanner.nextLine());
+            int discount20;
+            while (true){
+                try {
+                    discount20 = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");
+                }
+            }
+
             System.out.println("Input amount discount 50%");
-            int discount50 =Integer.parseInt(scanner.nextLine());
+            int discount50;
+            while (true){
+                try {
+                    discount50 = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");
+                }
+            }
+
             for (int i = 1; i <= discount10 + discount20 + discount50; i++) {
                 Contract contract = discount.pop();
                 if (i <= discount10 ){

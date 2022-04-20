@@ -10,7 +10,7 @@ public class Room extends Facility {
                 int areaUse,
                 int feeRent,
                 int maximumCustomer,
-                int id,
+                String id,
                 String freeService) {
 
         super(nameService, rentType, areaUse, feeRent, maximumCustomer, id);
@@ -87,13 +87,21 @@ public class Room extends Facility {
         super.setFloor(floor);
     }
 
+    public String getFreeService() {
+        return freeService;
+    }
+
+    public void setFreeService(String freeService) {
+        this.freeService = freeService;
+    }
+
     @Override
-    public int getId() {
+    public String getId() {
         return super.getId();
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(String id) {
         super.setId(id);
     }
 

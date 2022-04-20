@@ -3,19 +3,19 @@ package case_study.models.person;
 import case_study.service.EmployeeService;
 
 public class Employee extends Person {
-    private String level, position;
-    private int idEmployeeNumber, salary;
+    private String level, position, idEmployeeNumber;
+    private int salary;
 
 
     public Employee(String name,
                     String dateOfBirth,
                     String gender,
                     String email,
-                    int idCardNumber,
+                    String idCardNumber,
                     String phoneNumber,
                     String level,
                     String position,
-                    int idEmployeeNumber,
+                    String idEmployeeNumber,
                     int salary) {
 
         super(name, dateOfBirth, gender, email, idCardNumber, phoneNumber);
@@ -23,14 +23,6 @@ public class Employee extends Person {
         this.position = position;
         this.idEmployeeNumber = idEmployeeNumber;
         this.salary = salary;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
     }
 
     public String getPosition() {
@@ -41,11 +33,19 @@ public class Employee extends Person {
         this.position = position;
     }
 
-    public int getIdEmployeeNumber() {
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getIdEmployeeNumber() {
         return idEmployeeNumber;
     }
 
-    public void setIdEmployeeNumber(int idEmployeeNumber) {
+    public void setIdEmployeeNumber(String idEmployeeNumber) {
         this.idEmployeeNumber = idEmployeeNumber;
     }
 
@@ -98,12 +98,12 @@ public class Employee extends Person {
     }
 
     @Override
-    public int getIdCardNumber() {
+    public String getIdCardNumber() {
         return super.getIdCardNumber();
     }
 
     @Override
-    public void setIdCardNumber(int idCardNumber) {
+    public void setIdCardNumber(String idCardNumber) {
         super.setIdCardNumber(idCardNumber);
     }
 

@@ -1,9 +1,9 @@
 package case_study.service;
 
 public interface ContractService {
-    public void createNewContract();
+     void createNewContract();
 
-    public void displayContract();
+     void displayContract();
 
-    public void editNewContract();
+     void editNewContract();
 }

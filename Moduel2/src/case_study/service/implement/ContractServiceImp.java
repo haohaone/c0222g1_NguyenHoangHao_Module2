@@ -28,13 +28,37 @@ public class ContractServiceImp implements ContractService {
             System.out.println("Creating contract by booking have information: \n" + booking.toString());
             System.out.println("Creating contract by customer : \n" + customer.toString());
             System.out.println("Input id contract");
-            int id = Integer.parseInt(scanner.nextLine());
+            int id;
+            while (true){
+                try {
+                    id = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");
+                }
+            }
 
             System.out.println("Input pre-fee");
-            double preFee = Double.parseDouble(scanner.nextLine());
+            double preFee;
+            while (true){
+                try {
+                    preFee = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");
+                }
+            }
 
             System.out.println("Input total fee");
-            double totalFee = Double.parseDouble(scanner.nextLine());
+            double totalFee;
+            while (true){
+                try {
+                    totalFee = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");
+                }
+            }
 
             Contract contract = new Contract(
                     booking,
@@ -62,22 +86,57 @@ public class ContractServiceImp implements ContractService {
         int id;
         boolean flag = true;
         while (flag){
+            if (contractList.isEmpty()){
+                System.out.println("contract list is not contract in list");
+                break;
+            }
             System.out.println("Input id contract need to edit");
-            id = Integer.parseInt(scanner.nextLine());
+            while (true){
+                try {
+                    id = Integer.parseInt(scanner.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.err.println("Input wrong format");
+                }
+            }
             for (Contract contract : contractList) {
                 if (contract.getIdContract() == id){
                     System.out.println("Input pre-fee to edit");
-                    double preFee = Double.parseDouble(scanner.nextLine());
+                    double preFee;
+                    while (true){
+                        try {
+                            preFee = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (NumberFormatException e) {
+                            System.err.println("Input wrong format");
+                        }
+                    }
                     contract.setPreFee(preFee);
 
                     System.out.println("Input total fee to edit");
-                    double totalFee = Double.parseDouble(scanner.nextLine());
+                    double totalFee;
+                    while (true){
+                        try {
+                            totalFee = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (NumberFormatException e) {
+                            System.err.println("Input wrong format");
+                        }
+                    }
                     contract.setTotalFeeRent(totalFee);
 
                     System.out.println("Do you want edit booking");
                     System.out.println("1. Yes");
                     System.out.println("2. No");
-                    int yesNo = Integer.parseInt(scanner.nextLine());
+                    int yesNo;
+                    while (true){
+                        try {
+                            yesNo = Integer.parseInt(scanner.nextLine());
+                            break;
+                        } catch (NumberFormatException e) {
+                            System.err.println("Input wrong format");
+                        }
+                    }
                     if (yesNo == 1){
                         Booking booking = bookingServiceImp.editBooking();
                         contract.setBooking(booking);
