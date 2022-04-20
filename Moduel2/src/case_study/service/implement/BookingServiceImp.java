@@ -7,6 +7,9 @@ import case_study.models.person.Customer;
 import case_study.service.BookingService;
 import case_study.utils.BookingComparator;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -20,7 +23,13 @@ public class BookingServiceImp implements BookingService {
         return bookingSet;
     }
 
+    public static void dateTimeCheck(String startTime) throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+        LocalDate.parse(startTime, formatter);
+    }
+
     public void addBooking() {
+
         int id = 1;
         if (!bookingSet.isEmpty()) {
             id = bookingSet.size() + 1;
@@ -28,18 +37,28 @@ public class BookingServiceImp implements BookingService {
 
         Customer customer = chooseCustomer();
         Facility facility = chooseFacility();
-        System.out.println("Input start rent time");
-        String startTime = scanner.nextLine();
-//        while (true){
-//            try {
-//                startTime = scanner.nextLine();
-//                break;
-//            }catch (Exception e){
-//                System.err.println("Input wrong format");
-//            }
-//        }
-        System.out.println("Input end rent time");
-        String endTime = scanner.nextLine();
+        String startTime;
+        while (true){
+            System.out.println("Input start rent time");
+            try {
+                startTime = scanner.nextLine();
+                dateTimeCheck(startTime);
+                break;
+            }catch (Exception e){
+                System.err.println("Input wrong format");
+            }
+        }
+        String endTime;
+        while (true){
+            System.out.println("Input end rent time");
+            try {
+                endTime = scanner.nextLine();
+                dateTimeCheck(endTime);
+                break;
+            }catch (Exception e){
+                System.err.println("Input wrong format");
+            }
+        }
         Booking booking = new Booking(
                 id,
                 startTime,
@@ -112,12 +131,35 @@ public class BookingServiceImp implements BookingService {
                     booking.setCustomer(customer);
                     Facility facility = chooseFacility();
                     booking.setFacility(facility);
+
                     System.out.println("Input start rent time");
-                    String startTime = scanner.nextLine();
+                    String startTime;
+                    while (true){
+                        System.out.println("Input start rent time");
+                        try {
+                            startTime = scanner.nextLine();
+                            dateTimeCheck(startTime);
+                            break;
+                        }catch (Exception e){
+                            System.err.println("Input wrong format");
+                        }
+                    }
                     booking.setStarTime(startTime);
+
                     System.out.println("Input end rent time");
-                    String endTime = scanner.nextLine();
+                    String endTime;
+                    while (true){
+                        System.out.println("Input end rent time");
+                        try {
+                            endTime = scanner.nextLine();
+                            dateTimeCheck(endTime);
+                            break;
+                        }catch (Exception e){
+                            System.err.println("Input wrong format");
+                        }
+                    }
                     booking.setEndTime(endTime);
+
                     System.out.println("Edit successful");
                     return booking;
                 }

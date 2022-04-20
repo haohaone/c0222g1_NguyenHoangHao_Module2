@@ -9,7 +9,7 @@ import java.util.Comparator;
 public class BookingComparator implements Comparator<Booking> {
     @Override
     public int compare(Booking o1, Booking o2) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         LocalDate startDate1 = LocalDate.parse(o1.getStarTime(), formatter);
         LocalDate startDate2 = LocalDate.parse(o2.getStarTime(), formatter);
         LocalDate endDate1 = LocalDate.parse(o1.getEndTime(), formatter);

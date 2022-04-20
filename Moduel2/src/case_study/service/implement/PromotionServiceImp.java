@@ -40,7 +40,8 @@ public class PromotionServiceImp implements PromotionService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate thisMonth =  LocalDate.now();
         String localDate = thisMonth.format(formatter);
-        System.out.println(localDate.substring(3));
+
+
         int count = 0;
         for (Contract contract : contracts) {
             if (contract.getBooking().getStarTime().substring(3).equals(localDate.substring(3))){
