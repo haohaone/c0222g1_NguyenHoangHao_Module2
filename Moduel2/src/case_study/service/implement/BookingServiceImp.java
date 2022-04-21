@@ -1,12 +1,10 @@
 package case_study.service.implement;
-
 import case_study.models.booking_contracts.Booking;
 import case_study.models.facility.Facility;
 import case_study.models.facility.Room;
 import case_study.models.person.Customer;
 import case_study.service.BookingService;
 import case_study.utils.BookingComparator;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
