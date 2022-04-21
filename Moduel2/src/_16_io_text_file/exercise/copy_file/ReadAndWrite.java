@@ -33,25 +33,4 @@ public class ReadAndWrite {
             e.printStackTrace();
         }
     }
-
-    public static List<String[]> readObj(File file){
-        List<String[]> list = new ArrayList<>();
-
-        try (FileReader fileReader = new FileReader(file);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)){
-            String line = "";
-            if (!file.exists()){
-                throw new FileNotFoundException();
-            }
-            while ((line = bufferedReader.readLine()) != null){
-                String[] arr = line.split(",");
-                list.add(arr);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
 }
