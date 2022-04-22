@@ -16,7 +16,7 @@ public class Test {
             if (!file.exists()){
                 throw new FileNotFoundException();
             }
-            while ((line = bufferedReader.readLine()) != null){
+            while (( line = bufferedReader.readLine()) != null){
                 String[] arr = line.split(",");
                 list.add(arr);
             }

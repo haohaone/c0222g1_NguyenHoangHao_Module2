@@ -2,23 +2,40 @@ package case_study.service.implement;
 
 import case_study.models.person.Employee;
 import case_study.service.EmployeeService;
+import case_study.utils.ReadAndWrite;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeServiceImp implements EmployeeService {
-    private static List<Employee> employeeList = new ArrayList<>();
     public static Scanner scanner = new Scanner(System.in);
 
     @Override
     public void display() {
+        List<Employee> employeeList  = getEmployeeList();
         for (Employee employee : employeeList) {
             System.out.println(employee.toString());
         }
     }
 
     public static List<Employee> getEmployeeList() {
+        List<Employee> employeeList  = new ArrayList<>();
+        List<String[]> list = ReadAndWrite.read("src\\case_study\\data\\employee.csv");
+        for (String[] item : list) {
+            employeeList.add(new Employee(
+                                item[0],
+                                item[1],
+                                item[2],
+                                item[3],
+                                item[4],
+                                item[5],
+                                item[6],
+                                item[7],
+                                item[8],
+                                Integer.parseInt(item[9])));
+        }
         return employeeList;
     }
 
@@ -134,7 +151,7 @@ public class EmployeeServiceImp implements EmployeeService {
                 System.err.println("Input wrong format");;
             }
         }
-
+        List<Employee> employeeList  = getEmployeeList();
         employeeList.add(new Employee(name,
                             dateOfBirth,
                             gender,
@@ -145,12 +162,23 @@ public class EmployeeServiceImp implements EmployeeService {
                             position,
                             employeeID,
                             salary));
-
+        String line = name + "," +
+                dateOfBirth + "," +
+                gender + "," +
+                email + "," +
+                idCardNumber + "," +
+                phoneNumber + "," +
+                level + "," +
+                position + "," +
+                employeeID + "," +
+                salary;
+        ReadAndWrite.write("src\\case_study\\data\\employee.csv",line);
         System.out.println("Add new successful");
     }
 
     @Override
     public void edit() {
+        List<Employee> employeeList  = getEmployeeList();
         System.out.println("Input ID of employee to edit");
         String id = scanner.nextLine();
 
@@ -274,6 +302,22 @@ public class EmployeeServiceImp implements EmployeeService {
             System.out.println("Input employee salary");
             int salary = Integer.parseInt(scanner.nextLine());
             employeeList.get(index).setSalary(salary);
+
+            File file = new File("src\\case_study\\data\\employee.csv");
+            file.delete();
+            for (Employee item : employeeList) {
+                String  line = item.getName() + "," +
+                        item.getDateOfBirth() + "," +
+                        item.getGender() + "," +
+                        item.getEmail() + "," +
+                        item.getIdCardNumber() + "," +
+                        item.getPhoneNumber() + "," +
+                        item.getLevel() + "," +
+                        item.getPosition() + "," +
+                        item.getIdEmployeeNumber() + "," +
+                        item.getSalary();
+                ReadAndWrite.write("src\\case_study\\data\\employee.csv",line);
+            }
             System.out.println("Edit successful");
         }else {
             System.out.println("Id is not in employee list");
@@ -282,6 +326,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Override
     public void delete() {
+        List<Employee> employeeList  = getEmployeeList();
         System.out.println("Input ID of employee to edit");
         String id = scanner.nextLine();
         boolean flag = false;
@@ -295,6 +340,21 @@ public class EmployeeServiceImp implements EmployeeService {
         }
 
         if (flag){
+            File file = new File("src\\case_study\\data\\employee.csv");
+            file.delete();
+            for (Employee item : employeeList) {
+                String  line = item.getName() + "," +
+                        item.getDateOfBirth() + "," +
+                        item.getGender() + "," +
+                        item.getEmail() + "," +
+                        item.getIdCardNumber() + "," +
+                        item.getPhoneNumber() + "," +
+                        item.getLevel() + "," +
+                        item.getPosition() + "," +
+                        item.getIdEmployeeNumber() + "," +
+                        item.getSalary();
+                ReadAndWrite.write("src\\case_study\\data\\employee.csv",line);
+            }
             System.out.println("Delete successful");
         }else {
             System.out.println("Id is not in employee list");

@@ -5,60 +5,40 @@ import case_study.models.facility.House;
 import case_study.models.facility.Room;
 import case_study.models.facility.Villa;
 import case_study.service.FacilityService;
+import case_study.utils.ReadAndWrite;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class FacilityServiceImp implements FacilityService {
-    private static Map<Facility, Integer> facilityList = new LinkedHashMap<>();
+
     public Scanner scanner = new Scanner(System.in);
 
-    static {
-        facilityList.put(new Villa("Villa",
-                                    "Day",
-                                    "VIP",
-                                    10,
-                                    200,
-                                    2500,
-                                    20,
-                                    "1",
-                                    50),
-                                    0);
-
-        facilityList.put(new House("House",
-                        "Day",
-                        "VIP",
-                        10,
-                        200,
-                        2500,
-                        20,
-                        "2"),
-                        0);
-
-        facilityList.put(new Room("Room",
-                        "Day",
-                        50,
-                        200,
-                        5,
-                        "3",
-                        "Buffet"),
-                        0);
-    }
-
-    public static Map<Facility, Integer> getFacilityList() {
+    public static Map<Facility, Integer> getFacilityList(){
+        Map<Facility, Integer> facilityList = null;
+        try {
+            facilityList = ReadAndWrite.readFileByByte("src\\case_study\\data\\facility.csv");
+        }catch (NullPointerException e){
+            System.out.println("Facility list is 0");
+        }
         return facilityList;
     }
 
     @Override
     public void display() {
-        for (Map.Entry<Facility, Integer> element : facilityList.entrySet()) {
-            System.out.println(element.getKey() + ", amount rented = " + element.getValue() + "]");
+        Map<Facility, Integer> facilityList = getFacilityList();
+        try {
+            System.out.println();
+            for (Map.Entry<Facility, Integer> element : facilityList.entrySet()) {
+                System.out.println(element.getKey() + ", amount rented = " + element.getValue() + "]");
+            }
+        }catch (Exception e){
+            System.out.println("Facility list is 0");
         }
     }
 
     @Override
     public void displayMaintain() {
+        Map<Facility, Integer> facilityList = getFacilityList();
         System.out.println("--------------Maintain facility ---------------");
         int count = 0;
         for (Map.Entry<Facility, Integer> element : facilityList.entrySet()) {
@@ -74,6 +54,7 @@ public class FacilityServiceImp implements FacilityService {
 
     @Override
     public void addNewVilla() {
+        Map<Facility, Integer> facilityList = getFacilityList();
         System.out.println("Input name service");
         String name = scanner.nextLine();
 
@@ -142,12 +123,27 @@ public class FacilityServiceImp implements FacilityService {
         }
 
         Villa villa = new Villa(name, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id, sizePool);
+        if (facilityList == null){
+            facilityList = new LinkedHashMap<>();
+        }
         facilityList.put(villa, 0);
+        String line = name + "," +
+                rentType + "," +
+                standardService + "," +
+                floor + "," +
+                areaUse + "," +
+                feeRent + "," +
+                maximumCustomer + "," +
+                id + "," +
+                sizePool;
+        ReadAndWrite.writeFileByByte("src\\case_study\\data\\facility.csv", facilityList);
+        ReadAndWrite.write("src\\case_study\\data\\villa.csv", line);
         System.out.println("Add successful");
     }
 
     @Override
     public void addNewHouse() {
+        Map<Facility, Integer> facilityList = getFacilityList();
         System.out.println("Input name service");
         String name = scanner.nextLine();
 
@@ -205,12 +201,26 @@ public class FacilityServiceImp implements FacilityService {
         String id = scanner.nextLine();
 
         House house = new House(name, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id);
+        if (facilityList == null){
+            facilityList = new LinkedHashMap<>();
+        }
         facilityList.put(house, 0);
+        String line = name + "," +
+                rentType + "," +
+                standardService + "," +
+                floor + "," +
+                areaUse + "," +
+                feeRent + "," +
+                maximumCustomer + "," +
+                id;
+        ReadAndWrite.writeFileByByte("src\\case_study\\data\\facility.csv", facilityList);
+        ReadAndWrite.write("src\\case_study\\data\\house.csv", line);
         System.out.println("Add successful");
     }
 
     @Override
     public void addNewRoom() {
+        Map<Facility, Integer> facilityList = getFacilityList();
         System.out.println("Input name service");
         String name = scanner.nextLine();
 
@@ -257,7 +267,19 @@ public class FacilityServiceImp implements FacilityService {
         String freeService = scanner.nextLine();
 
         Room room = new Room(name, rentType, areaUse, feeRent, maximumCustomer, id, freeService);
+        if (facilityList == null){
+            facilityList = new LinkedHashMap<>();
+        }
         facilityList.put(room, 0);
+        String line = name + "," +
+                rentType + "," +
+                areaUse + "," +
+                feeRent + "," +
+                maximumCustomer + "," +
+                id + "," +
+                freeService;
+        ReadAndWrite.writeFileByByte("src\\case_study\\data\\facility.csv", facilityList);
+        ReadAndWrite.write("src\\case_study\\data\\room.csv", line);
         System.out.println("Add successful");
     }
 }

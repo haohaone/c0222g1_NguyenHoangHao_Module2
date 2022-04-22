@@ -6,7 +6,6 @@ public class Employee extends Person {
     private String level, position, idEmployeeNumber;
     private int salary;
 
-
     public Employee(String name,
                     String dateOfBirth,
                     String gender,
