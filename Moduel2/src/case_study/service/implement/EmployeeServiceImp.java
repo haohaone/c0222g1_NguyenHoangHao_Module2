@@ -6,6 +6,7 @@ import case_study.utils.ReadAndWrite;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -151,17 +152,6 @@ public class EmployeeServiceImp implements EmployeeService {
                 System.err.println("Input wrong format");;
             }
         }
-        List<Employee> employeeList  = getEmployeeList();
-        employeeList.add(new Employee(name,
-                            dateOfBirth,
-                            gender,
-                            email,
-                            idCardNumber,
-                            phoneNumber,
-                            level,
-                            position,
-                            employeeID,
-                            salary));
         String line = name + "," +
                 dateOfBirth + "," +
                 gender + "," +
@@ -178,7 +168,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Override
     public void edit() {
-        List<Employee> employeeList  = getEmployeeList();
+        List<Employee> employeeList = getEmployeeList();
         System.out.println("Input ID of employee to edit");
         String id = scanner.nextLine();
 

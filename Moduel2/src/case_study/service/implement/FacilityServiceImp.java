@@ -7,18 +7,18 @@ import case_study.models.facility.Villa;
 import case_study.service.FacilityService;
 import case_study.utils.ReadAndWrite;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class FacilityServiceImp implements FacilityService {
+public class FacilityServiceImp implements FacilityService, Serializable {
 
     public Scanner scanner = new Scanner(System.in);
 
-    public static Map<Facility, Integer> getFacilityList(){
-        Map<Facility, Integer> facilityList = null;
+    public static LinkedHashMap<Facility, Integer> getFacilityList(){
+        LinkedHashMap<Facility, Integer> facilityList = null;
         try {
-            facilityList = ReadAndWrite.readFileByByte("src\\case_study\\data\\facility.csv");
+            facilityList = ReadAndWrite.readFileMap("src\\case_study\\data\\facility.csv");
         }catch (NullPointerException e){
-            System.out.println("Facility list is 0");
         }
         return facilityList;
     }
@@ -27,7 +27,6 @@ public class FacilityServiceImp implements FacilityService {
     public void display() {
         Map<Facility, Integer> facilityList = getFacilityList();
         try {
-            System.out.println();
             for (Map.Entry<Facility, Integer> element : facilityList.entrySet()) {
                 System.out.println(element.getKey() + ", amount rented = " + element.getValue() + "]");
             }
@@ -54,7 +53,6 @@ public class FacilityServiceImp implements FacilityService {
 
     @Override
     public void addNewVilla() {
-        Map<Facility, Integer> facilityList = getFacilityList();
         System.out.println("Input name service");
         String name = scanner.nextLine();
 
@@ -121,10 +119,10 @@ public class FacilityServiceImp implements FacilityService {
                 System.err.println("Input wrong format");;
             }
         }
-
         Villa villa = new Villa(name, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id, sizePool);
-        if (facilityList == null){
-            facilityList = new LinkedHashMap<>();
+        LinkedHashMap<Facility, Integer> facilityList = new LinkedHashMap<>();
+        if (getFacilityList() != null){
+            facilityList = getFacilityList();
         }
         facilityList.put(villa, 0);
         String line = name + "," +
@@ -136,14 +134,13 @@ public class FacilityServiceImp implements FacilityService {
                 maximumCustomer + "," +
                 id + "," +
                 sizePool;
-        ReadAndWrite.writeFileByByte("src\\case_study\\data\\facility.csv", facilityList);
+        ReadAndWrite.writeFileMap("src\\case_study\\data\\facility.csv", facilityList);
         ReadAndWrite.write("src\\case_study\\data\\villa.csv", line);
         System.out.println("Add successful");
     }
 
     @Override
     public void addNewHouse() {
-        Map<Facility, Integer> facilityList = getFacilityList();
         System.out.println("Input name service");
         String name = scanner.nextLine();
 
@@ -201,8 +198,9 @@ public class FacilityServiceImp implements FacilityService {
         String id = scanner.nextLine();
 
         House house = new House(name, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id);
-        if (facilityList == null){
-            facilityList = new LinkedHashMap<>();
+        LinkedHashMap<Facility, Integer> facilityList = new LinkedHashMap<>();
+        if (getFacilityList() != null){
+            facilityList = getFacilityList();
         }
         facilityList.put(house, 0);
         String line = name + "," +
@@ -213,14 +211,13 @@ public class FacilityServiceImp implements FacilityService {
                 feeRent + "," +
                 maximumCustomer + "," +
                 id;
-        ReadAndWrite.writeFileByByte("src\\case_study\\data\\facility.csv", facilityList);
+        ReadAndWrite.writeFileMap("src\\case_study\\data\\facility.csv", facilityList);
         ReadAndWrite.write("src\\case_study\\data\\house.csv", line);
         System.out.println("Add successful");
     }
 
     @Override
     public void addNewRoom() {
-        Map<Facility, Integer> facilityList = getFacilityList();
         System.out.println("Input name service");
         String name = scanner.nextLine();
 
@@ -267,8 +264,9 @@ public class FacilityServiceImp implements FacilityService {
         String freeService = scanner.nextLine();
 
         Room room = new Room(name, rentType, areaUse, feeRent, maximumCustomer, id, freeService);
-        if (facilityList == null){
-            facilityList = new LinkedHashMap<>();
+        LinkedHashMap<Facility, Integer> facilityList = new LinkedHashMap<>();
+        if (getFacilityList() != null){
+            facilityList = getFacilityList();
         }
         facilityList.put(room, 0);
         String line = name + "," +
@@ -278,7 +276,7 @@ public class FacilityServiceImp implements FacilityService {
                 maximumCustomer + "," +
                 id + "," +
                 freeService;
-        ReadAndWrite.writeFileByByte("src\\case_study\\data\\facility.csv", facilityList);
+        ReadAndWrite.writeFileMap("src\\case_study\\data\\facility.csv", facilityList);
         ReadAndWrite.write("src\\case_study\\data\\room.csv", line);
         System.out.println("Add successful");
     }

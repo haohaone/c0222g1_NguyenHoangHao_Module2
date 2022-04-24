@@ -3,7 +3,9 @@ package case_study.models.booking_contracts;
 import case_study.models.facility.Facility;
 import case_study.models.person.Customer;
 
-public class Booking {
+import java.io.Serializable;
+
+public class Booking implements Serializable {
     private int idBooking;
     private String starTime, endTime;
     private Customer customer;

@@ -1,54 +1,44 @@
 package case_study.service.implement;
 
 import case_study.models.person.Customer;
+import case_study.models.person.Employee;
 import case_study.service.CustomerService;
+import case_study.utils.ReadAndWrite;
 
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-public class CustomerServiceImp implements CustomerService {
-    private static List<Customer> customerList = new LinkedList<>();
+public class CustomerServiceImp implements CustomerService, Serializable {
     static Scanner scanner = new Scanner(System.in);
 
-    static {
-        customerList.add(new Customer("hao",
-                "8-7-1999",
-                "Nam",
-                "hoanghao9x87@gmail.com",
-                "201787802",
-                "0762709502",
-                "1",
-                "hoa an 14",
-                "VIP"));
-
-        customerList.add(new Customer("hoang",
-                "2-7-2005",
-                "Nam",
-                "hoang2005@gmail.com",
-                "2005878888",
-                "0762709888",
-                "2",
-                "165 nguyen tat thanh",
-                "VIP"));
-
-        customerList.add(new Customer("trung",
-                "25-1-2005",
-                "Nam",
-                "trungtrung@gmail.com",
-                "200511111",
-                "0905000002",
-                "3",
-                "99 dien bien phu",
-                "VIP"));
-    }
-
     public static List<Customer> getCustomerList() {
+        List<Customer> customerList  = new LinkedList<>();
+        try {
+            List<String[]> list = ReadAndWrite.read("src\\case_study\\data\\customers.csv");
+            for (String[] item : list) {
+                customerList.add(new Customer(
+                        item[0],
+                        item[1],
+                        item[2],
+                        item[3],
+                        item[4],
+                        item[5],
+                        item[6],
+                        item[7],
+                        item[8]));
+            }
+        }catch (NullPointerException e){
+        }
         return customerList;
     }
 
     @Override
     public void display() {
+        List<Customer> customerList = getCustomerList();
         for (Customer customer : customerList) {
             System.out.println(customer.toString());
         }
@@ -122,21 +112,22 @@ public class CustomerServiceImp implements CustomerService {
             }
         }
 
-        customerList.add(new Customer(name,
-                dateOfBirth,
-                gender,
-                email,
-                idCardNumber,
-                phoneNumber,
-                customerID,
-                address,
-                customerType));
-
+        String line = name + "," +
+                dateOfBirth + "," +
+                gender + "," +
+                email + "," +
+                idCardNumber + "," +
+                phoneNumber + "," +
+                customerID + "," +
+                address + "," +
+                customerType;
+        ReadAndWrite.write("src\\case_study\\data\\customers.csv",line);
         System.out.println("Add new successful");
     }
 
     @Override
     public void edit() {
+        List<Customer> customerList = getCustomerList();
         System.out.println("Input ID of customer to edit");
         String id = scanner.nextLine();
         boolean flag = false;
@@ -224,7 +215,19 @@ public class CustomerServiceImp implements CustomerService {
                 }
             }
             customerList.get(index).setCustomerType(customerType);
-
+            File file = new File("src\\case_study\\data\\customers.csv");
+            file.delete();
+            for (Customer item : customerList) {
+                String  line = item.getName() + "," +
+                        item.getDateOfBirth() + "," +
+                        item.getGender() + "," +
+                        item.getEmail() + "," +
+                        item.getIdCardNumber() + "," +
+                        item.getPhoneNumber() + "," +
+                        item.getIdCustomerNumber() + "," +
+                        item.getAddress() + "," +
+                        item.getCustomerType();
+                ReadAndWrite.write("src\\case_study\\data\\customers.csv",line);            }
             System.out.println("Edit successful");
         } else {
             System.out.println("Id is not in employee list");
@@ -233,6 +236,7 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     public void delete() {
+        List<Customer> customerList = getCustomerList();
         System.out.println("Input ID of employee to edit");
         String id = scanner.nextLine();
         boolean flag = false;
@@ -240,6 +244,20 @@ public class CustomerServiceImp implements CustomerService {
         for (int i = 0; i < customerList.size(); i++) {
             if (customerList.get(i).getIdCustomerNumber().equals(id)) {
                 customerList.remove(i);
+                File file = new File("src\\case_study\\data\\customers.csv");
+                file.delete();
+                for (Customer item : customerList) {
+                    String  line = item.getName() + "," +
+                            item.getDateOfBirth() + "," +
+                            item.getGender() + "," +
+                            item.getEmail() + "," +
+                            item.getIdCardNumber() + "," +
+                            item.getPhoneNumber() + "," +
+                            item.getIdCustomerNumber() + "," +
+                            item.getAddress() + "," +
+                            item.getCustomerType();
+                    ReadAndWrite.write("src\\case_study\\data\\customers.csv",line);            }
+                System.out.println("Edit successful");
                 flag = true;
                 break;
             }

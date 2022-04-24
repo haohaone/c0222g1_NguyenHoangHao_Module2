@@ -1,12 +1,12 @@
 package case_study.utils;
 
 import _17_io_binary_file.exercise.Product;
+import case_study.models.booking_contracts.Booking;
+import case_study.models.booking_contracts.Contract;
 import case_study.models.facility.Facility;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ReadAndWrite {
     public static void write(String path, String line) {
@@ -44,14 +44,14 @@ public class ReadAndWrite {
         return null;
     }
 
-    public static void writeFileByByte(String path, Map<Facility, Integer> facilityIntegerMap){
+    public static void writeFileMap(String path, LinkedHashMap<Facility, Integer> objs){
         File file = new File(path);
         try(FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oop = new ObjectOutputStream(fos)) {
             if (!file.exists()){
                 throw new Exception();
             }
-            oop.writeObject(facilityIntegerMap);
+            oop.writeObject(objs);
         } catch (FileNotFoundException e) {
 
         } catch (IOException e) {
@@ -60,12 +60,12 @@ public class ReadAndWrite {
         }
     }
 
-    public static Map<Facility, Integer> readFileByByte(String path){
-        Map<Facility, Integer> facilityIntegerMap = null;
+    public static LinkedHashMap<Facility, Integer> readFileMap(String path){
+        LinkedHashMap<Facility, Integer> facilityIntegerMap = null;
         File file = new File(path);
         try(FileInputStream fis = new FileInputStream(file);
             ObjectInputStream oos = new ObjectInputStream(fis)) {
-            facilityIntegerMap = (Map<Facility, Integer>) oos.readObject();
+            facilityIntegerMap = (LinkedHashMap<Facility, Integer>) oos.readObject();
             return facilityIntegerMap;
         } catch (FileNotFoundException e) {
 
@@ -75,5 +75,71 @@ public class ReadAndWrite {
 
         }
         return facilityIntegerMap;
+    }
+
+    public static void writeFileTree(String path, TreeSet<Booking> objs){
+        File file = new File(path);
+        try(FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oop = new ObjectOutputStream(fos)) {
+            if (!file.exists()){
+                throw new Exception();
+            }
+            oop.writeObject(objs);
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        } catch (Exception e) {
+        }
+    }
+
+    public static TreeSet<Booking> readFileTree(String path){
+        TreeSet<Booking> bookings = new TreeSet<>(new BookingComparator());
+        File file = new File(path);
+        try(FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream oos = new ObjectInputStream(fis)) {
+            bookings = (TreeSet<Booking>) oos.readObject();
+            return bookings;
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        } catch (ClassNotFoundException e) {
+
+        }
+        return bookings;
+    }
+
+    public static void writeFileList(String path, List<Contract> objs){
+        File file = new File(path);
+        try(FileOutputStream fos = new FileOutputStream(file);
+            ObjectOutputStream oop = new ObjectOutputStream(fos)) {
+            if (!file.exists()){
+                throw new Exception();
+            }
+            oop.writeObject(objs);
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        } catch (Exception e) {
+        }
+    }
+
+    public static List<Contract> readFileList(String path){
+        List<Contract> contracts = null;
+        File file = new File(path);
+        try(FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream oos = new ObjectInputStream(fis)) {
+            contracts = (List<Contract>) oos.readObject();
+            return contracts;
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        } catch (ClassNotFoundException e) {
+
+        }
+        return contracts;
     }
 }

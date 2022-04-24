@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class InputOutputProduct {
     public static Scanner scanner = new Scanner(System.in);
+    public static List<Product> productList =  new ArrayList<>();
 
 
     public static void writeFile(String path, List<Product> products){
@@ -23,7 +24,7 @@ public class InputOutputProduct {
     }
 
     public static List<Product> readFile(String path){
-        List<Product> products = null;
+        List<Product> products;
         File file = new File(path);
         try(FileInputStream fis = new FileInputStream(file);
         ObjectInputStream oos = new ObjectInputStream(fis)) {
@@ -36,11 +37,10 @@ public class InputOutputProduct {
         } catch (ClassNotFoundException e) {
 
         }
-        return products;
+        return new LinkedList<>();
     }
 
     public static void add(){
-        List<Product> productList =  new ArrayList<>();
         if (readFile("src\\_17_io_binary_file\\exercise\\products.txt") != null){
             productList = readFile("src\\_17_io_binary_file\\exercise\\products.txt");
         }

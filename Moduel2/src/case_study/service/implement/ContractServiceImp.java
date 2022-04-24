@@ -4,23 +4,40 @@ import case_study.models.booking_contracts.Booking;
 import case_study.models.booking_contracts.Contract;
 import case_study.models.person.Customer;
 import case_study.service.ContractService;
+import case_study.utils.ReadAndWrite;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class ContractServiceImp implements ContractService {
-    static List<Contract> contractList = new ArrayList<>();
+public class ContractServiceImp implements ContractService, Serializable {
     static Scanner scanner = new Scanner(System.in);
-    Queue <Booking> bookingQueue = new LinkedList<>();
-    Set <Booking> bookingSet = BookingServiceImp.getBookingSet();
+
+    public static List<Contract> getContractList(){
+        List<Contract> list = null;
+        try {
+            list = ReadAndWrite.readFileList("src\\case_study\\data\\contract.csv");
+        }catch (NullPointerException e){
+
+        }
+        return list;
+    }
 
     @Override
     public void createNewContract() {
+        List<Contract> contractList = getContractList();
+        if (contractList == null){
+            contractList = new ArrayList<>();
+        }
+        TreeSet <Booking> bookingSet = BookingServiceImp.getBookingSet();
+        Queue <Booking> bookingQueue = new LinkedList<>();
         for (Booking booking : bookingSet) {
             if(!booking.isStatusContract()){
                 bookingQueue.add(booking);
                 booking.setStatusContract(true);
             }
         }
+        ReadAndWrite.writeFileTree("src\\case_study\\data\\booking.csv", bookingSet);
+
         if (!bookingQueue.isEmpty()){
             Booking booking = bookingQueue.poll();
             Customer customer = booking.getCustomer();
@@ -67,6 +84,7 @@ public class ContractServiceImp implements ContractService {
                     preFee,
                     totalFee);
             contractList.add(contract);
+            ReadAndWrite.writeFileList("src\\case_study\\data\\contract.csv",contractList);
             System.out.println("Create contract successful");
         }else {
             System.out.println("Bookings in list was created contract");
@@ -75,6 +93,7 @@ public class ContractServiceImp implements ContractService {
 
     @Override
     public void displayContract() {
+        List<Contract> contractList = getContractList();
         for (Contract contract: contractList) {
             System.out.println(contract);
         }
@@ -82,6 +101,7 @@ public class ContractServiceImp implements ContractService {
 
     @Override
     public void editNewContract() {
+        List<Contract> contractList = getContractList();
         BookingServiceImp bookingServiceImp = new BookingServiceImp();
         int id;
         boolean flag = true;
@@ -151,9 +171,5 @@ public class ContractServiceImp implements ContractService {
                 System.out.println("Your id input is not in list");
             }
         }
-    }
-
-    public static List<Contract> getContractList() {
-        return contractList;
     }
 }

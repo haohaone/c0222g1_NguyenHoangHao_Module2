@@ -2,7 +2,9 @@ package case_study.models.facility;
 
 import case_study.service.FacilityService;
 
-public class Villa extends Facility {
+import java.io.Serializable;
+
+public class Villa extends Facility implements Serializable {
     private int sizePool;
 
     public Villa(String nameService,

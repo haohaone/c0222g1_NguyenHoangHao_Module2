@@ -1,6 +1,8 @@
 package case_study.models.person;
 
-public abstract class Person{
+import java.io.Serializable;
+
+public abstract class Person implements Serializable {
     private String name, dateOfBirth, gender, email, phoneNumber, idCardNumber;
 
     public Person(String name,

@@ -1,23 +1,28 @@
 package case_study.service.implement;
+
 import case_study.models.booking_contracts.Booking;
 import case_study.models.facility.Facility;
 import case_study.models.facility.Room;
 import case_study.models.person.Customer;
 import case_study.service.BookingService;
 import case_study.utils.BookingComparator;
+import case_study.utils.ReadAndWrite;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
-public class BookingServiceImp implements BookingService {
-    private static Set<Booking> bookingSet = new TreeSet<>(new BookingComparator());
+public class BookingServiceImp implements BookingService, Serializable {
     public Scanner scanner = new Scanner(System.in);
 
-    public static Set<Booking> getBookingSet() {
+    public static TreeSet<Booking> getBookingSet() {
+        TreeSet<Booking> bookingSet = null;
+        try {
+            bookingSet = ReadAndWrite.readFileTree("src\\case_study\\data\\booking.csv");
+        } catch (NullPointerException e) {
+        }
         return bookingSet;
     }
 
@@ -27,7 +32,10 @@ public class BookingServiceImp implements BookingService {
     }
 
     public void addBooking() {
-
+        TreeSet<Booking> bookingSet = getBookingSet();
+        if (bookingSet == null){
+            bookingSet = new TreeSet<>(new BookingComparator());
+        }
         int id = 1;
         if (!bookingSet.isEmpty()) {
             id = bookingSet.size() + 1;
@@ -36,24 +44,24 @@ public class BookingServiceImp implements BookingService {
         Customer customer = chooseCustomer();
         Facility facility = chooseFacility();
         String startTime;
-        while (true){
+        while (true) {
             System.out.println("Input start rent time");
             try {
                 startTime = scanner.nextLine();
                 dateTimeCheck(startTime);
                 break;
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.err.println("Input wrong format");
             }
         }
         String endTime;
-        while (true){
+        while (true) {
             System.out.println("Input end rent time");
             try {
                 endTime = scanner.nextLine();
                 dateTimeCheck(endTime);
                 break;
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.err.println("Input wrong format");
             }
         }
@@ -65,11 +73,13 @@ public class BookingServiceImp implements BookingService {
                 facility);
 
         bookingSet.add(booking);
+        ReadAndWrite.writeFileTree("src\\case_study\\data\\booking.csv", bookingSet);
         System.out.println("Add booking successful");
     }
 
     @Override
     public void displayListBooking() {
+        TreeSet<Booking> bookingSet = getBookingSet();
         for (Booking booking : bookingSet) {
             if (booking.getFacility() instanceof Room) {
                 System.out.println(booking.toString() + "]");
@@ -86,10 +96,9 @@ public class BookingServiceImp implements BookingService {
         System.out.println("---------Customer List---------");
         customerServiceImp.display();
 
-        boolean check = true;
         String id;
-        while (check) {
-            if (CustomerServiceImp.getCustomerList().isEmpty()){
+        while (true) {
+            if (CustomerServiceImp.getCustomerList().isEmpty()) {
                 System.out.println("Customer list is not customer in list");
                 break;
             }
@@ -97,7 +106,6 @@ public class BookingServiceImp implements BookingService {
             id = scanner.nextLine();
             for (Customer customer : CustomerServiceImp.getCustomerList()) {
                 if (customer.getIdCustomerNumber().equals(id)) {
-                    check = false;
                     return customer;
                 }
             }
@@ -108,10 +116,11 @@ public class BookingServiceImp implements BookingService {
     }
 
     public Booking editBooking() {
+        TreeSet<Booking> bookingSet = getBookingSet();
         int id;
         boolean flag = true;
         while (flag) {
-            if (bookingSet.isEmpty()){
+            if (bookingSet.isEmpty()) {
                 System.out.println("Booking list is not booking in list");
                 break;
             }
@@ -132,13 +141,13 @@ public class BookingServiceImp implements BookingService {
 
                     System.out.println("Input start rent time");
                     String startTime;
-                    while (true){
+                    while (true) {
                         System.out.println("Input start rent time");
                         try {
                             startTime = scanner.nextLine();
                             dateTimeCheck(startTime);
                             break;
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.err.println("Input wrong format");
                         }
                     }
@@ -146,13 +155,13 @@ public class BookingServiceImp implements BookingService {
 
                     System.out.println("Input end rent time");
                     String endTime;
-                    while (true){
+                    while (true) {
                         System.out.println("Input end rent time");
                         try {
                             endTime = scanner.nextLine();
                             dateTimeCheck(endTime);
                             break;
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.err.println("Input wrong format");
                         }
                     }
@@ -173,28 +182,23 @@ public class BookingServiceImp implements BookingService {
         FacilityServiceImp facilityServiceImp = new FacilityServiceImp();
         System.out.println("---------Facility List---------");
         facilityServiceImp.display();
-
-        boolean check = true;
-        String id;
-        while (check) {
+        LinkedHashMap<Facility, Integer> facilityList = FacilityServiceImp.getFacilityList();
+        while (true) {
             System.out.println("Input id of facility");
-            id = scanner.nextLine();
-            for (Map.Entry<Facility, Integer> entry : FacilityServiceImp.getFacilityList().entrySet()) {
+            String id = scanner.nextLine();
+            for (Map.Entry<Facility, Integer> entry : facilityList.entrySet()) {
                 if (entry.getKey().getId().equals(id)) {
                     if (entry.getValue() <= 5) {
-                        check = false;
                         entry.setValue(entry.getValue() + 1);
+                        ReadAndWrite.writeFileMap("src\\case_study\\data\\facility.csv",facilityList);
                         return entry.getKey();
                     } else {
                         System.out.println("This Facility need to maintain");
                     }
                 }
             }
-            if (check) {
-                System.out.println("Id is not in list");
-                System.out.println();
-            }
+            System.out.println("Id is not in list");
+            System.out.println();
         }
-        return null;
     }
 }
