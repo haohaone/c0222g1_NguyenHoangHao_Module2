@@ -15,9 +15,8 @@ public class ContractServiceImp implements ContractService, Serializable {
     public static List<Contract> getContractList(){
         List<Contract> list = null;
         try {
-            list = ReadAndWrite.readFileList("src\\case_study\\data\\contract.csv");
-        }catch (NullPointerException e){
-
+            list = ReadAndWrite.readFileArrayList("src\\case_study\\data\\contract.csv");
+        }catch (NullPointerException ignored){
         }
         return list;
     }
@@ -25,9 +24,6 @@ public class ContractServiceImp implements ContractService, Serializable {
     @Override
     public void createNewContract() {
         List<Contract> contractList = getContractList();
-        if (contractList == null){
-            contractList = new ArrayList<>();
-        }
         TreeSet <Booking> bookingSet = BookingServiceImp.getBookingSet();
         Queue <Booking> bookingQueue = new LinkedList<>();
         for (Booking booking : bookingSet) {
@@ -37,57 +33,61 @@ public class ContractServiceImp implements ContractService, Serializable {
             }
         }
         ReadAndWrite.writeFileTree("src\\case_study\\data\\booking.csv", bookingSet);
+        boolean check = true;
+        while (check){
+            if (!bookingQueue.isEmpty()){
+                Booking booking = bookingQueue.poll();
+                Customer customer = booking.getCustomer();
 
-        if (!bookingQueue.isEmpty()){
-            Booking booking = bookingQueue.poll();
-            Customer customer = booking.getCustomer();
-
-            System.out.println("Creating contract by booking have information: \n" + booking.toString());
-            System.out.println("Creating contract by customer : \n" + customer.toString());
-            System.out.println("Input id contract");
-            int id;
-            while (true){
-                try {
-                    id = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.err.println("Input wrong format");
+                System.out.println("Creating contract by booking have information: \n" + booking.toString());
+                System.out.println("Creating contract by customer : \n" + customer.toString());
+                System.out.println("Input id contract");
+                int id;
+                while (true){
+                    try {
+                        id = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.err.println("Input wrong format");
+                    }
                 }
-            }
 
-            System.out.println("Input pre-fee");
-            double preFee;
-            while (true){
-                try {
-                    preFee = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.err.println("Input wrong format");
+                System.out.println("Input pre-fee");
+                double preFee;
+                while (true){
+                    try {
+                        preFee = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.err.println("Input wrong format");
+                    }
                 }
-            }
 
-            System.out.println("Input total fee");
-            double totalFee;
-            while (true){
-                try {
-                    totalFee = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.err.println("Input wrong format");
+                System.out.println("Input total fee");
+                double totalFee;
+                while (true){
+                    try {
+                        totalFee = Integer.parseInt(scanner.nextLine());
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.err.println("Input wrong format");
+                    }
                 }
-            }
 
-            Contract contract = new Contract(
-                    booking,
-                    customer,
-                    id,
-                    preFee,
-                    totalFee);
-            contractList.add(contract);
-            ReadAndWrite.writeFileList("src\\case_study\\data\\contract.csv",contractList);
-            System.out.println("Create contract successful");
-        }else {
-            System.out.println("Bookings in list was created contract");
+                Contract contract = new Contract(
+                        booking,
+                        customer,
+                        id,
+                        preFee,
+                        totalFee);
+                contractList.add(contract);
+                ReadAndWrite.writeFileArrayList("src\\case_study\\data\\contract.csv",contractList);
+                System.out.println("Create contract successful");
+                check = true;
+            }else {
+                System.out.println("Bookings in list was created contract");
+                check = false;
+            }
         }
     }
 
@@ -151,6 +151,7 @@ public class ContractServiceImp implements ContractService, Serializable {
                     int yesNo;
                     while (true){
                         try {
+                            System.out.println("Input your choice");
                             yesNo = Integer.parseInt(scanner.nextLine());
                             break;
                         } catch (NumberFormatException e) {
@@ -161,7 +162,7 @@ public class ContractServiceImp implements ContractService, Serializable {
                         Booking booking = bookingServiceImp.editBooking();
                         contract.setBooking(booking);
                         contract.setCustomer(booking.getCustomer());
-
+                        ReadAndWrite.writeFileArrayList("src\\case_study\\data\\contract.csv",contractList);
                     }
                     flag = false;
                     break;

@@ -9,6 +9,7 @@ import java.io.*;
 import java.util.*;
 
 public class ReadAndWrite {
+
     public static void write(String path, String line) {
         File file = new File(path);
         if (!file.exists()) {
@@ -61,7 +62,7 @@ public class ReadAndWrite {
     }
 
     public static LinkedHashMap<Facility, Integer> readFileMap(String path){
-        LinkedHashMap<Facility, Integer> facilityIntegerMap = null;
+        LinkedHashMap<Facility, Integer> facilityIntegerMap;
         File file = new File(path);
         try(FileInputStream fis = new FileInputStream(file);
             ObjectInputStream oos = new ObjectInputStream(fis)) {
@@ -74,7 +75,7 @@ public class ReadAndWrite {
         } catch (ClassNotFoundException e) {
 
         }
-        return facilityIntegerMap;
+        return new LinkedHashMap<Facility, Integer>();
     }
 
     public static void writeFileTree(String path, TreeSet<Booking> objs){
@@ -94,7 +95,7 @@ public class ReadAndWrite {
     }
 
     public static TreeSet<Booking> readFileTree(String path){
-        TreeSet<Booking> bookings = new TreeSet<>(new BookingComparator());
+        TreeSet<Booking> bookings;
         File file = new File(path);
         try(FileInputStream fis = new FileInputStream(file);
             ObjectInputStream oos = new ObjectInputStream(fis)) {
@@ -107,10 +108,10 @@ public class ReadAndWrite {
         } catch (ClassNotFoundException e) {
 
         }
-        return bookings;
+        return new TreeSet<Booking>(new BookingComparator());
     }
 
-    public static void writeFileList(String path, List<Contract> objs){
+    public static void writeFileArrayList(String path, List<Contract> objs){
         File file = new File(path);
         try(FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oop = new ObjectOutputStream(fos)) {
@@ -126,8 +127,8 @@ public class ReadAndWrite {
         }
     }
 
-    public static List<Contract> readFileList(String path){
-        List<Contract> contracts = null;
+    public static List<Contract> readFileArrayList(String path){
+        List<Contract> contracts;
         File file = new File(path);
         try(FileInputStream fis = new FileInputStream(file);
             ObjectInputStream oos = new ObjectInputStream(fis)) {
@@ -140,6 +141,6 @@ public class ReadAndWrite {
         } catch (ClassNotFoundException e) {
 
         }
-        return contracts;
+        return new ArrayList<>();
     }
 }

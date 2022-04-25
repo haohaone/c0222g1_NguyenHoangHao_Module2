@@ -33,9 +33,6 @@ public class BookingServiceImp implements BookingService, Serializable {
 
     public void addBooking() {
         TreeSet<Booking> bookingSet = getBookingSet();
-        if (bookingSet == null){
-            bookingSet = new TreeSet<>(new BookingComparator());
-        }
         int id = 1;
         if (!bookingSet.isEmpty()) {
             id = bookingSet.size() + 1;
@@ -141,8 +138,8 @@ public class BookingServiceImp implements BookingService, Serializable {
 
                     System.out.println("Input start rent time");
                     String startTime;
+                    System.out.println("Input start rent time");
                     while (true) {
-                        System.out.println("Input start rent time");
                         try {
                             startTime = scanner.nextLine();
                             dateTimeCheck(startTime);
@@ -155,8 +152,8 @@ public class BookingServiceImp implements BookingService, Serializable {
 
                     System.out.println("Input end rent time");
                     String endTime;
+                    System.out.println("Input end rent time");
                     while (true) {
-                        System.out.println("Input end rent time");
                         try {
                             endTime = scanner.nextLine();
                             dateTimeCheck(endTime);
@@ -168,6 +165,7 @@ public class BookingServiceImp implements BookingService, Serializable {
                     booking.setEndTime(endTime);
 
                     System.out.println("Edit successful");
+                    ReadAndWrite.writeFileTree("src\\case_study\\data\\booking.csv", bookingSet);
                     return booking;
                 }
             }

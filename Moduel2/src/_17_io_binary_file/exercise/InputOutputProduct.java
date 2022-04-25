@@ -1,14 +1,13 @@
 package _17_io_binary_file.exercise;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputOutputProduct {
     public static Scanner scanner = new Scanner(System.in);
-    public static List<Product> productList =  new ArrayList<>();
+    public static final List<Product> PRODUCTS =  readFile("src\\_17_io_binary_file\\exercise\\products.txt");
 
 
     public static void writeFile(String path, List<Product> products){
@@ -41,9 +40,6 @@ public class InputOutputProduct {
     }
 
     public static void add(){
-        if (readFile("src\\_17_io_binary_file\\exercise\\products.txt") != null){
-            productList = readFile("src\\_17_io_binary_file\\exercise\\products.txt");
-        }
 
         System.out.println("Input id product");
         String id = scanner.nextLine();
@@ -66,21 +62,19 @@ public class InputOutputProduct {
                 System.err.println("Input wrong format");
             }
         }
-        productList.add(new Product(id, name, productions, status, price));
-        writeFile("src\\_17_io_binary_file\\exercise\\products.txt", productList);
+        PRODUCTS.add(new Product(id, name, productions, status, price));
+        writeFile("src\\_17_io_binary_file\\exercise\\products.txt", PRODUCTS);
         System.out.println("Add successful");
     }
 
     public static void display(){
-        List<Product> productList = readFile("src\\_17_io_binary_file\\exercise\\products.txt");
-        for (Product product : productList) {
+        for (Product product : PRODUCTS) {
             System.out.println(product);
         }
     }
 
     public static Product search(String name){
-        List<Product> products = readFile("src\\_17_io_binary_file\\exercise\\products.txt");
-        for (Product item : products) {
+        for (Product item : PRODUCTS) {
             if (item.getName().contains(name)){
                 return item;
             }
