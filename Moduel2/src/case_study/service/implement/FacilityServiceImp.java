@@ -6,12 +6,19 @@ import case_study.models.facility.Room;
 import case_study.models.facility.Villa;
 import case_study.service.FacilityService;
 import case_study.utils.ReadAndWrite;
-
 import java.io.Serializable;
 import java.util.*;
 
-public class FacilityServiceImp implements FacilityService, Serializable {
 
+public class FacilityServiceImp implements FacilityService, Serializable {
+    public static final String VILLA, HOUSE, ROOM, FIRST_CHARACTER_UPPER, RENT_TYPE;
+    static {
+        VILLA = "^SVVL-[0-9]{4}$";
+        HOUSE = "^SVHO-[0-9]{4}$";
+        ROOM = "^SVRO-[0-9]{4}$";
+        FIRST_CHARACTER_UPPER = "^[A-Z][\\w]+$";
+        RENT_TYPE = "^(Day|Month|Year)$";
+    }
     public Scanner scanner = new Scanner(System.in);
 
     public static LinkedHashMap<Facility, Integer> getFacilityList(){
@@ -54,33 +61,65 @@ public class FacilityServiceImp implements FacilityService, Serializable {
     @Override
     public void addNewVilla() {
         System.out.println("Input name service");
-        String name = scanner.nextLine();
+        String name;
+        while (true){
+            name = scanner.nextLine();
+            if (name.matches(FIRST_CHARACTER_UPPER)){
+                break;
+            }else {
+                System.out.println("Your format is wrong");
+            }
+        }
 
         System.out.println("Input rent type");
-        String rentType = scanner.nextLine();
+        String rentType;
+        while (true){
+            rentType = scanner.nextLine();
+            if (rentType.matches(RENT_TYPE)){
+                break;
+            }else {
+                System.out.println("Your format should be Day, Month or Year");
+            }
+        }
 
         System.out.println("Input standard service");
-        String standardService = scanner.nextLine();
+        String standardService;
+        while (true){
+            standardService = scanner.nextLine();
+            if (standardService.matches(FIRST_CHARACTER_UPPER)){
+                break;
+            }else {
+                System.out.println("Your format is wrong");
+            }
+        }
 
         System.out.println("Input floor");
         int floor;
         while (true){
             try {
                 floor = Integer.parseInt(scanner.nextLine());
-                break;
+                if (floor > 0){
+                    break;
+                }else {
+                    System.out.println("Floor should be greater than 0");
+                }
             } catch (NumberFormatException e) {
                 System.err.println("Input wrong format");;
             }
         }
 
         System.out.println("Input area use");
-        int areaUse;
+        double areaUse;
         while (true){
             try {
-                areaUse = Integer.parseInt(scanner.nextLine());
-                break;
+                areaUse = Double.parseDouble(scanner.nextLine());
+                if (areaUse > 30){
+                    break;
+                }else {
+                    System.err.println("Minimum area is 30m2");
+                }
             } catch (NumberFormatException e) {
-                System.err.println("Input wrong format");;
+                System.err.println("Input format wrong");
             }
         }
 
@@ -89,9 +128,13 @@ public class FacilityServiceImp implements FacilityService, Serializable {
         while (true){
             try {
                 feeRent = Integer.parseInt(scanner.nextLine());
-                break;
+                if (feeRent > 0){
+                    break;
+                }else {
+                    System.out.println("Price should be greater than 0");
+                }
             } catch (NumberFormatException e) {
-                System.err.println("Input wrong format");;
+                System.err.println("Input wrong format");
             }
         }
 
@@ -100,25 +143,42 @@ public class FacilityServiceImp implements FacilityService, Serializable {
         while (true){
             try {
                 maximumCustomer = Integer.parseInt(scanner.nextLine());
-                break;
+                if (maximumCustomer > 0 && maximumCustomer < 20){
+                    break;
+                }else {
+                    System.out.println("Maximum customer is 19");
+                }
             } catch (NumberFormatException e) {
                 System.err.println("Input wrong format");;
             }
         }
 
         System.out.println("Input id facility");
-        String id = scanner.nextLine();
+        String id;
+        while (true){
+            id = scanner.nextLine();
+            if (id.matches(VILLA)){
+                break;
+            }else {
+                System.out.println("Your input should be SVVl-xxxx");
+            }
+        }
 
         System.out.println("Input size pool");
-        int sizePool;
+        double sizePool;
         while (true){
             try {
-                sizePool = Integer.parseInt(scanner.nextLine());
-                break;
+                sizePool = Double.parseDouble(scanner.nextLine());
+                if (sizePool > 30){
+                    break;
+                }else {
+                    System.out.println("Minimum size is 30m2");
+                }
             } catch (NumberFormatException e) {
                 System.err.println("Input wrong format");;
             }
         }
+
         Villa villa = new Villa(name, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id, sizePool);
         LinkedHashMap<Facility, Integer> facilityList = new LinkedHashMap<>();
         if (getFacilityList() != null){
@@ -142,33 +202,65 @@ public class FacilityServiceImp implements FacilityService, Serializable {
     @Override
     public void addNewHouse() {
         System.out.println("Input name service");
-        String name = scanner.nextLine();
+        String name;
+        while (true){
+            name = scanner.nextLine();
+            if (name.matches(FIRST_CHARACTER_UPPER)){
+                break;
+            }else {
+                System.out.println("Your format is wrong");
+            }
+        }
 
         System.out.println("Input rent type");
-        String rentType = scanner.nextLine();
+        String rentType;
+        while (true){
+            rentType = scanner.nextLine();
+            if (rentType.matches(RENT_TYPE)){
+                break;
+            }else {
+                System.out.println("Your format should be Day, Month or Year");
+            }
+        }
 
         System.out.println("Input standard service");
-        String standardService = scanner.nextLine();
+        String standardService;
+        while (true){
+            standardService = scanner.nextLine();
+            if (standardService.matches(FIRST_CHARACTER_UPPER)){
+                break;
+            }else {
+                System.out.println("Your format is wrong");
+            }
+        }
 
         System.out.println("Input floor");
         int floor;
         while (true){
             try {
                 floor = Integer.parseInt(scanner.nextLine());
-                break;
+                if (floor > 0){
+                    break;
+                }else {
+                    System.out.println("Floor should be greater than 0");
+                }
             } catch (NumberFormatException e) {
                 System.err.println("Input wrong format");;
             }
         }
 
         System.out.println("Input area use");
-        int areaUse;
+        double areaUse;
         while (true){
             try {
-                areaUse = Integer.parseInt(scanner.nextLine());
-                break;
+                areaUse = Double.parseDouble(scanner.nextLine());
+                if (areaUse > 30){
+                    break;
+                }else {
+                    System.err.println("Minimum area is 30m2");
+                }
             } catch (NumberFormatException e) {
-                System.err.println("Input wrong format");;
+                System.err.println("Input format wrong");
             }
         }
 
@@ -177,9 +269,13 @@ public class FacilityServiceImp implements FacilityService, Serializable {
         while (true){
             try {
                 feeRent = Integer.parseInt(scanner.nextLine());
-                break;
+                if (feeRent > 0){
+                    break;
+                }else {
+                    System.out.println("Price should be greater than 0");
+                }
             } catch (NumberFormatException e) {
-                System.err.println("Input wrong format");;
+                System.err.println("Input wrong format");
             }
         }
 
@@ -188,14 +284,26 @@ public class FacilityServiceImp implements FacilityService, Serializable {
         while (true){
             try {
                 maximumCustomer = Integer.parseInt(scanner.nextLine());
-                break;
+                if (maximumCustomer > 0 && maximumCustomer < 20){
+                    break;
+                }else {
+                    System.out.println("Maximum customer is 19");
+                }
             } catch (NumberFormatException e) {
                 System.err.println("Input wrong format");;
             }
         }
 
         System.out.println("Input id facility");
-        String id = scanner.nextLine();
+        String id;
+        while (true){
+            id = scanner.nextLine();
+            if (id.matches(HOUSE)){
+                break;
+            }else {
+                System.out.println("Your input should be SVVl-xxxx");
+            }
+        }
 
         House house = new House(name, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id);
         LinkedHashMap<Facility, Integer> facilityList = new LinkedHashMap<>();
@@ -219,19 +327,39 @@ public class FacilityServiceImp implements FacilityService, Serializable {
     @Override
     public void addNewRoom() {
         System.out.println("Input name service");
-        String name = scanner.nextLine();
+        String name;
+        while (true){
+            name = scanner.nextLine();
+            if (name.matches(FIRST_CHARACTER_UPPER)){
+                break;
+            }else {
+                System.out.println("Your format is wrong");
+            }
+        }
 
         System.out.println("Input rent type");
-        String rentType = scanner.nextLine();
+        String rentType;
+        while (true){
+            rentType = scanner.nextLine();
+            if (rentType.matches(RENT_TYPE)){
+                break;
+            }else {
+                System.out.println("Your format should be Day, Month or Year");
+            }
+        }
 
         System.out.println("Input area use");
-        int areaUse;
+        double areaUse;
         while (true){
             try {
-                areaUse = Integer.parseInt(scanner.nextLine());
-                break;
+                areaUse = Double.parseDouble(scanner.nextLine());
+                if (areaUse > 30){
+                    break;
+                }else {
+                    System.err.println("Minimum area is 30m2");
+                }
             } catch (NumberFormatException e) {
-                System.err.println("Input wrong format");;
+                System.err.println("Input format wrong");
             }
         }
 
@@ -240,9 +368,13 @@ public class FacilityServiceImp implements FacilityService, Serializable {
         while (true){
             try {
                 feeRent = Integer.parseInt(scanner.nextLine());
-                break;
+                if (feeRent > 0){
+                    break;
+                }else {
+                    System.out.println("Price should be greater than 0");
+                }
             } catch (NumberFormatException e) {
-                System.err.println("Input wrong format");;
+                System.err.println("Input wrong format");
             }
         }
 
@@ -251,17 +383,38 @@ public class FacilityServiceImp implements FacilityService, Serializable {
         while (true){
             try {
                 maximumCustomer = Integer.parseInt(scanner.nextLine());
-                break;
+                if (maximumCustomer > 0 && maximumCustomer < 20){
+                    break;
+                }else {
+                    System.out.println("Maximum customer is 19");
+                }
             } catch (NumberFormatException e) {
                 System.err.println("Input wrong format");;
             }
         }
 
         System.out.println("Input id facility");
-        String id = scanner.nextLine();
+        String id;
+        while (true){
+            id = scanner.nextLine();
+            if (id.matches(ROOM)){
+                break;
+            }else {
+                System.out.println("Your input should be SVVl-xxxx");
+            }
+        }
 
         System.out.println("Input free service");
-        String freeService = scanner.nextLine();
+        String freeService;
+        while (true){
+            freeService = scanner.nextLine();
+            if (freeService.matches(FIRST_CHARACTER_UPPER)){
+                break;
+            }else {
+                System.out.println("Input wrong format");
+            }
+        }
+
 
         Room room = new Room(name, rentType, areaUse, feeRent, maximumCustomer, id, freeService);
         LinkedHashMap<Facility, Integer> facilityList = new LinkedHashMap<>();

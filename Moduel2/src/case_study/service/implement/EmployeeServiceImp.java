@@ -2,9 +2,13 @@ package case_study.service.implement;
 
 import case_study.models.person.Employee;
 import case_study.service.EmployeeService;
+import case_study.utils.DateTimeException;
 import case_study.utils.ReadAndWrite;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -46,7 +50,18 @@ public class EmployeeServiceImp implements EmployeeService {
         String name = scanner.nextLine();
 
         System.out.println("Input date of birth employee");
-        String dateOfBirth = scanner.nextLine();
+        String dateOfBirth;
+        while (true){
+            try {
+                dateOfBirth = scanner.nextLine();
+                dateTimeCheck(dateOfBirth);
+                break;
+            } catch (DateTimeException e) {
+                System.err.println("This age of customer can't booking");
+            }catch (Exception ignored){
+                System.err.println("Input wrong format");
+            }
+        }
 
         System.out.println("Input gender employee");
         String gender = scanner.nextLine();
@@ -166,6 +181,18 @@ public class EmployeeServiceImp implements EmployeeService {
         System.out.println("Add new successful");
     }
 
+    private void dateTimeCheck(String dateOfBirth) throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+        LocalDate localDate1 = LocalDate.parse(dateOfBirth, formatter);
+        LocalDate localDate2 = LocalDate.now();
+        localDate2.format(formatter);
+
+
+        if (!localDate2.minusDays(6574).isAfter(localDate1) || !localDate2.minusDays(36600).isBefore(localDate1)) {
+            throw new DateTimeException();
+        }
+    }
+
     @Override
     public void edit() {
         List<Employee> employeeList = getEmployeeList();
@@ -188,8 +215,18 @@ public class EmployeeServiceImp implements EmployeeService {
             employeeList.get(index).setName(name);
 
             System.out.println("Input date of birth employee");
-            String dateOfBirth = scanner.nextLine();
-            employeeList.get(index).setDateOfBirth(dateOfBirth);
+            String dateOfBirth;
+            while (true){
+                try {
+                    dateOfBirth = scanner.nextLine();
+                    dateTimeCheck(dateOfBirth);
+                    break;
+                } catch (DateTimeException e) {
+                    System.err.println("This age of customer can't booking");
+                }catch (Exception ignored){
+                    System.err.println("Input wrong format");
+                }
+            }
 
             System.out.println("Input gender employee");
             String gender = scanner.nextLine();

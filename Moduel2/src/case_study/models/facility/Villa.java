@@ -5,17 +5,17 @@ import case_study.service.FacilityService;
 import java.io.Serializable;
 
 public class Villa extends Facility implements Serializable {
-    private int sizePool;
+    private double sizePool;
 
     public Villa(String nameService,
                  String rentType,
                  String standardService,
                  int floor,
-                 int areaUse,
+                 double areaUse,
                  int feeRent,
                  int maximumCustomer,
                  String id,
-                 int sizePool) {
+                 double sizePool) {
 
         super(nameService, rentType, standardService, floor, areaUse, feeRent, maximumCustomer, id);
         this.sizePool = sizePool;
@@ -31,11 +31,11 @@ public class Villa extends Facility implements Serializable {
         super.setMaintain(maintain);
     }
 
-    public int getSizePool() {
+    public double getSizePool() {
         return sizePool;
     }
 
-    public void setSizePool(int sizePool) {
+    public void setSizePool(double sizePool) {
         this.sizePool = sizePool;
     }
 
@@ -80,12 +80,12 @@ public class Villa extends Facility implements Serializable {
     }
 
     @Override
-    public int getAreaUse() {
+    public double getAreaUse() {
         return super.getAreaUse();
     }
 
     @Override
-    public void setAreaUse(int areaUse) {
+    public void setAreaUse(double areaUse) {
         super.setAreaUse(areaUse);
     }
 

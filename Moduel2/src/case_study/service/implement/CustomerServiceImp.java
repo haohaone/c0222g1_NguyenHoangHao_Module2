@@ -3,10 +3,15 @@ package case_study.service.implement;
 import case_study.models.person.Customer;
 import case_study.models.person.Employee;
 import case_study.service.CustomerService;
+import case_study.utils.DateTimeException;
 import case_study.utils.ReadAndWrite;
 
 import java.io.File;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,7 +55,18 @@ public class CustomerServiceImp implements CustomerService, Serializable {
         String name = scanner.nextLine();
 
         System.out.println("Input date of birth customer");
-        String dateOfBirth = scanner.nextLine();
+        String dateOfBirth;
+        while (true){
+            try {
+                dateOfBirth = scanner.nextLine();
+                dateTimeCheck(dateOfBirth);
+                break;
+            } catch (DateTimeException e) {
+                System.err.println("This age of customer can't booking");
+            }catch (Exception ignored){
+                System.err.println("Input wrong format");
+            }
+        }
 
         System.out.println("Input gender customer");
         String gender = scanner.nextLine();
@@ -146,7 +162,18 @@ public class CustomerServiceImp implements CustomerService, Serializable {
             customerList.get(index).setName(name);
 
             System.out.println("Input date of birth customer");
-            String dateOfBirth = scanner.nextLine();
+            String dateOfBirth;
+            while (true){
+                try {
+                    dateOfBirth = scanner.nextLine();
+                    dateTimeCheck(dateOfBirth);
+                    break;
+                } catch (DateTimeException e) {
+                    System.err.println("This age of customer can't booking");
+                }catch (Exception ignored){
+                    System.err.println("Input wrong format");
+                }
+            }
             customerList.get(index).setDateOfBirth(dateOfBirth);
 
             System.out.println("Input gender customer");
@@ -267,6 +294,18 @@ public class CustomerServiceImp implements CustomerService, Serializable {
             System.out.println("Delete successful");
         } else {
             System.out.println("Id is not in employee list");
+        }
+    }
+
+    public static void dateTimeCheck(String dateOfBirth) throws Exception {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+        LocalDate localDate1 = LocalDate.parse(dateOfBirth, formatter);
+        LocalDate localDate2 = LocalDate.now();
+        localDate2.format(formatter);
+
+
+        if (!localDate2.minusDays(6574).isAfter(localDate1) || !localDate2.minusDays(36600).isBefore(localDate1)) {
+            throw new DateTimeException();
         }
     }
 }

@@ -7,7 +7,7 @@ public class Room extends Facility {
 
     public Room(String nameService,
                 String rentType,
-                int areaUse,
+                double areaUse,
                 int feeRent,
                 int maximumCustomer,
                 String id,
@@ -48,12 +48,12 @@ public class Room extends Facility {
     }
 
     @Override
-    public int getAreaUse() {
+    public double getAreaUse() {
         return super.getAreaUse();
     }
 
     @Override
-    public void setAreaUse(int areaUse) {
+    public void setAreaUse(double areaUse) {
         super.setAreaUse(areaUse);
     }
 

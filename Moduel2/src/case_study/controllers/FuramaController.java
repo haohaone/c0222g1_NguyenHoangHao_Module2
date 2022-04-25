@@ -37,7 +37,7 @@ public class FuramaController {
                     employeeServiceImp.delete();
                     break;
                 case 5:
-                    DisplayMainMenu.displayMainMenu();
+                    return;
             }
         }
     }
@@ -71,7 +71,7 @@ public class FuramaController {
                     customerServiceImp.delete();
                     break;
                 case 5:
-                    DisplayMainMenu.displayMainMenu();
+                    return;
             }
         }
     }
@@ -101,7 +101,7 @@ public class FuramaController {
                     facilityServiceImp.displayMaintain();
                     break;
                 case 4:
-                    DisplayMainMenu.displayMainMenu();
+                    return;
             }
         }
     }
@@ -134,7 +134,7 @@ public class FuramaController {
                     facilityManagement();
                     break;
                 case 4:
-                    facilityManagement();
+                    return;
             }
         }
     }
@@ -173,7 +173,7 @@ public class FuramaController {
                     contractServiceImp.editNewContract();
                     break;
                 case 6:
-                    DisplayMainMenu.displayMainMenu();
+                    return;
             }
         }
     }
@@ -199,7 +199,7 @@ public class FuramaController {
                     promotionServiceImp.displayDiscount();
                     break;
                 case 3:
-                    DisplayMainMenu.displayMainMenu();
+                    return;
             }
         }
     }

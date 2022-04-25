@@ -3,19 +3,15 @@ package case_study.models.facility;
 import java.io.Serializable;
 
 public abstract class Facility implements Serializable {
-    private String nameService,
-            rentType,
-            standardService,
-            id;
-    private int areaUse,
-            feeRent,
-            maximumCustomer,
-            floor;
+    private String nameService, rentType, standardService, id;
+    private int
+            maximumCustomer, floor, feeRent;
+    private double areaUse;
     private int maintain = 0;
 
     public Facility(String nameService,
                     String rentType,
-                    int areaUse,
+                    double areaUse,
                     int feeRent,
                     int maximumCustomer
                     ,String id) {
@@ -32,7 +28,7 @@ public abstract class Facility implements Serializable {
                     String rentType,
                     String standardService,
                     int floor,
-                    int areaUse,
+                    double areaUse,
                     int feeRent,
                     int maximumCustomer,
                     String id) {
@@ -86,11 +82,11 @@ public abstract class Facility implements Serializable {
         this.floor = floor;
     }
 
-    public int getAreaUse() {
+    public double getAreaUse() {
         return areaUse;
     }
 
-    public void setAreaUse(int areaUse) {
+    public void setAreaUse(double areaUse) {
         this.areaUse = areaUse;
     }
 

@@ -54,9 +54,7 @@ public class ReadAndWrite {
             }
             oop.writeObject(objs);
         } catch (FileNotFoundException e) {
-
         } catch (IOException e) {
-
         } catch (Exception e) {
         }
     }
