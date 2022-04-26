@@ -3,22 +3,17 @@ package case_study.service.implement;
 import case_study.models.person.Customer;
 import case_study.models.person.Employee;
 import case_study.service.CustomerService;
-import case_study.utils.DateTimeException;
+import case_study.service.implement.regex.CustomerRegex;
 import case_study.utils.ReadAndWrite;
-
 import java.io.File;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class CustomerServiceImp implements CustomerService, Serializable {
     static Scanner scanner = new Scanner(System.in);
+    public static List<Customer> customerList = getCustomerList();
 
     public static List<Customer> getCustomerList() {
         List<Customer> customerList  = new LinkedList<>();
@@ -55,18 +50,7 @@ public class CustomerServiceImp implements CustomerService, Serializable {
         String name = scanner.nextLine();
 
         System.out.println("Input date of birth customer");
-        String dateOfBirth;
-        while (true){
-            try {
-                dateOfBirth = scanner.nextLine();
-                dateTimeCheck(dateOfBirth);
-                break;
-            } catch (DateTimeException e) {
-                System.err.println("This age of customer can't booking");
-            }catch (Exception ignored){
-                System.err.println("Input wrong format");
-            }
-        }
+        String dateOfBirth = CustomerRegex.dateOfBirth();
 
         System.out.println("Input gender customer");
         String gender = scanner.nextLine();
@@ -86,47 +70,7 @@ public class CustomerServiceImp implements CustomerService, Serializable {
         System.out.println("Input customer address");
         String address = scanner.nextLine();
 
-        String customerType = "";
-        boolean check = true;
-        while (check) {
-            System.out.println("--------Menu--------");
-            System.out.println("1. Gold");
-            System.out.println("2. Silver");
-            System.out.println("3. Member");
-            System.out.println("4. Platinum");
-            System.out.println("5. Diamond");
-            System.out.println("Input your choice");
-            int choice = 0;
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.err.println("Input wrong format");;
-            }
-            switch (choice) {
-                case 1:
-                    customerType = "Gold";
-                    check = false;
-                    break;
-                case 2:
-                    customerType = "Silver";
-                    check = false;
-                    break;
-                case 3:
-                    customerType = "Member";
-                    check = false;
-                    break;
-                case 4:
-                    customerType = "Platinum";
-                    check = false;
-                    break;
-                case 5:
-                    customerType = "Diamond";
-                    check = false;
-                    break;
-                default:
-                    check = true;
-            }
-        }
+        String customerType = CustomerRegex.customerType();
 
         String line = name + "," +
                 dateOfBirth + "," +
@@ -143,7 +87,6 @@ public class CustomerServiceImp implements CustomerService, Serializable {
 
     @Override
     public void edit() {
-        List<Customer> customerList = getCustomerList();
         System.out.println("Input ID of customer to edit");
         String id = scanner.nextLine();
         boolean flag = false;
@@ -162,18 +105,7 @@ public class CustomerServiceImp implements CustomerService, Serializable {
             customerList.get(index).setName(name);
 
             System.out.println("Input date of birth customer");
-            String dateOfBirth;
-            while (true){
-                try {
-                    dateOfBirth = scanner.nextLine();
-                    dateTimeCheck(dateOfBirth);
-                    break;
-                } catch (DateTimeException e) {
-                    System.err.println("This age of customer can't booking");
-                }catch (Exception ignored){
-                    System.err.println("Input wrong format");
-                }
-            }
+            String dateOfBirth = CustomerRegex.dateOfBirth();
             customerList.get(index).setDateOfBirth(dateOfBirth);
 
             System.out.println("Input gender customer");
@@ -200,48 +132,9 @@ public class CustomerServiceImp implements CustomerService, Serializable {
             String address = scanner.nextLine();
             customerList.get(index).setAddress(address);
 
-            String customerType = "";
-            boolean check = true;
-            while (check) {
-                System.out.println("--------Menu--------");
-                System.out.println("1. Gold");
-                System.out.println("2. Silver");
-                System.out.println("3. Member");
-                System.out.println("4. Platinum");
-                System.out.println("5. Diamond");
-                System.out.println("Input your choice");
-                int choice = 0;
-                try {
-                    choice = Integer.parseInt(scanner.nextLine());
-                } catch (NumberFormatException e) {
-                    System.err.println("Input wrong format");;
-                }
-                switch (choice) {
-                    case 1:
-                        customerType = "Gold";
-                        check = false;
-                        break;
-                    case 2:
-                        customerType = "Silver";
-                        check = false;
-                        break;
-                    case 3:
-                        customerType = "Member";
-                        check = false;
-                        break;
-                    case 4:
-                        customerType = "Platinum";
-                        check = false;
-                        break;
-                    case 5:
-                        customerType = "Diamond";
-                        check = false;
-                        break;
-                    default:
-                        check = true;
-                }
-            }
+            String customerType = CustomerRegex.customerType();
             customerList.get(index).setCustomerType(customerType);
+
             File file = new File("src\\case_study\\data\\customers.csv");
             file.delete();
             for (Customer item : customerList) {
@@ -263,7 +156,6 @@ public class CustomerServiceImp implements CustomerService, Serializable {
 
     @Override
     public void delete() {
-        List<Customer> customerList = getCustomerList();
         System.out.println("Input ID of employee to edit");
         String id = scanner.nextLine();
         boolean flag = false;
@@ -294,18 +186,6 @@ public class CustomerServiceImp implements CustomerService, Serializable {
             System.out.println("Delete successful");
         } else {
             System.out.println("Id is not in employee list");
-        }
-    }
-
-    public static void dateTimeCheck(String dateOfBirth) throws Exception {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
-        LocalDate localDate1 = LocalDate.parse(dateOfBirth, formatter);
-        LocalDate localDate2 = LocalDate.now();
-        localDate2.format(formatter);
-
-
-        if (!localDate2.minusDays(6574).isAfter(localDate1) || !localDate2.minusDays(36600).isBefore(localDate1)) {
-            throw new DateTimeException();
         }
     }
 }

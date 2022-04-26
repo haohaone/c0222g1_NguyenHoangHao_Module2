@@ -1,13 +1,12 @@
 package case_study.service.implement;
-
 import case_study.models.booking_contracts.Booking;
 import case_study.models.facility.Facility;
 import case_study.models.facility.Room;
 import case_study.models.person.Customer;
 import case_study.service.BookingService;
+import case_study.service.implement.regex.BookingRegex;
 import case_study.utils.BookingComparator;
 import case_study.utils.ReadAndWrite;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,9 +15,10 @@ import java.util.*;
 
 public class BookingServiceImp implements BookingService, Serializable {
     public Scanner scanner = new Scanner(System.in);
+    public static TreeSet<Booking> bookingSet = getBookingSet();
 
     public static TreeSet<Booking> getBookingSet() {
-        TreeSet<Booking> bookingSet = null;
+        TreeSet<Booking> bookingSet = new TreeSet<>(new BookingComparator());
         try {
             bookingSet = ReadAndWrite.readFileTree("src\\case_study\\data\\booking.csv");
         } catch (NullPointerException e) {
@@ -26,13 +26,7 @@ public class BookingServiceImp implements BookingService, Serializable {
         return bookingSet;
     }
 
-    public static void dateTimeCheck(String startTime) throws Exception {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
-        LocalDate.parse(startTime, formatter);
-    }
-
     public void addBooking() {
-        TreeSet<Booking> bookingSet = getBookingSet();
         int id = 1;
         if (!bookingSet.isEmpty()) {
             id = bookingSet.size() + 1;
@@ -40,28 +34,12 @@ public class BookingServiceImp implements BookingService, Serializable {
 
         Customer customer = chooseCustomer();
         Facility facility = chooseFacility();
-        String startTime;
-        while (true) {
-            System.out.println("Input start rent time");
-            try {
-                startTime = scanner.nextLine();
-                dateTimeCheck(startTime);
-                break;
-            } catch (Exception e) {
-                System.err.println("Input wrong format");
-            }
-        }
-        String endTime;
-        while (true) {
-            System.out.println("Input end rent time");
-            try {
-                endTime = scanner.nextLine();
-                dateTimeCheck(endTime);
-                break;
-            } catch (Exception e) {
-                System.err.println("Input wrong format");
-            }
-        }
+        System.out.println("Input start time");
+        String startTime = BookingRegex.time();
+
+        System.out.println("Input end time");
+        String endTime = BookingRegex.time();
+
         Booking booking = new Booking(
                 id,
                 startTime,
@@ -113,10 +91,8 @@ public class BookingServiceImp implements BookingService, Serializable {
     }
 
     public Booking editBooking() {
-        TreeSet<Booking> bookingSet = getBookingSet();
         int id;
-        boolean flag = true;
-        while (flag) {
+        while (true) {
             if (bookingSet.isEmpty()) {
                 System.out.println("Booking list is not booking in list");
                 break;
@@ -137,31 +113,11 @@ public class BookingServiceImp implements BookingService, Serializable {
                     booking.setFacility(facility);
 
                     System.out.println("Input start rent time");
-                    String startTime;
-                    System.out.println("Input start rent time");
-                    while (true) {
-                        try {
-                            startTime = scanner.nextLine();
-                            dateTimeCheck(startTime);
-                            break;
-                        } catch (Exception e) {
-                            System.err.println("Input wrong format");
-                        }
-                    }
+                    String startTime = BookingRegex.time();
                     booking.setStarTime(startTime);
 
                     System.out.println("Input end rent time");
-                    String endTime;
-                    System.out.println("Input end rent time");
-                    while (true) {
-                        try {
-                            endTime = scanner.nextLine();
-                            dateTimeCheck(endTime);
-                            break;
-                        } catch (Exception e) {
-                            System.err.println("Input wrong format");
-                        }
-                    }
+                    String endTime = BookingRegex.time();
                     booking.setEndTime(endTime);
 
                     System.out.println("Edit successful");
@@ -169,9 +125,7 @@ public class BookingServiceImp implements BookingService, Serializable {
                     return booking;
                 }
             }
-            if (flag) {
-                System.out.println("Your id input is not in list");
-            }
+            System.out.println("Your id input is not in list");
         }
         return null;
     }

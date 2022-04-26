@@ -1,12 +1,10 @@
 package case_study.controllers;
 
 import java.util.Scanner;
-import case_study.controllers.DisplayMainMenu;
 import case_study.service.implement.*;
 
 public class FuramaController {
     public static Scanner scanner = new Scanner(System.in);
-    public DisplayMainMenu displayMainMenu = new DisplayMainMenu();
 
     public static void employeeManagement() {
         EmployeeServiceImp employeeServiceImp = new EmployeeServiceImp();

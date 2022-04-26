@@ -2,6 +2,7 @@ package case_study.service.implement;
 
 import case_study.models.booking_contracts.Contract;
 import case_study.service.PromotionService;
+import case_study.service.implement.regex.ContractRegex;
 import case_study.utils.ReadAndWrite;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class PromotionServiceImp implements PromotionService {
-    private List<Contract> contracts = ContractServiceImp.getContractList();
+    public static List<Contract> contracts = ContractServiceImp.getContractList();
     public Scanner scanner = new Scanner(System.in);
 
     @Override
@@ -53,37 +54,13 @@ public class PromotionServiceImp implements PromotionService {
             System.out.println("please input your amount give away discount");
 
             System.out.println("Input amount discount 10%");
-            int discount10;
-            while (true) {
-                try {
-                    discount10 = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.err.println("Input wrong format");
-                }
-            }
+            int discount10 = ContractRegex.id();
 
             System.out.println("Input amount discount 20%");
-            int discount20;
-            while (true) {
-                try {
-                    discount20 = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.err.println("Input wrong format");
-                }
-            }
+            int discount20 = ContractRegex.id();
 
             System.out.println("Input amount discount 50%");
-            int discount50;
-            while (true) {
-                try {
-                    discount50 = Integer.parseInt(scanner.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.err.println("Input wrong format");
-                }
-            }
+            int discount50 = ContractRegex.id();
 
             for (int i = 1; i <= discount10 + discount20 + discount50; i++) {
                 Contract contract = discount.pop();
