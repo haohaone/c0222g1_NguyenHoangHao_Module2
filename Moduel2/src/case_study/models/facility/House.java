@@ -111,4 +111,16 @@ public class House extends Facility {
                 ", standard service = " + getStandardService() +
                 ", floor = " + getFloor();
     }
+
+    @Override
+    public String getLine() {
+        return  getNameService() + "," +
+                getRentType() + "," +
+                getStandardService() + "," +
+                getFloor() + "," +
+                getAreaUse() + "," +
+                getFeeRent() + "," +
+                getMaximumCustomer() + "," +
+                getId();
+    }
 }

@@ -112,4 +112,12 @@ public class Customer extends Person implements Serializable {
                 ", address = " + address +
                 ", customer type = " + customerType;
     }
+
+    @Override
+    public String getLine() {
+        return super.getLine() + "," +
+                idCustomerNumber + "," +
+                address + "," +
+                customerType;
+    }
 }

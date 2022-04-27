@@ -121,15 +121,12 @@ public class FuramaController {
             switch (choice) {
                 case 1:
                     facilityServiceImp.addNewVilla();
-                    facilityManagement();
                     break;
                 case 2:
                     facilityServiceImp.addNewHouse();
-                    facilityManagement();
                     break;
                 case 3:
                     facilityServiceImp.addNewRoom();
-                    facilityManagement();
                     break;
                 case 4:
                     return;

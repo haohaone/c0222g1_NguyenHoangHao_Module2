@@ -119,4 +119,15 @@ public class Room extends Facility {
     public String toString() {
         return super.toString() + ", free service = " + freeService;
     }
+
+    @Override
+    public String getLine() {
+        return  getNameService() + "," +
+                getRentType() + "," +
+                getAreaUse() + "," +
+                getFeeRent() + "," +
+                getMaximumCustomer() + "," +
+                getId() + "," +
+                getFreeService();
+    }
 }

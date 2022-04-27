@@ -19,7 +19,8 @@ public class ReadAndWrite {
                 e.printStackTrace();
             }
         }
-        try (FileWriter fileWriter = new FileWriter(file, true);
+
+        try (FileWriter fileWriter = new FileWriter(file,true);
              BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             bufferedWriter.write(line);
             bufferedWriter.newLine();

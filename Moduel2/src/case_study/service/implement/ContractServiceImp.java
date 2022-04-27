@@ -4,6 +4,8 @@ import case_study.models.booking_contracts.Booking;
 import case_study.models.booking_contracts.Contract;
 import case_study.models.person.Customer;
 import case_study.service.ContractService;
+import case_study.service.implement.design_pattern.singleton.BookingList;
+import case_study.service.implement.design_pattern.singleton.ContractList;
 import case_study.service.implement.regex.ContractRegex;
 import case_study.utils.ReadAndWrite;
 import java.io.Serializable;
@@ -11,20 +13,11 @@ import java.util.*;
 
 public class ContractServiceImp implements ContractService, Serializable {
     public static Scanner scanner = new Scanner(System.in);
-    public static List<Contract> list = getContractList();
-
-    public static List<Contract> getContractList(){
-        List<Contract> list = new ArrayList<>();
-        try {
-            list = ReadAndWrite.readFileArrayList("src\\case_study\\data\\contract.csv");
-        }catch (NullPointerException ignored){
-        }
-        return list;
-    }
+    public static List<Contract> list = ContractList.getContractList();
 
     @Override
     public void createNewContract() {
-        TreeSet <Booking> bookingSet = BookingServiceImp.getBookingSet();
+        TreeSet <Booking> bookingSet = BookingList.getBookingSet();
         Queue <Booking> bookingQueue = new LinkedList<>();
         for (Booking booking : bookingSet) {
             if(!booking.isStatusContract()){
@@ -71,7 +64,7 @@ public class ContractServiceImp implements ContractService, Serializable {
 
     @Override
     public void displayContract() {
-        List<Contract> list = getContractList();
+        List<Contract> list = ContractList.getContractList();
         for (Contract contract: list) {
             System.out.println(contract);
         }

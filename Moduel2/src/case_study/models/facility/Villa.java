@@ -126,4 +126,17 @@ public class Villa extends Facility implements Serializable {
                 ", size pool = " +
                 sizePool+ ", floor = " + getFloor();
     }
+
+    @Override
+    public String getLine() {
+        return  getNameService() + "," +
+                getRentType() + "," +
+                getStandardService() + "," +
+                getFloor() + "," +
+                getAreaUse() + "," +
+                getFeeRent() + "," +
+                getMaximumCustomer() + "," +
+                getId() + "," +
+                getSizePool();
+    }
 }

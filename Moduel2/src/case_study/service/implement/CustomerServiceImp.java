@@ -1,44 +1,23 @@
 package case_study.service.implement;
 
 import case_study.models.person.Customer;
-import case_study.models.person.Employee;
 import case_study.service.CustomerService;
+import case_study.service.implement.design_pattern.singleton.CustomerList;
 import case_study.service.implement.regex.CustomerRegex;
 import case_study.utils.ReadAndWrite;
+
 import java.io.File;
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class CustomerServiceImp implements CustomerService, Serializable {
     static Scanner scanner = new Scanner(System.in);
-    public static List<Customer> customerList = getCustomerList();
-
-    public static List<Customer> getCustomerList() {
-        List<Customer> customerList  = new LinkedList<>();
-        try {
-            List<String[]> list = ReadAndWrite.read("src\\case_study\\data\\customers.csv");
-            for (String[] item : list) {
-                customerList.add(new Customer(
-                        item[0],
-                        item[1],
-                        item[2],
-                        item[3],
-                        item[4],
-                        item[5],
-                        item[6],
-                        item[7],
-                        item[8]));
-            }
-        }catch (NullPointerException e){
-        }
-        return customerList;
-    }
+    public static List<Customer> customerList = CustomerList.getCustomerList();
 
     @Override
     public void display() {
-        List<Customer> customerList = getCustomerList();
+        customerList = CustomerList.getCustomerList();
         for (Customer customer : customerList) {
             System.out.println(customer.toString());
         }
@@ -81,7 +60,7 @@ public class CustomerServiceImp implements CustomerService, Serializable {
                 customerID + "," +
                 address + "," +
                 customerType;
-        ReadAndWrite.write("src\\case_study\\data\\customers.csv",line);
+        ReadAndWrite.write("src\\case_study\\data\\customers.csv", line);
         System.out.println("Add new successful");
     }
 
@@ -137,8 +116,9 @@ public class CustomerServiceImp implements CustomerService, Serializable {
 
             File file = new File("src\\case_study\\data\\customers.csv");
             file.delete();
+
             for (Customer item : customerList) {
-                String  line = item.getName() + "," +
+                String line = item.getName() + "," +
                         item.getDateOfBirth() + "," +
                         item.getGender() + "," +
                         item.getEmail() + "," +
@@ -147,7 +127,8 @@ public class CustomerServiceImp implements CustomerService, Serializable {
                         item.getIdCustomerNumber() + "," +
                         item.getAddress() + "," +
                         item.getCustomerType();
-                ReadAndWrite.write("src\\case_study\\data\\customers.csv",line);            }
+                ReadAndWrite.write("src\\case_study\\data\\customers.csv", line);
+            }
             System.out.println("Edit successful");
         } else {
             System.out.println("Id is not in employee list");
@@ -166,7 +147,7 @@ public class CustomerServiceImp implements CustomerService, Serializable {
                 File file = new File("src\\case_study\\data\\customers.csv");
                 file.delete();
                 for (Customer item : customerList) {
-                    String  line = item.getName() + "," +
+                    String line = item.getName() + "," +
                             item.getDateOfBirth() + "," +
                             item.getGender() + "," +
                             item.getEmail() + "," +
@@ -175,7 +156,8 @@ public class CustomerServiceImp implements CustomerService, Serializable {
                             item.getIdCustomerNumber() + "," +
                             item.getAddress() + "," +
                             item.getCustomerType();
-                    ReadAndWrite.write("src\\case_study\\data\\customers.csv",line);            }
+                    ReadAndWrite.write("src\\case_study\\data\\customers.csv", line);
+                }
                 System.out.println("Edit successful");
                 flag = true;
                 break;

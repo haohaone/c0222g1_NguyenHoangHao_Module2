@@ -1,30 +1,22 @@
 package case_study.service.implement;
+
 import case_study.models.booking_contracts.Booking;
 import case_study.models.facility.Facility;
 import case_study.models.facility.Room;
 import case_study.models.person.Customer;
 import case_study.service.BookingService;
+import case_study.service.implement.design_pattern.singleton.BookingList;
+import case_study.service.implement.design_pattern.singleton.CustomerList;
+import case_study.service.implement.design_pattern.singleton.FacilityList;
 import case_study.service.implement.regex.BookingRegex;
 import case_study.utils.BookingComparator;
 import case_study.utils.ReadAndWrite;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.ResolverStyle;
 import java.util.*;
 
 public class BookingServiceImp implements BookingService, Serializable {
     public Scanner scanner = new Scanner(System.in);
-    public static TreeSet<Booking> bookingSet = getBookingSet();
-
-    public static TreeSet<Booking> getBookingSet() {
-        TreeSet<Booking> bookingSet = new TreeSet<>(new BookingComparator());
-        try {
-            bookingSet = ReadAndWrite.readFileTree("src\\case_study\\data\\booking.csv");
-        } catch (NullPointerException e) {
-        }
-        return bookingSet;
-    }
+    public static TreeSet<Booking> bookingSet = BookingList.getBookingSet();
 
     public void addBooking() {
         int id = 1;
@@ -54,7 +46,7 @@ public class BookingServiceImp implements BookingService, Serializable {
 
     @Override
     public void displayListBooking() {
-        TreeSet<Booking> bookingSet = getBookingSet();
+        TreeSet<Booking> bookingSet = BookingList.getBookingSet();
         for (Booking booking : bookingSet) {
             if (booking.getFacility() instanceof Room) {
                 System.out.println(booking.toString() + "]");
@@ -73,13 +65,13 @@ public class BookingServiceImp implements BookingService, Serializable {
 
         String id;
         while (true) {
-            if (CustomerServiceImp.getCustomerList().isEmpty()) {
+            if (CustomerList.getCustomerList().isEmpty()) {
                 System.out.println("Customer list is not customer in list");
                 break;
             }
             System.out.println("Input id of customer booking");
             id = scanner.nextLine();
-            for (Customer customer : CustomerServiceImp.getCustomerList()) {
+            for (Customer customer : CustomerList.getCustomerList()) {
                 if (customer.getIdCustomerNumber().equals(id)) {
                     return customer;
                 }
@@ -134,7 +126,7 @@ public class BookingServiceImp implements BookingService, Serializable {
         FacilityServiceImp facilityServiceImp = new FacilityServiceImp();
         System.out.println("---------Facility List---------");
         facilityServiceImp.display();
-        LinkedHashMap<Facility, Integer> facilityList = FacilityServiceImp.getFacilityList();
+        LinkedHashMap<Facility, Integer> facilityList = FacilityList.getFacilityList();
         while (true) {
             System.out.println("Input id of facility");
             String id = scanner.nextLine();

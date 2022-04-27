@@ -124,4 +124,6 @@ public abstract class Facility implements Serializable {
                 ", maximumCustomer = " + maximumCustomer +
                 ", id = " + id;
     }
+
+    public abstract String getLine();
 }

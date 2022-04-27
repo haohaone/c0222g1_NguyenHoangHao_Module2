@@ -129,11 +129,10 @@ public class EmployeeRegex {
         while (true){
             try {
                 salary = Integer.parseInt(scanner.nextLine());
-                break;
+                return salary;
             } catch (NumberFormatException e) {
                 System.err.println("Input wrong format");;
             }
         }
-        return salary;
     }
 }

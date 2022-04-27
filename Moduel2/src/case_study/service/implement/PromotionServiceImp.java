@@ -2,9 +2,9 @@ package case_study.service.implement;
 
 import case_study.models.booking_contracts.Contract;
 import case_study.service.PromotionService;
+import case_study.service.implement.design_pattern.singleton.ContractList;
 import case_study.service.implement.regex.ContractRegex;
 import case_study.utils.ReadAndWrite;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class PromotionServiceImp implements PromotionService {
-    public static List<Contract> contracts = ContractServiceImp.getContractList();
+    public static List<Contract> contracts = ContractList.getContractList();
     public Scanner scanner = new Scanner(System.in);
 
     @Override

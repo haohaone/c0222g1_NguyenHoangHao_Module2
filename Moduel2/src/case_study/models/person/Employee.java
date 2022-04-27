@@ -125,4 +125,13 @@ public class Employee extends Person {
                 ", salary = " + salary +
                 "]";
     }
+
+    @Override
+    public String getLine() {
+        return super.getLine() + "," +
+                level + "," +
+                position + "," +
+                idEmployeeNumber + "," +
+                salary;
+    }
 }

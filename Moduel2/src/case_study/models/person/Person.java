@@ -78,4 +78,14 @@ public abstract class Person implements Serializable {
                 ", id card Number = " + idCardNumber +
                 ", phone number = " + phoneNumber;
     }
+
+    public String getLine(){
+        String line = name + "," +
+                dateOfBirth + "," +
+                gender + "," +
+                email + "," +
+                idCardNumber + "," +
+                phoneNumber;
+        return line;
+    }
 }
