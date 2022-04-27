@@ -5,9 +5,7 @@ import case_study.models.facility.House;
 import case_study.models.facility.Room;
 import case_study.models.facility.Villa;
 import case_study.service.FacilityService;
-import case_study.service.implement.design_pattern.factory.CreateHouse;
-import case_study.service.implement.design_pattern.factory.CreateRoom;
-import case_study.service.implement.design_pattern.factory.CreateVilla;
+import case_study.service.implement.design_pattern.factory.Create;
 import case_study.service.implement.design_pattern.singleton.FacilityList;
 import case_study.utils.ReadAndWrite;
 import java.io.Serializable;
@@ -47,9 +45,7 @@ public class FacilityServiceImp implements FacilityService, Serializable {
 
     @Override
     public void addNewVilla() {
-        CreateVilla createVilla = new CreateVilla();
-
-        Villa villa = (Villa) createVilla.create();
+        Villa villa = (Villa) Create.create("Villa");
 
         facilityList.put(villa, 0);
 
@@ -60,11 +56,9 @@ public class FacilityServiceImp implements FacilityService, Serializable {
 
     @Override
     public void addNewHouse() {
-        CreateHouse createHouse = new CreateHouse();
-        House house = (House) createHouse.create();
+        House house = (House) Create.create("House");
 
         facilityList.put(house, 0);
-
 
         ReadAndWrite.writeFileMap("src\\case_study\\data\\facility.csv", facilityList);
         ReadAndWrite.write("src\\case_study\\data\\house.csv", house.getLine());
@@ -73,8 +67,7 @@ public class FacilityServiceImp implements FacilityService, Serializable {
 
     @Override
     public void addNewRoom() {
-        CreateRoom createRoom = new CreateRoom();
-        Room room = (Room) createRoom.create();
+        Room room = (Room) Create.create("Room");
 
         facilityList.put(room, 0);
 
