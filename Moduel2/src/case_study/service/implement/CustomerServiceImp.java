@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-public class CustomerServiceImp implements CustomerService, Serializable {
+public class CustomerServiceImp implements CustomerService {
     static Scanner scanner = new Scanner(System.in);
     public static List<Customer> customerList = CustomerList.getCustomerList();
 
@@ -25,6 +25,7 @@ public class CustomerServiceImp implements CustomerService, Serializable {
 
     @Override
     public void addNew() {
+        customerList = CustomerList.getCustomerList();
         System.out.println("Input customer name");
         String name = scanner.nextLine();
 
@@ -66,6 +67,7 @@ public class CustomerServiceImp implements CustomerService, Serializable {
 
     @Override
     public void edit() {
+        customerList = CustomerList.getCustomerList();
         System.out.println("Input ID of customer to edit");
         String id = scanner.nextLine();
         boolean flag = false;
@@ -114,21 +116,7 @@ public class CustomerServiceImp implements CustomerService, Serializable {
             String customerType = CustomerRegex.customerType();
             customerList.get(index).setCustomerType(customerType);
 
-            File file = new File("src\\case_study\\data\\customers.csv");
-            file.delete();
-
-            for (Customer item : customerList) {
-                String line = item.getName() + "," +
-                        item.getDateOfBirth() + "," +
-                        item.getGender() + "," +
-                        item.getEmail() + "," +
-                        item.getIdCardNumber() + "," +
-                        item.getPhoneNumber() + "," +
-                        item.getIdCustomerNumber() + "," +
-                        item.getAddress() + "," +
-                        item.getCustomerType();
-                ReadAndWrite.write("src\\case_study\\data\\customers.csv", line);
-            }
+            writeCustomerList(customerList);
             System.out.println("Edit successful");
         } else {
             System.out.println("Id is not in employee list");
@@ -137,6 +125,7 @@ public class CustomerServiceImp implements CustomerService, Serializable {
 
     @Override
     public void delete() {
+        customerList = CustomerList.getCustomerList();
         System.out.println("Input ID of employee to edit");
         String id = scanner.nextLine();
         boolean flag = false;
@@ -144,20 +133,8 @@ public class CustomerServiceImp implements CustomerService, Serializable {
         for (int i = 0; i < customerList.size(); i++) {
             if (customerList.get(i).getIdCustomerNumber().equals(id)) {
                 customerList.remove(i);
-                File file = new File("src\\case_study\\data\\customers.csv");
-                file.delete();
-                for (Customer item : customerList) {
-                    String line = item.getName() + "," +
-                            item.getDateOfBirth() + "," +
-                            item.getGender() + "," +
-                            item.getEmail() + "," +
-                            item.getIdCardNumber() + "," +
-                            item.getPhoneNumber() + "," +
-                            item.getIdCustomerNumber() + "," +
-                            item.getAddress() + "," +
-                            item.getCustomerType();
-                    ReadAndWrite.write("src\\case_study\\data\\customers.csv", line);
-                }
+
+                writeCustomerList(customerList);
                 System.out.println("Edit successful");
                 flag = true;
                 break;
@@ -168,6 +145,17 @@ public class CustomerServiceImp implements CustomerService, Serializable {
             System.out.println("Delete successful");
         } else {
             System.out.println("Id is not in employee list");
+        }
+    }
+
+    public static void writeCustomerList(List<Customer> customers) {
+        List<Customer> customerList  = customers;
+
+        File file = new File("src\\case_study\\data\\customers.csv");
+        file.delete();
+
+        for (Customer item : customerList) {
+            ReadAndWrite.write("src\\case_study\\data\\customers.csv", item.getLine());
         }
     }
 }

@@ -4,36 +4,41 @@ import case_study.models.person.Customer;
 
 import java.io.Serializable;
 
-public class Contract implements Serializable {
-    private int  idContract;
-    private Booking booking;
-    private Customer customer;
-    private String discountStatus;
+public class Contract {
+    private int idContract, idBooking;
+    private String discountStatus, idCustomer, startTime;
     private double preFee, totalFeeRent;
 
-    public Contract(Booking booking, Customer customer, int idContract, double preFee, double totalFeeRent) {
+    public Contract(int booking,
+                    String customer,
+                    int idContract,
+                    double preFee,
+                    double totalFeeRent,
+                    String startTime,
+                    String discountStatus) {
         this.preFee = preFee;
         this.totalFeeRent = totalFeeRent;
         this.idContract = idContract;
-        this.booking = booking;
-        this.customer = customer;
-        this.discountStatus = "No discount";
+        this.idBooking = booking;
+        this.idCustomer = customer;
+        this.discountStatus = discountStatus;
+        this.startTime = startTime;
     }
 
-    public Booking getBooking() {
-        return booking;
+    public int getIdBooking() {
+        return idBooking;
     }
 
-    public void setBooking(Booking booking) {
-        this.booking = booking;
+    public void setIdBooking(int idBooking) {
+        this.idBooking = idBooking;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public String getIdCustomer() {
+        return idCustomer;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setIdCustomer(String idCustomer) {
+        this.idCustomer = idCustomer;
     }
 
     public double getPreFee() {
@@ -68,15 +73,33 @@ public class Contract implements Serializable {
         this.discountStatus = discountStatus;
     }
 
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
     @Override
     public String toString() {
         return "[" +
-                "idBooking=" + booking.getIdBooking() +
-                ", idCustomer=" + customer.getIdCustomerNumber() +
+                "idBooking=" + idBooking +
+                ", idCustomer=" + idCustomer +
                 ", preFee=" + preFee +
                 ", totalFeeRent=" + totalFeeRent +
                 ", idContract=" + idContract +
                 ", discount status = " + discountStatus +
                 ']';
+    }
+
+    public String getLine() {
+        return  idBooking + "," +
+                idCustomer + "," +
+                idContract + "," +
+                preFee + "," +
+                totalFeeRent + "," +
+                startTime + "," +
+                discountStatus;
     }
 }

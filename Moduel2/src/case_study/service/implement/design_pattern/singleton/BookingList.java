@@ -4,18 +4,24 @@ import case_study.models.booking_contracts.Booking;
 import case_study.utils.BookingComparator;
 import case_study.utils.ReadAndWrite;
 
+import java.util.List;
 import java.util.TreeSet;
 
 public class BookingList {
-    private static TreeSet<Booking> bookingSet = null;
+    private static TreeSet<Booking> bookingSet = new TreeSet<>(new BookingComparator());
 
     private BookingList(){}
 
     public static TreeSet<Booking> getBookingSet() {
-        TreeSet<Booking> bookingSet = new TreeSet<>(new BookingComparator());
-        try {
-            bookingSet = ReadAndWrite.readFileTree("src\\case_study\\data\\booking.csv");
-        } catch (NullPointerException e) {
+        bookingSet.clear();
+        List<String[]> list = ReadAndWrite.read("src\\case_study\\data\\booking.csv");
+        for (String[] item: list){
+            bookingSet.add(new Booking(Integer.parseInt(item[0]),
+                    item[1],
+                    item[2],
+                    item[3],
+                    item[4],
+                    item[5]));
         }
         return bookingSet;
     }

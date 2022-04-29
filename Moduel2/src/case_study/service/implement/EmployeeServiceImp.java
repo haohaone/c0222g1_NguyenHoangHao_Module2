@@ -24,6 +24,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Override
     public void addNew() {
+        employeeList = EmployeeList.getEmployeeList();
         System.out.println("Input employee name");
         String name = scanner.nextLine();
 
@@ -69,6 +70,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Override
     public void edit() {
+        employeeList = EmployeeList.getEmployeeList();
         System.out.println("Input ID of employee to edit");
         String id = scanner.nextLine();
 
@@ -118,11 +120,7 @@ public class EmployeeServiceImp implements EmployeeService {
             int salary = EmployeeRegex.salary();
             employeeList.get(index).setSalary(salary);
 
-            File file = new File("src\\case_study\\data\\employee.csv");
-            file.delete();
-            for (Employee item : employeeList) {
-                ReadAndWrite.write("src\\case_study\\data\\employee.csv",item.getLine());
-            }
+            writeEmployeeList(employeeList);
             System.out.println("Edit successful");
         }else {
             System.out.println("Id is not in employee list");
@@ -131,6 +129,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Override
     public void delete() {
+        employeeList = EmployeeList.getEmployeeList();
         System.out.println("Input ID of employee to edit");
         String id = scanner.nextLine();
         boolean flag = false;
@@ -138,20 +137,32 @@ public class EmployeeServiceImp implements EmployeeService {
         for (int i = 0; i < employeeList.size(); i++) {
             if (employeeList.get(i).getIdEmployeeNumber().equals(id)){
                 employeeList.remove(i);
+
+                writeEmployeeList(employeeList);
+
                 flag = true;
                 break;
             }
         }
 
         if (flag){
-            File file = new File("src\\case_study\\data\\employee.csv");
-            file.delete();
-            for (Employee item : employeeList) {
-                ReadAndWrite.write("src\\case_study\\data\\employee.csv",item.getLine());
-            }
+
+            writeEmployeeList(employeeList);
             System.out.println("Delete successful");
         }else {
             System.out.println("Id is not in employee list");
+        }
+    }
+
+    public static void writeEmployeeList(List<Employee> employees){
+        List<Employee> employeeList = employees;
+
+        File file = new File("src\\case_study\\data\\employee.csv");
+        file.delete();
+
+
+        for (Employee item : employeeList) {
+            ReadAndWrite.write("src\\case_study\\data\\employee.csv",item.getLine());
         }
     }
 }

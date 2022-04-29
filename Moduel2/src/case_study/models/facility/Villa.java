@@ -4,7 +4,7 @@ import case_study.service.FacilityService;
 
 import java.io.Serializable;
 
-public class Villa extends Facility implements Serializable {
+public class Villa extends Facility{
     private double sizePool;
 
     public Villa(String nameService,

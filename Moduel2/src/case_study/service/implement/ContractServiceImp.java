@@ -2,41 +2,44 @@ package case_study.service.implement;
 
 import case_study.models.booking_contracts.Booking;
 import case_study.models.booking_contracts.Contract;
-import case_study.models.person.Customer;
 import case_study.service.ContractService;
 import case_study.service.implement.design_pattern.singleton.BookingList;
 import case_study.service.implement.design_pattern.singleton.ContractList;
 import case_study.service.implement.regex.ContractRegex;
 import case_study.utils.ReadAndWrite;
-import java.io.Serializable;
+
+import java.io.File;
 import java.util.*;
 
-public class ContractServiceImp implements ContractService, Serializable {
+public class ContractServiceImp implements ContractService{
     public static Scanner scanner = new Scanner(System.in);
-    public static List<Contract> list = ContractList.getContractList();
+    public static List<Contract> contractList = ContractList.getContractList();
+    public static TreeSet <Booking> bookingSet = BookingList.getBookingSet();
 
     @Override
     public void createNewContract() {
-        TreeSet <Booking> bookingSet = BookingList.getBookingSet();
+        contractList = ContractList.getContractList();
+        bookingSet = BookingList.getBookingSet();
         Queue <Booking> bookingQueue = new LinkedList<>();
         for (Booking booking : bookingSet) {
-            if(!booking.isStatusContract()){
+            if(booking.getStatusContract().equals("false")){
                 bookingQueue.add(booking);
-                booking.setStatusContract(true);
+                booking.setStatusContract("true");
             }
         }
-        ReadAndWrite.writeFileTree("src\\case_study\\data\\booking.csv", bookingSet);
+
+        BookingServiceImp.writeBookingList(bookingSet);
+
         boolean check = true;
         while (check){
             if (!bookingQueue.isEmpty()){
                 Booking booking = bookingQueue.poll();
-                Customer customer = booking.getCustomer();
+                String customerId = booking.getCustomerId();
 
                 System.out.println("Creating contract by booking have information: \n" + booking.toString());
-                System.out.println("Creating contract by customer : \n" + customer.toString());
                 int id = 1;
-                if (!list.isEmpty()) {
-                    id = list.size() + 1;
+                if (!contractList.isEmpty()) {
+                    id = contractList.size() + 1;
                 }
 
                 System.out.println("Input pre-fee");
@@ -46,13 +49,15 @@ public class ContractServiceImp implements ContractService, Serializable {
                 double totalFee = ContractRegex.fee();
 
                 Contract contract = new Contract(
-                        booking,
-                        customer,
+                        booking.getIdBooking(),
+                        customerId,
                         id,
                         preFee,
-                        totalFee);
-                list.add(contract);
-                ReadAndWrite.writeFileArrayList("src\\case_study\\data\\contract.csv",list);
+                        totalFee,
+                        booking.getStarTime(),
+                        "No discount");
+
+                ReadAndWrite.write("src\\case_study\\data\\contract.csv",contract.getLine());
                 System.out.println("Create contract successful");
                 check = true;
             }else {
@@ -64,26 +69,27 @@ public class ContractServiceImp implements ContractService, Serializable {
 
     @Override
     public void displayContract() {
-        List<Contract> list = ContractList.getContractList();
-        for (Contract contract: list) {
+        contractList = ContractList.getContractList();
+        for (Contract contract: contractList) {
             System.out.println(contract);
         }
     }
 
     @Override
     public void editNewContract() {
+        contractList = ContractList.getContractList();
         BookingServiceImp bookingServiceImp = new BookingServiceImp();
         int id;
         boolean flag = true;
         while (flag){
-            if (list.isEmpty()){
+            if (contractList.isEmpty()){
                 System.out.println("contract list is not contract in list");
                 break;
             }
             System.out.println("Input id contract need to edit");
             id = ContractRegex.id();
 
-            for (Contract contract : list) {
+            for (Contract contract : contractList) {
                 if (contract.getIdContract() == id){
                     System.out.println("Input pre-fee to edit");
                     double preFee = ContractRegex.fee();
@@ -99,10 +105,12 @@ public class ContractServiceImp implements ContractService, Serializable {
                     int yesNo = ContractRegex.id();
 
                     if (yesNo == 1){
-                        Booking booking = bookingServiceImp.editBooking();
-                        contract.setBooking(booking);
-                        contract.setCustomer(booking.getCustomer());
-                        ReadAndWrite.writeFileArrayList("src\\case_study\\data\\contract.csv",list);
+                        Booking booking = bookingServiceImp.editBooking(contract.getIdBooking());
+
+                        contract.setIdBooking(booking.getIdBooking());
+                        contract.setIdCustomer(booking.getCustomerId());
+
+                        writeFileContract(contractList);
                     }
                     flag = false;
                     break;
@@ -111,6 +119,17 @@ public class ContractServiceImp implements ContractService, Serializable {
             if (flag){
                 System.out.println("Your id input is not in list");
             }
+        }
+    }
+
+    public static void writeFileContract(List<Contract> contracts){
+        List<Contract> contractList = contracts;
+
+        File file = new File("src\\case_study\\data\\contract.csv");
+        file.delete();
+
+        for (Contract item : contractList) {
+            ReadAndWrite.write("src\\case_study\\data\\contract.csv", item.getLine());
         }
     }
 }

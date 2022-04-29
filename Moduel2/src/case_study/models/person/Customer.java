@@ -2,8 +2,9 @@ package case_study.models.person;
 
 import java.io.Serializable;
 
-public class Customer extends Person implements Serializable {
+public class Customer extends Person {
     private String address, customerType, idCustomerNumber;
+    private boolean bookingStatus = false;
 
     public Customer(String name,
                     String dateOfBirth,
@@ -103,6 +104,14 @@ public class Customer extends Person implements Serializable {
     @Override
     public void setPhoneNumber(String phoneNumber) {
         super.setPhoneNumber(phoneNumber);
+    }
+
+    public boolean isBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(boolean bookingStatus) {
+        this.bookingStatus = bookingStatus;
     }
 
     @Override

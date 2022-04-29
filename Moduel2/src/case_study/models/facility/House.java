@@ -1,6 +1,5 @@
 package case_study.models.facility;
 
-import case_study.service.FacilityService;
 
 public class House extends Facility {
 

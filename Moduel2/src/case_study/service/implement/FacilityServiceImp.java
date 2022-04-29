@@ -8,11 +8,12 @@ import case_study.service.FacilityService;
 import case_study.service.implement.design_pattern.factory.Create;
 import case_study.service.implement.design_pattern.singleton.FacilityList;
 import case_study.utils.ReadAndWrite;
-import java.io.Serializable;
+
+import java.io.File;
 import java.util.*;
 
 
-public class FacilityServiceImp implements FacilityService, Serializable {
+public class FacilityServiceImp implements FacilityService{
     public Scanner scanner = new Scanner(System.in);
     public static LinkedHashMap<Facility, Integer> facilityList = FacilityList.getFacilityList();
 
@@ -30,6 +31,7 @@ public class FacilityServiceImp implements FacilityService, Serializable {
 
     @Override
     public void displayMaintain() {
+        facilityList = FacilityList.getFacilityList();
         System.out.println("--------------Maintain facility ---------------");
         int count = 0;
         for (Map.Entry<Facility, Integer> element : facilityList.entrySet()) {
@@ -43,14 +45,22 @@ public class FacilityServiceImp implements FacilityService, Serializable {
         }
     }
 
+    public static void writeFacilityList(LinkedHashMap<Facility, Integer> facility){
+        LinkedHashMap<Facility, Integer> facilityList = facility;
+
+        File file = new File("src\\case_study\\data\\facility.csv");
+        file.delete();
+
+        for (Map.Entry<Facility, Integer> element : facilityList.entrySet()) {
+            ReadAndWrite.write("src\\case_study\\data\\facility.csv", element.getKey().getLine()+","+element.getValue());
+        }
+    }
+
     @Override
     public void addNewVilla() {
         Villa villa = (Villa) Create.create("Villa");
 
-        facilityList.put(villa, 0);
-
-        ReadAndWrite.writeFileMap("src\\case_study\\data\\facility.csv", facilityList);
-        ReadAndWrite.write("src\\case_study\\data\\villa.csv", villa.getLine());
+        ReadAndWrite.write("src\\case_study\\data\\facility.csv", villa.getLine()+",0");
         System.out.println("Add successful");
     }
 
@@ -58,10 +68,7 @@ public class FacilityServiceImp implements FacilityService, Serializable {
     public void addNewHouse() {
         House house = (House) Create.create("House");
 
-        facilityList.put(house, 0);
-
-        ReadAndWrite.writeFileMap("src\\case_study\\data\\facility.csv", facilityList);
-        ReadAndWrite.write("src\\case_study\\data\\house.csv", house.getLine());
+        ReadAndWrite.write("src\\case_study\\data\\facility.csv", house.getLine()+",0");
         System.out.println("Add successful");
     }
 
@@ -69,10 +76,7 @@ public class FacilityServiceImp implements FacilityService, Serializable {
     public void addNewRoom() {
         Room room = (Room) Create.create("Room");
 
-        facilityList.put(room, 0);
-
-        ReadAndWrite.writeFileMap("src\\case_study\\data\\facility.csv", facilityList);
-        ReadAndWrite.write("src\\case_study\\data\\room.csv", room.getLine());
+        ReadAndWrite.write("src\\case_study\\data\\facility.csv", room.getLine()+",0");
         System.out.println("Add successful");
     }
 }

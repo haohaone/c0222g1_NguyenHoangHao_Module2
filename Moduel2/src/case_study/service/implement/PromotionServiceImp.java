@@ -1,7 +1,9 @@
 package case_study.service.implement;
 
+import case_study.models.booking_contracts.Booking;
 import case_study.models.booking_contracts.Contract;
 import case_study.service.PromotionService;
+import case_study.service.implement.design_pattern.singleton.BookingList;
 import case_study.service.implement.design_pattern.singleton.ContractList;
 import case_study.service.implement.regex.ContractRegex;
 import case_study.utils.ReadAndWrite;
@@ -10,20 +12,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.TreeSet;
 
 public class PromotionServiceImp implements PromotionService {
     public static List<Contract> contracts = ContractList.getContractList();
+
     public Scanner scanner = new Scanner(System.in);
 
     @Override
     public void displayCustomerUseService() {
+        contracts = ContractList.getContractList();
+
         String year;
         int check = 0;
         System.out.println("Input years for display customer list");
         year = scanner.nextLine();
         for (Contract contract : contracts) {
-            if (contract.getBooking().getStarTime().substring(6).contains(year)) {
-                System.out.println(contract.getBooking().getCustomer());
+            if (contract.getStartTime().substring(6).contains(year)) {
+                System.out.println(contract.getIdCustomer());
                 check++;
             }
         }
@@ -34,6 +40,7 @@ public class PromotionServiceImp implements PromotionService {
 
     @Override
     public void displayDiscount() {
+        contracts = ContractList.getContractList();
         Stack<Contract> discount = new Stack<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate thisMonth = LocalDate.now();
@@ -42,7 +49,7 @@ public class PromotionServiceImp implements PromotionService {
 
         int count = 0;
         for (Contract contract : contracts) {
-            if (contract.getBooking().getStarTime().substring(3).equals(localDate.substring(3))) {
+            if (contract.getStartTime().substring(3).equals(localDate.substring(3))) {
                 if (contract.getDiscountStatus().contains("No discount")) {
                     discount.add(contract);
                     count++;
@@ -72,7 +79,8 @@ public class PromotionServiceImp implements PromotionService {
                     contract.setDiscountStatus("Discount 50%");
                 }
             }
-            ReadAndWrite.writeFileArrayList("src\\case_study\\data\\contract.csv", contracts);
+
+            ContractServiceImp.writeFileContract(contracts);
             System.out.println("Give away discount successful");
         } else {
             System.out.println("This month have 0 booking");

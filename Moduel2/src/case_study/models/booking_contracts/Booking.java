@@ -5,24 +5,23 @@ import case_study.models.person.Customer;
 
 import java.io.Serializable;
 
-public class Booking implements Serializable {
+public class Booking{
     private int idBooking;
-    private String starTime, endTime;
-    private Customer customer;
-    private Facility facility;
-    private boolean statusContract;
+    private String starTime, endTime, customerId, facilityId;
+    private String statusContract = "false";
 
     public Booking(int idBooking,
                    String starTime,
                    String endTime,
-                   Customer customer,
-                   Facility facility) {
+                   String customerId,
+                   String facilityId,
+                   String statusContract) {
         this.idBooking = idBooking;
         this.starTime = starTime;
         this.endTime = endTime;
-        this.customer = customer;
-        this.facility = facility;
-        this.statusContract = false;
+        this.customerId = customerId;
+        this.facilityId = facilityId;
+        this.statusContract = statusContract;
     }
 
     public int getIdBooking() {
@@ -49,38 +48,42 @@ public class Booking implements Serializable {
         this.endTime = endTime;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public Facility getFacility() {
-        return facility;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public void setFacility(Facility facility) {
-        this.facility = facility;
-    }
-
-    public boolean isStatusContract() {
+    public String getStatusContract() {
         return statusContract;
     }
 
-    public void setStatusContract(boolean statusContract) {
+    public void setStatusContract(String statusContract) {
         this.statusContract = statusContract;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getFacilityId() {
+        return facilityId;
+    }
+
+    public void setFacilityId(String facilityId) {
+        this.facilityId = facilityId;
     }
 
     @Override
     public String toString() {
         return  "[" +
                 "idBooking = " + idBooking +
-                ", idCustomerNumber = " + customer.getIdCustomerNumber() +
+                ", idCustomerNumber = " + customerId +
                 ", starTime = " + starTime + '\'' +
                 ", endTime = " + endTime + '\'' +
-                ", nameService = " + facility.getNameService() +
-                ", status Contract = " + isStatusContract();
+                ", nameService = " + facilityId +
+                ", status Contract = " + statusContract;
+    }
+
+    public String getLine(){
+        return idBooking +","+ starTime +","+ endTime +","+ customerId +"," +facilityId + "," + statusContract;
     }
 }

@@ -9,14 +9,17 @@ import case_study.service.implement.design_pattern.singleton.BookingList;
 import case_study.service.implement.design_pattern.singleton.CustomerList;
 import case_study.service.implement.design_pattern.singleton.FacilityList;
 import case_study.service.implement.regex.BookingRegex;
-import case_study.utils.BookingComparator;
+
 import case_study.utils.ReadAndWrite;
-import java.io.Serializable;
+
+import java.io.File;
 import java.util.*;
 
-public class BookingServiceImp implements BookingService, Serializable {
+public class BookingServiceImp implements BookingService {
     public Scanner scanner = new Scanner(System.in);
     public static TreeSet<Booking> bookingSet = BookingList.getBookingSet();
+    public static LinkedHashMap<Facility, Integer> facilityList = FacilityList.getFacilityList();
+
 
     public void addBooking() {
         int id = 1;
@@ -36,25 +39,19 @@ public class BookingServiceImp implements BookingService, Serializable {
                 id,
                 startTime,
                 endTime,
-                customer,
-                facility);
+                customer.getIdCustomerNumber(),
+                facility.getNameService(),
+                "false");
 
-        bookingSet.add(booking);
-        ReadAndWrite.writeFileTree("src\\case_study\\data\\booking.csv", bookingSet);
+        ReadAndWrite.write("src\\case_study\\data\\booking.csv", booking.getLine());
         System.out.println("Add booking successful");
     }
 
     @Override
     public void displayListBooking() {
-        TreeSet<Booking> bookingSet = BookingList.getBookingSet();
+        bookingSet = BookingList.getBookingSet();
         for (Booking booking : bookingSet) {
-            if (booking.getFacility() instanceof Room) {
-                System.out.println(booking.toString() + "]");
-            } else {
-                System.out.println(booking.toString() +
-                        ", standard service = " + booking.getFacility().getStandardService() +
-                        "]");
-            }
+            System.out.println(booking.toString());
         }
     }
 
@@ -82,42 +79,28 @@ public class BookingServiceImp implements BookingService, Serializable {
         return null;
     }
 
-    public Booking editBooking() {
-        int id;
-        while (true) {
-            if (bookingSet.isEmpty()) {
-                System.out.println("Booking list is not booking in list");
-                break;
-            }
-            try {
-                id = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.err.println("Input wrong format");
-            }
-            System.out.println("Input id booking need to edit");
-            displayListBooking();
-            id = Integer.parseInt(scanner.nextLine());
-            for (Booking booking : bookingSet) {
-                if (id == booking.getIdBooking()) {
-                    Customer customer = chooseCustomer();
-                    booking.setCustomer(customer);
-                    Facility facility = chooseFacility();
-                    booking.setFacility(facility);
+    public Booking editBooking(int id) {
+        bookingSet = BookingList.getBookingSet();
+        for (Booking booking : bookingSet) {
+            if (id == booking.getIdBooking()) {
+                Customer customer = chooseCustomer();
+                booking.setCustomerId(customer.getIdCustomerNumber());
+                Facility facility = chooseFacility();
+                booking.setFacilityId(facility.getId());
 
-                    System.out.println("Input start rent time");
-                    String startTime = BookingRegex.time();
-                    booking.setStarTime(startTime);
+                System.out.println("Input start rent time");
+                String startTime = BookingRegex.time();
+                booking.setStarTime(startTime);
 
-                    System.out.println("Input end rent time");
-                    String endTime = BookingRegex.time();
-                    booking.setEndTime(endTime);
+                System.out.println("Input end rent time");
+                String endTime = BookingRegex.time();
+                booking.setEndTime(endTime);
 
-                    System.out.println("Edit successful");
-                    ReadAndWrite.writeFileTree("src\\case_study\\data\\booking.csv", bookingSet);
-                    return booking;
-                }
+                System.out.println("Edit successful");
+
+                writeBookingList(bookingSet);
+                return booking;
             }
-            System.out.println("Your id input is not in list");
         }
         return null;
     }
@@ -126,15 +109,20 @@ public class BookingServiceImp implements BookingService, Serializable {
         FacilityServiceImp facilityServiceImp = new FacilityServiceImp();
         System.out.println("---------Facility List---------");
         facilityServiceImp.display();
-        LinkedHashMap<Facility, Integer> facilityList = FacilityList.getFacilityList();
+
+        facilityList = FacilityList.getFacilityList();
+
         while (true) {
             System.out.println("Input id of facility");
             String id = scanner.nextLine();
             for (Map.Entry<Facility, Integer> entry : facilityList.entrySet()) {
                 if (entry.getKey().getId().equals(id)) {
                     if (entry.getValue() <= 5) {
+
                         entry.setValue(entry.getValue() + 1);
-                        ReadAndWrite.writeFileMap("src\\case_study\\data\\facility.csv",facilityList);
+
+                        FacilityServiceImp.writeFacilityList(facilityList);
+
                         return entry.getKey();
                     } else {
                         System.out.println("This Facility need to maintain");
@@ -143,6 +131,17 @@ public class BookingServiceImp implements BookingService, Serializable {
             }
             System.out.println("Id is not in list");
             System.out.println();
+        }
+    }
+
+    public static void writeBookingList(TreeSet<Booking> bookings) {
+        TreeSet<Booking> bookingSet = bookings;
+
+        File file = new File("src\\case_study\\data\\booking.csv");
+        file.delete();
+
+        for (Booking book : bookingSet) {
+            ReadAndWrite.write("src\\case_study\\data\\booking.csv", book.getLine());
         }
     }
 }

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
-public class BookingComparator implements Comparator<Booking>, Serializable {
+public class BookingComparator implements Comparator<Booking>{
     @Override
     public int compare(Booking o1, Booking o2) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
