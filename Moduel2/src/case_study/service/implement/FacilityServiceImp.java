@@ -46,19 +46,19 @@ public class FacilityServiceImp implements FacilityService{
     }
 
     public static void writeFacilityList(LinkedHashMap<Facility, Integer> facility){
-        LinkedHashMap<Facility, Integer> facilityList = facility;
 
         File file = new File("src\\case_study\\data\\facility.csv");
         file.delete();
 
-        for (Map.Entry<Facility, Integer> element : facilityList.entrySet()) {
+        for (Map.Entry<Facility, Integer> element : facility.entrySet()) {
             ReadAndWrite.write("src\\case_study\\data\\facility.csv", element.getKey().getLine()+","+element.getValue());
         }
     }
 
     @Override
     public void addNewVilla() {
-        Villa villa = (Villa) Create.create("Villa");
+        facilityList = FacilityList.getFacilityList();
+        Villa villa = (Villa) Create.create("Villa", facilityList);
 
         ReadAndWrite.write("src\\case_study\\data\\facility.csv", villa.getLine()+",0");
         System.out.println("Add successful");
@@ -66,7 +66,8 @@ public class FacilityServiceImp implements FacilityService{
 
     @Override
     public void addNewHouse() {
-        House house = (House) Create.create("House");
+        facilityList = FacilityList.getFacilityList();
+        House house = (House) Create.create("House", facilityList);
 
         ReadAndWrite.write("src\\case_study\\data\\facility.csv", house.getLine()+",0");
         System.out.println("Add successful");
@@ -74,7 +75,7 @@ public class FacilityServiceImp implements FacilityService{
 
     @Override
     public void addNewRoom() {
-        Room room = (Room) Create.create("Room");
+        Room room = (Room) Create.create("Room", facilityList);
 
         ReadAndWrite.write("src\\case_study\\data\\facility.csv", room.getLine()+",0");
         System.out.println("Add successful");

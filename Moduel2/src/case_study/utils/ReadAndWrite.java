@@ -27,6 +27,13 @@ public class ReadAndWrite {
     public static List<String[]> read(String path) {
         List<String[]> list = new ArrayList<>();
         File file = new File(path);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try (FileReader fileReader = new FileReader(file);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line = "";

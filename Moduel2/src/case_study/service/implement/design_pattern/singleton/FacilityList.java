@@ -11,12 +11,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class FacilityList {
-    private static LinkedHashMap<Facility, Integer> facilityList = new LinkedHashMap<>();
+    private static LinkedHashMap<Facility, Integer> facilityList = null;
 
     private FacilityList(){}
 
     public static  LinkedHashMap<Facility, Integer> getFacilityList(){
-        facilityList.clear();
+        facilityList = new LinkedHashMap<>();
         List<String[]> list = ReadAndWrite.read("src\\case_study\\data\\facility.csv");
         for (String[] item : list) {
             if (item[0].equals("Villa")){

@@ -1,15 +1,19 @@
 package case_study.service.implement.regex;
 
+import case_study.models.person.Customer;
+import case_study.models.person.Employee;
 import case_study.utils.DateTimeException;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
+import java.util.List;
 import java.util.Scanner;
 
 public class CustomerRegex {
     public static Scanner scanner = new Scanner(System.in);
+    public static String idRegex = "CUS\\-[0-9]{4}";
 
     public static void dateTimeCheck(String dateOfBirth) throws Exception {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
@@ -82,5 +86,34 @@ public class CustomerRegex {
             }
         }
         return customerType;
+    }
+
+    public static String idRegex(List<Customer> customerList){
+        String id;
+        boolean check = true;
+        while (check){
+            check = false;
+            while (true){
+                id = scanner.nextLine();
+                if (id.matches(idRegex)){
+                    break;
+                }else {
+                    System.err.println("Your input is wrong format");
+                }
+            }
+
+            for (Customer emp : customerList) {
+                if (emp.getIdCustomerNumber().equals(id)){
+                    check = true;
+                    break;
+                }
+            }
+            if (check){
+                System.out.println("Your is already in list");
+            }else {
+                return id;
+            }
+        }
+        return "";
     }
 }

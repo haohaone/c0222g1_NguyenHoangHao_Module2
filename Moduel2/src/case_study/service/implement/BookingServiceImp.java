@@ -22,6 +22,7 @@ public class BookingServiceImp implements BookingService {
 
 
     public void addBooking() {
+        bookingSet = BookingList.getBookingSet();
         int id = 1;
         if (!bookingSet.isEmpty()) {
             id = bookingSet.size() + 1;
@@ -135,12 +136,10 @@ public class BookingServiceImp implements BookingService {
     }
 
     public static void writeBookingList(TreeSet<Booking> bookings) {
-        TreeSet<Booking> bookingSet = bookings;
-
         File file = new File("src\\case_study\\data\\booking.csv");
         file.delete();
 
-        for (Booking book : bookingSet) {
+        for (Booking book : bookings) {
             ReadAndWrite.write("src\\case_study\\data\\booking.csv", book.getLine());
         }
     }

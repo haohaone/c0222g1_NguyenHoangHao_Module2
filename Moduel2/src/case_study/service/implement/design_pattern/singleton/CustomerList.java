@@ -12,7 +12,7 @@ public class CustomerList {
     private CustomerList(){}
 
     public static List<Customer> getCustomerList() {
-        List<Customer> customerList  = new LinkedList<>();
+        customerList  = new LinkedList<>();
         try {
             List<String[]> list = ReadAndWrite.read("src\\case_study\\data\\customers.csv");
             for (String[] item : list) {

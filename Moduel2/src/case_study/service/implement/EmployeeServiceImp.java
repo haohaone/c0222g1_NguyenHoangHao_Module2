@@ -48,7 +48,7 @@ public class EmployeeServiceImp implements EmployeeService {
         String position = EmployeeRegex.position();
 
         System.out.println("Input employee ID ");
-        String employeeID = scanner.nextLine();
+        String employeeID = EmployeeRegex.idRegex(employeeList);
 
         System.out.println("Input employee salary");
         int salary = EmployeeRegex.salary();
@@ -155,13 +155,10 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     public static void writeEmployeeList(List<Employee> employees){
-        List<Employee> employeeList = employees;
-
         File file = new File("src\\case_study\\data\\employee.csv");
         file.delete();
 
-
-        for (Employee item : employeeList) {
+        for (Employee item : employees) {
             ReadAndWrite.write("src\\case_study\\data\\employee.csv",item.getLine());
         }
     }

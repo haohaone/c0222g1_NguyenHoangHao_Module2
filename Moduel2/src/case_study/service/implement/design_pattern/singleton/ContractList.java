@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContractList {
-    private static List<Contract> contractList= new ArrayList<>();
+    private static List<Contract> contractList = null;
 
     private ContractList(){}
 
     public static List<Contract> getContractList(){
-        contractList.clear();
+        contractList= new ArrayList<>();
         List<String[]> list = ReadAndWrite.read("src\\case_study\\data\\contract.csv");
         for (String[] item: list){
             contractList.add(new Contract(Integer.parseInt(item[0]),

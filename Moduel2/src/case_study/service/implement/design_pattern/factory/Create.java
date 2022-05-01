@@ -6,9 +6,12 @@ import case_study.models.facility.Room;
 import case_study.models.facility.Villa;
 import case_study.service.implement.regex.FacilityRegex;
 
+import java.util.LinkedHashMap;
+
 public class Create {
 
-    public static Facility create(String nameSv) {
+    public static Facility create(String nameSv, LinkedHashMap<Facility, Integer> facilityList) {
+
         System.out.println("Input name service");
         String name = FacilityRegex.name();
 
@@ -26,7 +29,7 @@ public class Create {
 
         if (nameSv.equals("Villa")){
             System.out.println("Input id facility");
-            String id = FacilityRegex.idVilla();
+            String id = FacilityRegex.id(facilityList, nameSv);
 
             System.out.println("Input size pool");
             double sizePool = FacilityRegex.sizePool();
@@ -41,7 +44,7 @@ public class Create {
             return villa;
         }else if (nameSv.equals("House")){
             System.out.println("Input id facility");
-            String id = FacilityRegex.idHouse();
+            String id = FacilityRegex.id(facilityList, nameSv);
 
             System.out.println("Input floor");
             int floor = FacilityRegex.floor();
@@ -53,7 +56,7 @@ public class Create {
             return house;
         }else {
             System.out.println("Input id facility");
-            String id = FacilityRegex.idRoom();
+            String id = FacilityRegex.id(facilityList, nameSv);
 
             System.out.println("Input free service");
             String freeSv = FacilityRegex.freeService();

@@ -1,5 +1,11 @@
 package case_study.service.implement.regex;
 
+import case_study.models.facility.Facility;
+import case_study.models.person.Employee;
+import case_study.utils.ReadAndWrite;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class FacilityRegex {
@@ -53,43 +59,41 @@ public class FacilityRegex {
         return standardService;
     }
 
-    public static String idVilla() {
-        String id;
-        while (true) {
-            id = scanner.nextLine();
-            if (id.matches(VILLA)) {
-                break;
-            } else {
-                System.out.println("Your input should be SVVl-xxxx");
-            }
+    public static String id(LinkedHashMap<Facility,Integer> facilityList, String name) {
+        if (name.equals("Villa")){
+            name = VILLA;
+        }else if (name.equals("House")){
+            name = HOUSE;
+        }else {
+            name = ROOM;
         }
-        return id;
-    }
 
-    public static String idHouse() {
         String id;
-        while (true) {
-            id = scanner.nextLine();
-            if (id.matches(HOUSE)) {
-                break;
-            } else {
-                System.out.println("Your input should be SVHO-xxxx");
+        boolean check = true;
+        while (check){
+            check = false;
+            while (true) {
+                id = scanner.nextLine();
+                if (id.matches(name)) {
+                    break;
+                } else {
+                    System.out.println("Your input should be SVVl-xxxx");
+                }
             }
-        }
-        return id;
-    }
 
-    public static String idRoom() {
-        String id;
-        while (true) {
-            id = scanner.nextLine();
-            if (id.matches(ROOM)) {
-                break;
-            } else {
-                System.out.println("Your input should be SVRO-xxxx");
+            for (Map.Entry<Facility, Integer> element : facilityList.entrySet()) {
+                if (element.getKey().getId().equals(id)){
+                    check = true;
+                    break;
+                }
+            }
+            if (check){
+                System.out.println("Your is already in list");
+            }else {
+                return id;
             }
         }
-        return id;
+        return "";
     }
 
     public static int floor() {

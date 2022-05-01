@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class BookingList {
-    private static TreeSet<Booking> bookingSet = new TreeSet<>(new BookingComparator());
+    private static TreeSet<Booking> bookingSet = null;
 
     private BookingList(){}
 
     public static TreeSet<Booking> getBookingSet() {
-        bookingSet.clear();
+        bookingSet = new TreeSet<>(new BookingComparator());
         List<String[]> list = ReadAndWrite.read("src\\case_study\\data\\booking.csv");
         for (String[] item: list){
             bookingSet.add(new Booking(Integer.parseInt(item[0]),

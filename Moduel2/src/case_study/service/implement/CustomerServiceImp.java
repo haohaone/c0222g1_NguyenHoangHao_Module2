@@ -45,7 +45,7 @@ public class CustomerServiceImp implements CustomerService {
         String phoneNumber = scanner.nextLine();
 
         System.out.println("Input customer ID ");
-        String customerID = scanner.nextLine();
+        String customerID = CustomerRegex.idRegex(customerList);
 
         System.out.println("Input customer address");
         String address = scanner.nextLine();
@@ -149,12 +149,10 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     public static void writeCustomerList(List<Customer> customers) {
-        List<Customer> customerList  = customers;
-
         File file = new File("src\\case_study\\data\\customers.csv");
         file.delete();
 
-        for (Customer item : customerList) {
+        for (Customer item : customers) {
             ReadAndWrite.write("src\\case_study\\data\\customers.csv", item.getLine());
         }
     }

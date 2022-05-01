@@ -18,7 +18,6 @@ public class ContractServiceImp implements ContractService{
 
     @Override
     public void createNewContract() {
-        contractList = ContractList.getContractList();
         bookingSet = BookingList.getBookingSet();
         Queue <Booking> bookingQueue = new LinkedList<>();
         for (Booking booking : bookingSet) {
@@ -32,6 +31,7 @@ public class ContractServiceImp implements ContractService{
 
         boolean check = true;
         while (check){
+            contractList = ContractList.getContractList();
             if (!bookingQueue.isEmpty()){
                 Booking booking = bookingQueue.poll();
                 String customerId = booking.getCustomerId();
@@ -123,12 +123,10 @@ public class ContractServiceImp implements ContractService{
     }
 
     public static void writeFileContract(List<Contract> contracts){
-        List<Contract> contractList = contracts;
-
         File file = new File("src\\case_study\\data\\contract.csv");
         file.delete();
 
-        for (Contract item : contractList) {
+        for (Contract item : contracts) {
             ReadAndWrite.write("src\\case_study\\data\\contract.csv", item.getLine());
         }
     }
